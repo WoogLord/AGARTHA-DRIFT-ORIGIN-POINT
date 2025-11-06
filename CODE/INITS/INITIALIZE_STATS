@@ -1,0 +1,13 @@
+-- Stat initialization
+
+function initParty()
+    currentPartyMembers = {
+        "Marc"
+    }
+end
+
+function initEnemies()
+    currentPartyMembers = {
+        "Rat"
+    }
+end
