@@ -11,6 +11,17 @@ ADOPVersion = "AGARTHA:DRIFT-ORIGIN:POINT v0.0"
 Font = love.graphics.newFont(20)
 TestString="AGARTHA:DRIFT-ORIGIN:POINT, created by " .. name .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
 
+--==+== AUDIO ==+==--
+-- SFX
+sfxTitleLogoVocal = love.audio.newSource("ASSETS/SFX/stupidSFXforMenu.mp3", "static")
+
+-- MUSIC
+musTitleLoadCutscene = love.audio.newSource("ASSETS/MUSIC/erm.mp3", "stream")
+musTitleScreen = love.audio.newSource("ASSETS/MUSIC/marcs 1trillionth game.mp3", "stream")
+musPlayGameDefault = love.audio.newSource("ASSETS/MUSIC/scaccus.mp3", "stream")
+
+musPlayGameDefault:setVolume(.5)
+
 --==+==-- "ints" --==+==--
 spriteTimer = 0
 updownFloating = 0
@@ -24,11 +35,16 @@ PriorStatePaused = ""
 
 --==+==-- bools --==+==--
 isFullScreen = true
+isDebug = false
 
 --==+== UI ==+==--
 VersionInfoString = ADOPVersion .. " - Made with " .. _VERSION
 logoTitle = love.graphics.newImage("ASSETS/ART/UI/LOGO_TITLE_v0.0.png")
 bgTitle = love.graphics.newImage("ASSETS/ART/UI/BACKGROUND_TITLE_v0.0.png")
+
+-- paused
+menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
+selOptionPause = 1
 
 -- Sprite Sheet for Chess Pieces
 spritesheetPieces = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.0.png")

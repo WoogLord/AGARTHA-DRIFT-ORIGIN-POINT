@@ -14,3 +14,21 @@ function drawMainMenu()
         , 0
         , 3, 3)
 end
+
+function drawPaused()
+    if isPaused == true then
+        love.graphics.setColor(0, 0, 0, 0.65)
+        love.graphics.rectangle("fill", 0, 0, currWindWidth, currWindHeight)
+
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.setFont(Font)
+        for i, option in ipairs(menuOptionsPaused) do
+            if i == selOptionPause then
+                love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
+            else
+                love.graphics.setColor(1, 1, 1)  -- Normal color
+            end
+            love.graphics.print(option, currWindWidth / 2 - 75, currWindHeight / 2 + (i - 1) * 40)
+        end        
+    end
+end

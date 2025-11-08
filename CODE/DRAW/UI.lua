@@ -1,6 +1,4 @@
 -- UI
-logoTitle = love.graphics.newImage("ASSETS/ART/UI/LOGO_TITLE_v0.0.png")
-bgTitle = love.graphics.newImage("ASSETS/ART/UI/BACKGROUND_TITLE_v0.0.png")
 
 -- BUTTON DECS
 buttonsMainMenu = {
