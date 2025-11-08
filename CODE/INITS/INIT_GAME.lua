@@ -27,3 +27,16 @@ isFullScreen = true
 
 --==+== UI ==+==--
 VersionInfoString = ADOPVersion .. " - Made with " .. _VERSION
+logoTitle = love.graphics.newImage("ASSETS/ART/UI/LOGO_TITLE_v0.0.png")
+bgTitle = love.graphics.newImage("ASSETS/ART/UI/BACKGROUND_TITLE_v0.0.png")
+
+-- Sprite Sheet for Chess Pieces
+spritesheetPieces = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.0.png")
+ssPiecesWidth, ssPiecesHeight = 32,32
+
+-- make array later, also do looping through sprite sheet and have ids
+playerIdle_ARR = {}
+playerSprite = love.graphics.newQuad(ssPiecesWidth*0, 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())
+-- for i = 0, 3, 1 do
+--     playerIdle_ARR[i] = {love.graphics.newQuad(ssPiecesWidth*i, 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())}
+-- end
