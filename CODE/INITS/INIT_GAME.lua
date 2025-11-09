@@ -52,7 +52,6 @@ ssPiecesWidth, ssPiecesHeight = 32,32
 
 -- make array later, also do looping through sprite sheet and have ids
 playerIdle_ARR = {}
-playerSprite = love.graphics.newQuad(ssPiecesWidth*0, 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())
--- for i = 0, 3, 1 do
---     playerIdle_ARR[i] = {love.graphics.newQuad(ssPiecesWidth*i, 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())}
--- end
+for i = 1, 4, 1 do
+    playerIdle_ARR[i] = {love.graphics.newQuad(ssPiecesWidth*(i-1), 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())}
+end

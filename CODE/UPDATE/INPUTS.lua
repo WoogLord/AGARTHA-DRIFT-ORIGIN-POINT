@@ -1,13 +1,9 @@
 -- INPUTS
 
 INPUTS_ARR = {
-    fullscreen = "f"
-    , debug = "F1"
-    , pause = "escape"
-    , up = "w"
-    , down = "s"
-    , left = "a"
-    , right = "d"
+    fullscreen = "f", debug = "F1", pause = "escape"
+    , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
+    , select = {"return", "z"}, cancel = "x"
 }
 
 -- handle inputs - mouse
@@ -35,11 +31,11 @@ function love.keypressed(key)
         if key == INPUTS_ARR.pause then
             isPaused = false
             CurrentState = PriorStatePaused
-        elseif key == 'down' then
+        elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
             selOptionPause = math.min(selOptionPause + 1 , #menuOptionsPaused)
-        elseif key == "up" then 
+        elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
             selOptionPause = math.max(selOptionPause - 1 , 1)
-        elseif key == "return" then
+        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
             if menuOptionsPaused[selOptionPause] == "RESUME" then
                 isPaused = false
             elseif menuOptionsPaused[selOptionPause] == "MAIN MENU" then
