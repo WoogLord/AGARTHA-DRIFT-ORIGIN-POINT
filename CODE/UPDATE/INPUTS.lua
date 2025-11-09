@@ -22,6 +22,18 @@ function love.keypressed(key)
         if CurrentState == "Play" then isDebug = not isDebug end
     end
 
+    if CurrentState == "MainMenu" then
+        if key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then
+            player_ARR.y = player_ARR.y - (1*3)
+        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
+            player_ARR.x = player_ARR.x - (1*3)
+        elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+            player_ARR.y = player_ARR.y + (1*3)
+        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
+            player_ARR.x = player_ARR.x + (1*3)
+        end
+    end
+
     if isPaused == false then
         if key == INPUTS_ARR.pause then
             PriorStatePaused = CurrentState

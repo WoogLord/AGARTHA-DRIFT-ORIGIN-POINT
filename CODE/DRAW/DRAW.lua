@@ -32,3 +32,12 @@ function drawPaused()
         end        
     end
 end
+
+function drawPlayer()
+    love.graphics.draw(spritesheetPlayer
+        , playerIdle_ARR[animTiming]
+        , player_ARR.x, player_ARR.y
+        , 0
+        , 3, 3
+    )
+end

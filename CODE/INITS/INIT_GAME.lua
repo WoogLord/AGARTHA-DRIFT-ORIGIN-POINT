@@ -46,12 +46,13 @@ bgTitle = love.graphics.newImage("ASSETS/ART/UI/BACKGROUND_TITLE_v0.0.png")
 menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
 selOptionPause = 1
 
--- Sprite Sheet for Chess Pieces
-spritesheetPieces = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.0.png")
-ssPiecesWidth, ssPiecesHeight = 32,32
+-- Sprite Sheet for Player
+spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.0.png")
+ssWidth, ssHeight = 32,32
 
 -- make array later, also do looping through sprite sheet and have ids
 playerIdle_ARR = {}
 for i = 1, 4, 1 do
-    playerIdle_ARR[i] = {love.graphics.newQuad(ssPiecesWidth*(i-1), 0, ssPiecesWidth, ssPiecesHeight, spritesheetPieces:getDimensions())}
+    playerIdle_ARR[i] = love.graphics.newQuad(ssWidth*(i-1), 0, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
+    print(playerIdle_ARR[i]) -- DEBUG
 end
