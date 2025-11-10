@@ -9,6 +9,7 @@ age = 26
 isAlive = true
 ADOPVersion = "AGARTHA:DRIFT-ORIGIN:POINT v0.0"
 Font = love.graphics.newFont(20)
+bigFont = love.graphics.newFont(32)
 TestString="AGARTHA:DRIFT-ORIGIN:POINT, created by " .. name .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
 
 --==+== AUDIO ==+==--
@@ -43,7 +44,9 @@ logoTitle = love.graphics.newImage("ASSETS/ART/UI/LOGO_TITLE_v0.0.png")
 bgTitle = love.graphics.newImage("ASSETS/ART/UI/BACKGROUND_TITLE_v0.0.png")
 
 -- paused
+menuOptionsMain = {"PLAY", "OPTIONS", "QUIT"}
 menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
+selOptionMain = 1
 selOptionPause = 1
 
 -- Sprite Sheet for Player

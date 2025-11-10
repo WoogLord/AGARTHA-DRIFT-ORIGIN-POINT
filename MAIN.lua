@@ -7,6 +7,7 @@ local initStats require "CODE.INITS.INITIALIZE_STATS"
 local uiFunctions require "CODE.DRAW.UI"
 local drawFunctions require "CODE.DRAW.DRAW"
 local inputFunctions require "CODE.UPDATE.INPUTS"
+local cameraFunctions require "CODE.UPDATE.CAMERA"
 
 function love.load()
     musTitleLoadCutscene:setVolume(0.25)
@@ -30,6 +31,13 @@ function love.update(dt)
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
+    -- Make a stats updater
+    if player_ARR.isMechedUp then
+        moveSpeed = player_ARR.mech.moveSpeed * dt
+    else
+        moveSpeed = player_ARR.pilot.moveSpeed * dt
+    end
+
     -- Shove this into an audio manager later
     if CurrentState == "MainMenu" then
         if not musTitleLoadCutscene:isPlaying() then
@@ -39,7 +47,10 @@ function love.update(dt)
             end
         end
     elseif CurrentState == "Play" then
+        playerControls()
         if not musPlayGameDefault:isPlaying() then
+            musTitleScreen:stop()
+            musTitleLoadCutscene:stop()
             musPlayGameDefault:play()
         end
     end
@@ -48,8 +59,11 @@ end
 function love.draw()
     currWindWidth, currWindHeight = love.graphics.getDimensions()
     love.graphics.setColor(1,1,1)
-    drawMainMenu()
-    drawPlayer()
+    if CurrentState == "MainMenu" then
+        drawMainMenu()  
+    elseif CurrentState == "Play" then
+        drawPlayer()
+    end
     love.graphics.print(TestString, 5, currWindHeight-25-Font:getHeight(VersionInfoString))
     love.graphics.print(VersionInfoString, 5, currWindHeight-5-Font:getHeight(VersionInfoString))
     drawPaused()

@@ -6,6 +6,21 @@ INPUTS_ARR = {
     , select = {"return", "z"}, cancel = "x"
 }
 
+function playerControls()
+    if CurrentState == "Play" then
+        -- TO-DO: make this so i can move at angles and not orthogonal only
+        if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+            player_ARR.y = player_ARR.y - ((1*3) * moveSpeed)
+        elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+            player_ARR.x = player_ARR.x - ((1*3) * moveSpeed)
+        elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+            player_ARR.y = player_ARR.y + ((1*3) * moveSpeed)
+        elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+            player_ARR.x = player_ARR.x + ((1*3) * moveSpeed)
+        end
+    end
+end
+
 -- handle inputs - mouse
 function isMouseOverButton(button)
     local mx, my = love.mouse.getPosition()
@@ -23,14 +38,19 @@ function love.keypressed(key)
     end
 
     if CurrentState == "MainMenu" then
-        if key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then
-            player_ARR.y = player_ARR.y - (1*3)
-        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
-            player_ARR.x = player_ARR.x - (1*3)
-        elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
-            player_ARR.y = player_ARR.y + (1*3)
-        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
-            player_ARR.x = player_ARR.x + (1*3)
+        if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+            selOptionMain = math.min(selOptionMain + 1 , #menuOptionsMain)
+        elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+            selOptionMain = math.max(selOptionMain - 1 , 1)
+        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+            if menuOptionsMain[selOptionMain] == "PLAY" then
+                CurrentState = "Play"
+            elseif menuOptionsMain[selOptionMain] == "OPTIONS" then
+                CurrentState = "Options"
+                PriorState = "MainMenu"
+            elseif menuOptionsMain[selOptionMain] == "QUIT" then
+                love.event.quit()
+            end
         end
     end
 

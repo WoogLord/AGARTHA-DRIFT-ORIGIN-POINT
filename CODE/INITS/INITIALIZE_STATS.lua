@@ -7,13 +7,14 @@ function initParty()
     
     --==+==--
     player_ARR = {
-          x = 256
-        , y = 256
+          x = WindWidth / 2 + ssWidth
+        , y = WindHeight / 2 + ssHeight
         , pilot = {
               hp = 10
             , maxHP = 10
             , stamina = 25
             , maxStam = 25
+            , moveSpeed = 100
         }
         , isMechedUp = false
         , mech = {
@@ -21,6 +22,7 @@ function initParty()
             , maxHP = 10
             , heat = 25
             , maxHeat = 25
+            , moveSpeed = 100
         }
     }
 end
