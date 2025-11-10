@@ -37,7 +37,12 @@ function love.update(dt)
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
-    speedManager()
+    if player_ARR.isMechedUp then
+        moveSpeed = player_ARR.mech.moveSpeed * dt
+    else
+        moveSpeed = player_ARR.pilot.moveSpeed * dt
+    end
+
     musicManager()
 end
 
