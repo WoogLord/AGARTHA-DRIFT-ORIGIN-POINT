@@ -34,6 +34,7 @@ function love.update(dt)
     spriteTimer=spriteTimer + dt
     animTiming = math.ceil(spriteTimer % 4)
     print(animTiming)
+    print("This is marcs test")
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
