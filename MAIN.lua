@@ -44,6 +44,7 @@ function love.update(dt)
     end
 
     musicManager()
+    
 end
 
 function love.draw()
