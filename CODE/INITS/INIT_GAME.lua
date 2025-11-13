@@ -50,7 +50,7 @@ selOptionMain = 1
 selOptionPause = 1
 
 -- Sprite Sheet for Player
-spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.0.png")
+spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
 ssWidth, ssHeight = 32,32
 
 -- make array later, also do looping through sprite sheet and have ids
