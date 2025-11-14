@@ -49,8 +49,13 @@ function drawPaused()
 end
 
 function drawPlayer()
+        if player_ARR.facingDirection == "Up" then CurrentAnimArray = playerIdle_ARR_Up
+    elseif player_ARR.facingDirection == "Left" then CurrentAnimArray = playerIdle_ARR_Left
+    elseif player_ARR.facingDirection == "Down" then CurrentAnimArray = playerIdle_ARR_Down
+    elseif player_ARR.facingDirection == "Right" then CurrentAnimArray = playerIdle_ARR_Right
+    end
     love.graphics.draw(spritesheetPlayer
-        , playerIdle_ARR[animTiming]
+        , CurrentAnimArray[animTiming]
         , player_ARR.x, player_ARR.y
         , 0
         , 3, 3

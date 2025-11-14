@@ -24,6 +24,7 @@ function initParty()
             , maxHeat = 25
             , moveSpeed = 100
         }
+        , facingDirection = "Down"
     }
 end
 

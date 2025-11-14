@@ -54,8 +54,14 @@ spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0
 ssWidth, ssHeight = 32,32
 
 -- make array later, also do looping through sprite sheet and have ids
-playerIdle_ARR = {}
+playerIdle_ARR_Up = {}
+playerIdle_ARR_Left = {}
+playerIdle_ARR_Down = {}
+playerIdle_ARR_Right = {}
 for i = 1, 4, 1 do
-    playerIdle_ARR[i] = love.graphics.newQuad(ssWidth*(i-1), 0, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
-    print(playerIdle_ARR[i]) -- DEBUG
+    playerIdle_ARR_Up[i] = love.graphics.newQuad(ssWidth*(i-1), 0 * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
+    playerIdle_ARR_Left[i] = love.graphics.newQuad(ssWidth*(i-1), 1 * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
+    playerIdle_ARR_Down[i] = love.graphics.newQuad(ssWidth*(i-1), 2 * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
+    playerIdle_ARR_Right[i] = love.graphics.newQuad(ssWidth*(i-1), 3 * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
+    -- print(playerIdle_ARR[i]) -- DEBUG
 end

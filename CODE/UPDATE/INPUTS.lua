@@ -10,12 +10,16 @@ function playerControls()
     if CurrentState == "Play" then
         -- TO-DO: make this so i can move at angles and not orthogonal only
         if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+            player_ARR.facingDirection = "Up"
             player_ARR.y = player_ARR.y - ((1*3) * moveSpeed)
         elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+            player_ARR.facingDirection = "Left"
             player_ARR.x = player_ARR.x - ((1*3) * moveSpeed)
         elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+            player_ARR.facingDirection = "Down"
             player_ARR.y = player_ARR.y + ((1*3) * moveSpeed)
         elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+            player_ARR.facingDirection = "Right"
             player_ARR.x = player_ARR.x + ((1*3) * moveSpeed)
         end
     end
