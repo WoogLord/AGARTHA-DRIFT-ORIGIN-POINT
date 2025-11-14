@@ -1,0 +1,1 @@
+-- Have this handle collision, and entering battles
