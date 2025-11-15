@@ -65,3 +65,15 @@ for i = 1, 4, 1 do
     playerIdle_ARR_Right[i] = love.graphics.newQuad(ssWidth*(i-1), 3 * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions())
     -- print(playerIdle_ARR[i]) -- DEBUG
 end
+
+-- Tilemaps
+tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
+tilemapGround_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
+-- tilemapGroundFluff_01
+-- tilemapColliders_01
+tilemapEnemies_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
+encounterHitbox = love.graphics.newQuad(0, 0, ssWidth, ssHeight, tilemapEnemies_01:getDimensions())
+tilemapEnemies_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
+-- targetEnemyTile_ImageData = love.image.newImageData(32,32,tilemapEnemies_01_ImageData)
+
+overworldEnemies = {}

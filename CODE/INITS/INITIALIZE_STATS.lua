@@ -26,10 +26,13 @@ function initParty()
         }
         , facingDirection = "Down"
     }
+
+    playerInitX, playerInitY = player_ARR.x, player_ARR.y
 end
 
 function initEnemies()
     currentPartyMembers = {
         "Rat"
     }
+    
 end

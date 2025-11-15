@@ -61,3 +61,19 @@ function drawPlayer()
         , 3, 3
     )
 end
+
+function drawOverworld()
+    -- draw ground
+        -- camera needed here maybe
+    love.graphics.draw(tilemapGround_01
+        ,ssWidth*(-5*3),ssHeight*(-5*3)
+        ,0,3,3)
+    -- playerInitX, playerInitY
+    -- draw colliders
+    -- draw enemy
+    love.graphics.draw(tilemapEnemies_01
+        ,ssWidth*(-5*3),ssHeight*(-5*3)
+        ,0,3,3)
+    drawPlayer()
+    -- draw Foreground
+end
