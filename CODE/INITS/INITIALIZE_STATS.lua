@@ -9,6 +9,8 @@ function initParty()
     player_ARR = {
           x = WindWidth / 2 + ssWidth
         , y = WindHeight / 2 + ssHeight
+        , mapX = 8
+        , mapY = 8
         , pilot = {
               hp = 10
             , maxHP = 10

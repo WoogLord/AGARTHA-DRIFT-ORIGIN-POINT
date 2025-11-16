@@ -2,8 +2,15 @@
 function overworldManager()
     -- 1. enemies
         -- made from sprite spawners in the TILEMAP_MASTER-ENEMY_SPAWNS file
-    if player_ARR.x > overworldEnemies[2].x and player_ARR.x < overworldEnemies[2].x + ssWidth then
-        print("Collided with enemy 2 at x = ".. overworldEnemies[2].x .. ", y = ".. overworldEnemies[2].y)        
+    enemyTestIndex = 4
+    -- OKAY this doesnt work because it checks players position ON THE SCREEN
+    -- against the enemies MAP positioning
+    if          player_ARR.x > overworldEnemies[enemyTestIndex].x 
+            and player_ARR.x < overworldEnemies[enemyTestIndex].x + ssWidth
+            -- and player_ARR.y < overworldEnemies[2].y 
+            -- and player_ARR.y > overworldEnemies[2].y + ssHeight 
+            then
+        print("Collided with enemy 2 at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
     end
     -- 2. check if player contacts a wall collider
 
