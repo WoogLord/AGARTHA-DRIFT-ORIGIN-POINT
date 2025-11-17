@@ -49,17 +49,18 @@ function drawPaused()
 end
 
 function drawPlayer()
-        if player.facingDirection == "Up" then CurrentAnimArray = playerIdle_ARR_Up
-    elseif player.facingDirection == "Left" then CurrentAnimArray = playerIdle_ARR_Left
-    elseif player.facingDirection == "Down" then CurrentAnimArray = playerIdle_ARR_Down
-    elseif player.facingDirection == "Right" then CurrentAnimArray = playerIdle_ARR_Right
-    end
     love.graphics.draw(spritesheetPlayer
         , CurrentAnimArray[animTiming]
         , player.x, player.y
         , 0
         , 3, 3
     )
+    -- for i = 1, #player.animationArray.VanityNames, 1 do
+    --     for j = 1, player.animationArray.Frames[i], 1 do
+    --         love.graphics.draw(spritesheetPlayer,player.animationArray.Animations[i][j], player.x + (j*ssWidth), player.y + (i*ssHeight)
+    --         ,0 ,graphicsScale, graphicsScale)
+    --     end
+    -- end
 end
 
 function drawOverworld()
@@ -67,8 +68,8 @@ function drawOverworld()
         -- camera needed here maybe
         -- so player now has mapX and mapY, we can just use player
         -- so we need an offset based off the center and scale of the tile set
-    local mapOffsetX = ssWidth * (-1 * player.mapX * graphicsScale)
-    local mapOffsetY = ssHeight * (-1 * player.mapY * graphicsScale)
+    local mapOffsetX = ssWidth * (-1 * player.mapTileX * graphicsScale)
+    local mapOffsetY = ssHeight * (-1 * player.mapTileY * graphicsScale)
 
     love.graphics.draw(tilemapGround_01
         ,mapOffsetX,mapOffsetY
@@ -79,6 +80,7 @@ function drawOverworld()
     love.graphics.draw(tilemapEnemies_01
         ,mapOffsetX,mapOffsetY
         ,0,3,3)
+        
     drawPlayer()
     -- draw Foreground
 end

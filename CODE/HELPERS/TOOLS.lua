@@ -23,3 +23,14 @@ function tileChecker(_tileX, _tileY, _checkedImageData, _tileTargetImageData)
     end
     return true
 end
+
+function returnIndexGivenArrayValue(_array, _searchValue)
+    local indexArrToReturn={}
+    for valuesFound, currentIndex in pairs(_array) do
+        indexArrToReturn[currentIndex] = valuesFound
+        
+    end
+    print(indexArrToReturn[_searchValue])
+    -- print("SearchValue: "..{_searchValue})
+    return indexArrToReturn[_searchValue]
+end

@@ -20,6 +20,7 @@ local audioManagerFunctions require "CODE.UPDATE.AUDIO_MANAGER"
 local statsManagerFunctions require "CODE.UPDATE.STATS_MANAGER"
 local overworldManagerFunctions require "CODE.UPDATE.OVERWORLD_MANAGER"
 local battleManagerFunctions require "CODE.UPDATE.BATTLE_MANAGER"
+local animManagerFunctions require "CODE.UPDATE.ANIM_MANAGER"
 
 function love.load()
     musTitleLoadCutscene:setVolume(0.25)
@@ -45,15 +46,13 @@ function love.update(dt)
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
-    if player_ARR.isMechedUp then
-        moveSpeed = player_ARR.mech.moveSpeed * dt
-    else
-        moveSpeed = player_ARR.pilot.moveSpeed * dt
-    end
+    speedManager(dt)
 
     musicManager()
     overworldManager()
     battleManager()
+
+    animStateMachine()
 end
 
 function love.draw()
