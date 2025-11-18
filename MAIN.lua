@@ -60,11 +60,8 @@ function love.draw()
     if CurrentState == "MainMenu" then
         drawMainMenu()  
     elseif CurrentState == "Play" then
-        if player.inBattle == false then
-            drawOverworld()
-        else
-            drawBattle()
-        end
+        if player.inBattle then drawBattle()
+        else drawOverworld() end
     end
     drawPaused()
     

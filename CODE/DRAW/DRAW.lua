@@ -88,6 +88,7 @@ end
 function drawBattle()
     drawEnemies()
     drawPlayer()
+    battleUI(player)
 end
 
 function drawEnemies()
