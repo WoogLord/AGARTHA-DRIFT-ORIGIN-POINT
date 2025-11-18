@@ -1,5 +1,14 @@
 function animStateMachine()
-    if player.inBattle == false then
+    if player.inBattle then
+        if player.currentAnimState == "Idle" then
+            if player.facingDirection == "Right" 
+                then CurrentAnimArray = 
+                    player.animationArray.Animations[
+                        returnIndexGivenArrayValue(player.animationArray.VanityNames, "IdleRight")
+                    ]
+            end
+        end
+    else
         if player.currentAnimState == "Idle" then
                 if player.facingDirection == "Up" 
                 then CurrentAnimArray = 

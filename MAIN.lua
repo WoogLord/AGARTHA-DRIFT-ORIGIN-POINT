@@ -46,12 +46,11 @@ function love.update(dt)
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
+    if player.inBattle then battleManager()
+    else overworldManager() end
+
     speedManager(dt)
-
     musicManager()
-    overworldManager()
-    battleManager()
-
     animStateMachine()
 end
 
@@ -61,7 +60,11 @@ function love.draw()
     if CurrentState == "MainMenu" then
         drawMainMenu()  
     elseif CurrentState == "Play" then
-        drawOverworld()
+        if player.inBattle == false then
+            drawOverworld()
+        else
+            drawBattle()
+        end
     end
     drawPaused()
     

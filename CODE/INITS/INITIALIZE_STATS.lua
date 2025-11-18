@@ -64,7 +64,7 @@ function initParty()
 end
 
 function initEnemies()
-    currentPartyMembers = {
+    currentBattleEnemies = {
         "Rat"
     }
 end

@@ -13,6 +13,12 @@ function overworldManager()
             -- and player.y < overworldEnemies[2].y 
             -- and player.y > overworldEnemies[2].y + ssHeight 
             then
+        -- play cutscene
+        -- Have an anim where player current world position slides to fighting one
+        -- For now, we hardset player values
+        player.x, player.y = currWindWidth / 4, currWindHeight / 2
+        player.inBattle = true
+        player.facingDirection = "Right"
         print("Collided with enemy "..enemyTestIndex.." at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
     end
     -- 2. check if player contacts a wall collider

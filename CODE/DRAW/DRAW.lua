@@ -84,3 +84,12 @@ function drawOverworld()
     drawPlayer()
     -- draw Foreground
 end
+
+function drawBattle()
+    drawEnemies()
+    drawPlayer()
+end
+
+function drawEnemies()
+    
+end

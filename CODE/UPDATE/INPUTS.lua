@@ -8,19 +8,23 @@ INPUTS_ARR = {
 
 function playerControls()
     if CurrentState == "Play" then
-        -- TO-DO: make this so i can move at angles and not orthogonal only
-        if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
-            player.facingDirection = "Up"
-            player.y = player.y - ((1*3) * moveSpeed)
-        elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
-            player.facingDirection = "Left"
-            player.x = player.x - ((1*3) * moveSpeed)
-        elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
-            player.facingDirection = "Down"
-            player.y = player.y + ((1*3) * moveSpeed)
-        elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
-            player.facingDirection = "Right"
-            player.x = player.x + ((1*3) * moveSpeed)
+        if player.inBattle then
+        else
+            -- TO-DO: make this so i can move at angles and not orthogonal only
+            -- note: anims are still 4-directions
+            if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+                player.facingDirection = "Up"
+                player.y = player.y - (graphicsScale * moveSpeed)
+            elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+                player.facingDirection = "Left"
+                player.x = player.x - (graphicsScale * moveSpeed)
+            elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+                player.facingDirection = "Down"
+                player.y = player.y + (graphicsScale * moveSpeed)
+            elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+                player.facingDirection = "Right"
+                player.x = player.x + (graphicsScale * moveSpeed)
+            end
         end
     end
 end

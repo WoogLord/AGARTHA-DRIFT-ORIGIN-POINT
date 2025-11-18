@@ -7,10 +7,10 @@ WindWidth, WindHeight = ScreenWidth-math.floor(ScreenWidth*0.10),ScreenHeight-ma
 name = "Marc"
 age = 26
 isAlive = true
-ADOPVersion = "AGARTHA:DRIFT-ORIGIN:POINT v0.0"
+ADOPVersion = "HYPERBOREA:ASCENDING v0.0"
 Font = love.graphics.newFont(20)
 bigFont = love.graphics.newFont(32)
-TestString="AGARTHA:DRIFT-ORIGIN:POINT, created by " .. name .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
+TestString="HYPERBOREA:ASCENDING, created by " .. name .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
 
 --==+== AUDIO ==+==--
 -- SFX
