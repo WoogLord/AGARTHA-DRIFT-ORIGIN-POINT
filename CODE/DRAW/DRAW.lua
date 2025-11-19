@@ -58,21 +58,25 @@ function drawPlayer()
 end
 
 function drawAlly1()
+    love.graphics.setColor(1, 0.5, 0.5)
     love.graphics.draw(spritesheetPlayer
         , CurrentAnimArray[animTiming]
         , ally1.x, ally1.y
         , 0
         , 3, 3
     )
+    love.graphics.setColor(1,1,1)
 end
 
 function drawAlly2()
+    love.graphics.setColor(0.5, 0.5, 1)
     love.graphics.draw(spritesheetPlayer
         , CurrentAnimArray[animTiming]
         , ally2.x, ally2.y
         , 0
         , 3, 3
     )
+    love.graphics.setColor(1,1,1)
 end
 
 function drawOverworld()
@@ -102,7 +106,7 @@ function drawBattle()
     drawPlayer()
     if ally1.inParty then drawAlly1() end
     if ally2.inParty then drawAlly2() end
-    battleUI(player, ally1, ally2)
+    battleUI(ally1, player, ally2)
 end
 
 function drawEnemies()

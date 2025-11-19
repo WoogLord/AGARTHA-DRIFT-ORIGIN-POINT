@@ -2,8 +2,19 @@
 function battleManager()
     -- 1. spawn players and enemies, make turn timer
     turnCounter = 0
-    print(ally1.name, ally2.name, Anthony.name, Alfred.name)
+    combatants = {player, ally1, ally2}
     -- 2. initial attacks
+    initialAttacks()
     -- 3. assign turn order values
-    
+    for i=1, #combatants, 1 do
+        if combatants[i].isMechedUp then
+            print(combatants[i].name.." is in Mech, moveSpeed: "..combatants[i].mech.moveSpeed)
+        else
+            print(combatants[i].name.." not in Mech, moveSpeed: "..combatants[i].pilot.moveSpeed)
+        end
+    end 
+end
+
+function initialAttacks()
+
 end
