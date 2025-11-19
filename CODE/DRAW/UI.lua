@@ -28,13 +28,13 @@ end
 function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
     love.graphics.setColor(0.8, 0.8, 0.8)
     love.graphics.rectangle("fill", 0, 0, currWindWidth, 200)
-
+    
     partyBattleArr = {_party1, _party2, _party3}
     battleUIOffsetY = 50
 
     for i=1,#partyBattleArr, 1 do
-        if partyBattleArr[i] then
-            local yOff = battleUIOffsetY * i
+        local yOff = battleUIOffsetY * i
+        if partyBattleArr[i].inParty then
             if partyBattleArr[i].isMechedUp then
                 love.graphics.setColor(0.7, 1, 0.7)
                 love.graphics.printf("HP:"..partyBattleArr[i].mech.hp.."/"..partyBattleArr[i].mech.maxHP, 50, yOff, 400, "left") 

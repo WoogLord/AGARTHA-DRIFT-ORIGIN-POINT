@@ -28,6 +28,7 @@ spriteTimer = 0
 updownFloating = 0
 timerNoInput = 0
 graphicsScale = 3
+ssWidth, ssHeight = 32,32
 
 --==+==-- strings --==+==--
 CurrentState = "MainMenu"
@@ -51,7 +52,6 @@ selOptionPause = 1
 
 -- Sprite Sheet for Player
 spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
-ssWidth, ssHeight = 32,32
 
 -- Tilemaps
 tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")

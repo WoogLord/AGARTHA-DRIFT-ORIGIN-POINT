@@ -55,12 +55,24 @@ function drawPlayer()
         , 0
         , 3, 3
     )
-    -- for i = 1, #player.animationArray.VanityNames, 1 do
-    --     for j = 1, player.animationArray.Frames[i], 1 do
-    --         love.graphics.draw(spritesheetPlayer,player.animationArray.Animations[i][j], player.x + (j*ssWidth), player.y + (i*ssHeight)
-    --         ,0 ,graphicsScale, graphicsScale)
-    --     end
-    -- end
+end
+
+function drawAlly1()
+    love.graphics.draw(spritesheetPlayer
+        , CurrentAnimArray[animTiming]
+        , ally1.x, ally1.y
+        , 0
+        , 3, 3
+    )
+end
+
+function drawAlly2()
+    love.graphics.draw(spritesheetPlayer
+        , CurrentAnimArray[animTiming]
+        , ally2.x, ally2.y
+        , 0
+        , 3, 3
+    )
 end
 
 function drawOverworld()
@@ -88,7 +100,9 @@ end
 function drawBattle()
     drawEnemies()
     drawPlayer()
-    battleUI(player)
+    if ally1.inParty then drawAlly1() end
+    if ally2.inParty then drawAlly2() end
+    battleUI(player, ally1, ally2)
 end
 
 function drawEnemies()
