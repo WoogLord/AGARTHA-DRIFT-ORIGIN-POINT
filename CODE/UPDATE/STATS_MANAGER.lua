@@ -1,7 +1,7 @@
 function speedManager(_dt)
     if player.isMechedUp then
-        moveSpeed = player.mech.moveSpeed * _dt
+        moveSpeed = (100 + player.mech.speed) * _dt
     else
-        moveSpeed = player.pilot.moveSpeed * _dt
+        moveSpeed = (100 + player.pilot.speed) * _dt
     end
 end

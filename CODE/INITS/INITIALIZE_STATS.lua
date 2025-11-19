@@ -14,7 +14,7 @@ function initParty()
             , maxHP = 10
             , stamina = 25
             , maxStam = 25
-            , moveSpeed = 100
+            , speed = 10
         }
         , isMechedUp = false
         , mech = {
@@ -22,7 +22,7 @@ function initParty()
             , maxHP = 10
             , heat = 25
             , maxHeat = 25
-            , moveSpeed = 100
+            , speed = 10
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -62,7 +62,7 @@ function initParty()
             , maxHP = 15
             , stamina = 25
             , maxStam = 25
-            , moveSpeed = 100
+            , speed = 10
         }
         , isMechedUp = false
         , mech = {
@@ -70,7 +70,7 @@ function initParty()
             , maxHP = 35
             , heat = 15
             , maxHeat = 15
-            , moveSpeed = 125
+            , speed = 15
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -110,7 +110,7 @@ function initParty()
             , maxHP = 10
             , stamina = 35
             , maxStam = 35
-            , moveSpeed = 110
+            , speed = 11
         }
         , isMechedUp = false
         , mech = {
@@ -118,7 +118,7 @@ function initParty()
             , maxHP = 17
             , heat = 30
             , maxHeat = 30
-            , moveSpeed = 90
+            , speed = 9
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
