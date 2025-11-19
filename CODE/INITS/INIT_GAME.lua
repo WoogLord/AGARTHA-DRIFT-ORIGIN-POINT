@@ -4,13 +4,13 @@ love.graphics.setDefaultFilter("nearest","nearest")
 ScreenWidth, ScreenHeight = love.window.getDesktopDimensions()
 WindWidth, WindHeight = ScreenWidth-math.floor(ScreenWidth*0.10),ScreenHeight-math.floor(ScreenHeight*0.10)
 
-name = "Marc"
+creatorFirstName = "Marc"
 age = 26
 isAlive = true
 ADOPVersion = "HYPERBOREA:ASCENDING v0.0"
 Font = love.graphics.newFont(20)
 bigFont = love.graphics.newFont(32)
-TestString="HYPERBOREA:ASCENDING, created by " .. name .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
+TestString="HYPERBOREA:ASCENDING, created by " .. creatorFirstName .. ", my age is " .. age .. " and I am " .. (isAlive and "Alive" or "Dead")
 
 --==+== AUDIO ==+==--
 -- SFX
@@ -52,6 +52,8 @@ selOptionPause = 1
 
 -- Sprite Sheet for Player
 spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
+-- spritesheetAnthony
+-- spritesheetAlfred
 
 -- Tilemaps
 tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
