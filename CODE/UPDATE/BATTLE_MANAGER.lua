@@ -8,9 +8,9 @@ function battleManager()
     -- 3. assign turn order values
     for i=1, #combatants, 1 do
         if combatants[i].isMechedUp then
-            print(combatants[i].name.." is in Mech, moveSpeed: "..combatants[i].mech.moveSpeed)
+            print(combatants[i].name.." is in Mech, speed: "..combatants[i].mech.speed)
         else
-            print(combatants[i].name.." not in Mech, moveSpeed: "..combatants[i].pilot.moveSpeed)
+            print(combatants[i].name.." not in Mech, speed: "..combatants[i].pilot.speed)
         end
     end 
 end

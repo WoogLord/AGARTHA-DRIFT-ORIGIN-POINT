@@ -50,7 +50,7 @@ menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
 selOptionMain = 1
 selOptionPause = 1
 
--- Sprite Sheet for Player
+-- Sprite Sheet for all Characters (loop? maybe an array)
 spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
 -- spritesheetAnthony
 -- spritesheetAlfred
