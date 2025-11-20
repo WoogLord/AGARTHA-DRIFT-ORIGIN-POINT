@@ -2,7 +2,7 @@
 function battleManager()
     -- 1. spawn players and enemies, make turn timer
     
-    combatants = {player, ally1, ally2}
+    combatants = {player, ally1, ally2, enemy_01}
     -- 2. initial attacks
     if turnCounter == 0 then
         initiativeAndStats()
@@ -49,23 +49,36 @@ function turnCharger()
             if combatants[i].mech.currentTurnCharge == combatants[i].mech.maxTurnCharge then
                 takeTurn(combatants[i])
             else
-                combatants[i].mech.currentTurnCharge = math.min(combatants[i].mech.currentTurnCharge + combatants[i].mech.speed, combatants[i].mech.maxTurnCharge)
+                combatants[i].mech.currentTurnCharge = 
+                    math.min(combatants[i].mech.currentTurnCharge + (combatants[i].mech.speed * turnChargeReduction)
+                        , combatants[i].mech.maxTurnCharge)
             end
         else
             if combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
                 takeTurn(combatants[i])
             else
-                combatants[i].pilot.currentTurnCharge = math.min(combatants[i].pilot.currentTurnCharge + combatants[i].pilot.speed, combatants[i].pilot.maxTurnCharge)
+                combatants[i].pilot.currentTurnCharge = 
+                    math.min(combatants[i].pilot.currentTurnCharge + (combatants[i].pilot.speed * turnChargeReduction)
+                        , combatants[i].pilot.maxTurnCharge)
             end
         end
     end
 end
 
 function takeTurn(_turnTaker)
-    love.timer.sleep(5)
     if _turnTaker == player then
         print("Player's turn")
+        if _turnTaker.isMechedUp then
+            _turnTaker.mech.currentTurnCharge = 0
+        else
+            _turnTaker.pilot.currentTurnCharge = 0
+        end
     else
         print(_turnTaker.name.."'s turn")
+        if _turnTaker.isMechedUp then
+            _turnTaker.mech.currentTurnCharge = 0
+        else
+            _turnTaker.pilot.currentTurnCharge = 0
+        end
     end
 end

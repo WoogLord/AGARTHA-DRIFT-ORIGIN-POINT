@@ -153,5 +153,27 @@ function drawBattle()
 end
 
 function drawEnemies()
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    love.graphics.draw(spritesheetPlayer
+        , CurrentAnimArray[animTiming]
+        , enemy_01.x, enemy_01.y
+        , 0
+        , 3, 3
+    )
+    love.graphics.setColor(1,1,1)
+    if player.inBattle then 
+        -- currTurnCharge
+        love.graphics.setColor(0.5, 0, 0.5)
+        if enemy_01.isMechedUp then
+            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.mech.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.mech.currentTurnCharge, 15)
+        else
+            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.pilot.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.pilot.currentTurnCharge, 15)
+        end
+    end
+    love.graphics.setColor(1,1,1)
     
 end

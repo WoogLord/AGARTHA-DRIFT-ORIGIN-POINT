@@ -1,4 +1,4 @@
-function animStateMachine()
+function animStateMachine() -- PROBLEM, this is just for the player...
     if player.inBattle then
         if player.currentAnimState == "Idle" then
             if player.facingDirection == "Right" 

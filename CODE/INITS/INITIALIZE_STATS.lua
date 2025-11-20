@@ -18,6 +18,7 @@ function initParty()
             , startTurnCharge = 10
             , currentTurnCharge = 0
             , maxTurnCharge = 150
+            , abilities = {}
         }
         , isMechedUp = false
         , mech = {
@@ -29,6 +30,7 @@ function initParty()
             , startTurnCharge = 30
             , currentTurnCharge = 0
             , maxTurnCharge = 100
+            , abilities = {}
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -72,6 +74,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
+            , abilities = {}
         }
         , isMechedUp = false
         , mech = {
@@ -83,6 +86,7 @@ function initParty()
             , startTurnCharge = 50
             , currentTurnCharge = 0
             , maxTurnCharge = 100
+            , abilities = {}
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -126,6 +130,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
+            , abilities = {}
         }
         , isMechedUp = false
         , mech = {
@@ -137,6 +142,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
+            , abilities = {}
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -202,5 +208,58 @@ end
 function initEnemies()
     currentBattleEnemies = {
         "Rat"
+    }
+    enemy_01 = {
+          x = WindWidth / 2 + ssWidth
+        , y = WindHeight / 2 + ssHeight
+        , inParty = true
+        , name = "Rat"
+        , pilot = {
+              hp = 5
+            , maxHP = 5
+            , stamina = 15
+            , maxStam = 15
+            , speed = 5
+            , startTurnCharge = 75
+            , currentTurnCharge = 75
+            , maxTurnCharge = 75
+            , abilities = {}
+        }
+        , isMechedUp = false
+        , mech = {
+              hp = 8
+            , maxHP = 8
+            , heat = 20
+            , maxHeat = 20
+            , speed = 5
+            , startTurnCharge = 50
+            , currentTurnCharge = 50
+            , maxTurnCharge = 50
+            , abilities = {}
+        }
+        , facingDirection = "Left"
+        , currentAnimState = "Idle"
+        , currentAnimArrIndex = 2 -- Facing Down
+        , inBattle = false
+        , animationArray = {
+              VanityNames = {
+                "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
+            }
+            , Frames = {
+                4,4,4,4
+            }
+            , Direction = {
+                "Up", "Left", "Down", "Right"
+            }
+            , State = {
+                "Idle", "Idle", "Idle", "Idle"
+            }
+            , SpriteSheetRow = {
+                0, 1, 2, 3
+            }
+            , Animations = { -- loop this later
+                {}, {}, {}, {}
+            }
+        }
     }
 end

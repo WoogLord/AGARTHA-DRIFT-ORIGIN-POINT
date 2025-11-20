@@ -30,6 +30,9 @@ timerNoInput = 0
 graphicsScale = 3
 ssWidth, ssHeight = 32,32
 
+--==+==-- "floats" --==+==--
+turnChargeReduction = 0.05
+
 --==+==-- strings --==+==--
 CurrentState = "MainMenu"
 PriorState = ""
