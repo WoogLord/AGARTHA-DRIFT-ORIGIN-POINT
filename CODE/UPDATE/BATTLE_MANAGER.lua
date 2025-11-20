@@ -1,14 +1,22 @@
 -- TODO: marc, make this do the turn based logic and load everything
 function battleManager()
     -- 1. spawn players and enemies, make turn timer
-    turnCounter = 0
+    
     combatants = {player, ally1, ally2}
     -- 2. initial attacks
     if turnCounter == 0 then
         initiativeAndStats()
         initialAttacks()
     else
-        turnCharger()
+        for i=1, #combatants, 1 do
+            if combatants[i].mech.currentTurnCharge == combatants[i].mech.maxTurnCharge then
+                takeTurn(combatants[i])
+            elseif combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
+                takeTurn(combatants[i])
+            else
+                turnCharger()
+            end
+        end
     end
     -- 3. assign turn order values
 
@@ -27,6 +35,7 @@ function initiativeAndStats()
             print(combatants[i].name.." not in Mech, speed: "..combatants[i].pilot.speed..", currentTurnCharge: "..combatants[i].pilot.currentTurnCharge)
         end
     end 
+    return
 end
 
 function initialAttacks()
@@ -37,9 +46,26 @@ end
 function turnCharger()
     for i=1, #combatants, 1 do
         if combatants[i].isMechedUp then
-            combatants[i].mech.currentTurnCharge = combatants[i].mech.currentTurnCharge + combatants[i].mech.speed
+            if combatants[i].mech.currentTurnCharge == combatants[i].mech.maxTurnCharge then
+                takeTurn(combatants[i])
+            else
+                combatants[i].mech.currentTurnCharge = math.min(combatants[i].mech.currentTurnCharge + combatants[i].mech.speed, combatants[i].mech.maxTurnCharge)
+            end
         else
-            combatants[i].pilot.currentTurnCharge = combatants[i].pilot.currentTurnCharge + combatants[i].pilot.speed
+            if combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
+                takeTurn(combatants[i])
+            else
+                combatants[i].pilot.currentTurnCharge = math.min(combatants[i].pilot.currentTurnCharge + combatants[i].pilot.speed, combatants[i].pilot.maxTurnCharge)
+            end
         end
+    end
+end
+
+function takeTurn(_turnTaker)
+    love.timer.sleep(5)
+    if _turnTaker == player then
+        print("Player's turn")
+    else
+        print(_turnTaker.name.."'s turn")
     end
 end

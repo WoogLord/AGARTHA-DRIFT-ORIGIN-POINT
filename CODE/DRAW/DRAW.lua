@@ -81,6 +81,20 @@ function drawAlly1()
         , 3, 3
     )
     love.graphics.setColor(1,1,1)
+    if player.inBattle then 
+        -- currTurnCharge
+        love.graphics.setColor(0.5, 0, 0.5)
+        if ally1.isMechedUp then
+            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.mech.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.mech.currentTurnCharge, 15)
+        else
+            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.pilot.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.pilot.currentTurnCharge, 15)
+        end
+    end
+    love.graphics.setColor(1,1,1)
 end
 
 function drawAlly2()
@@ -91,6 +105,20 @@ function drawAlly2()
         , 0
         , 3, 3
     )
+    love.graphics.setColor(1,1,1)
+    if player.inBattle then 
+        -- currTurnCharge
+        love.graphics.setColor(0.5, 0, 0.5)
+        if ally2.isMechedUp then
+            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.mech.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.mech.currentTurnCharge, 15)
+        else
+            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.pilot.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.pilot.currentTurnCharge, 15)
+        end
+    end
     love.graphics.setColor(1,1,1)
 end
 

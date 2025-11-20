@@ -19,6 +19,7 @@ function overworldManager()
         player.x, player.y = currWindWidth / 4, currWindHeight / 2
         ally1.x, ally1.y = currWindWidth / 5, currWindHeight / 3
         ally2.x, ally2.y = currWindWidth / 5, currWindHeight / 1.5
+        turnCounter = 0
         player.inBattle = true
         player.facingDirection = "Right"
         print("Collided with enemy "..enemyTestIndex.." at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
