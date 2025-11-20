@@ -49,12 +49,27 @@ function drawPaused()
 end
 
 function drawPlayer()
+    love.graphics.setColor(1,1,1)
     love.graphics.draw(spritesheetPlayer
         , CurrentAnimArray[animTiming]
         , player.x, player.y
         , 0
         , 3, 3
     )
+    if player.inBattle then 
+        -- currTurnCharge
+        love.graphics.setColor(0.5, 0, 0.5)
+        if player.isMechedUp then
+            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.mech.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.mech.currentTurnCharge, 15)
+        else
+            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.pilot.maxTurnCharge, 15)
+            love.graphics.setColor(0.75, 0 ,0.75)
+            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.pilot.currentTurnCharge, 15)
+        end
+    end
+    love.graphics.setColor(1,1,1)
 end
 
 function drawAlly1()

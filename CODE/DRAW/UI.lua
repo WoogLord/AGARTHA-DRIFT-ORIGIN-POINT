@@ -36,17 +36,23 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
         local yOff = (battleUIOffsetY * i) - 30
         if partyBattleArr[i].inParty then
             if partyBattleArr[i].isMechedUp then
+                -- name
                 love.graphics.setColor(1, 1, 1)
                 love.graphics.printf("[M]-"..partyBattleArr[i].name, 25, yOff, 400, "left")
+                -- hp
                 love.graphics.setColor(0.7, 1, 0.7)
-                love.graphics.printf("HP:"..partyBattleArr[i].mech.hp.."/"..partyBattleArr[i].mech.maxHP, 50, yOff, 400, "right") 
+                love.graphics.printf("HP:"..partyBattleArr[i].mech.hp.."/"..partyBattleArr[i].mech.maxHP, 50, yOff, 400, "right")
+                -- mana
                 love.graphics.setColor(1, 0.7, 0)
                 love.graphics.printf("Heat:"..partyBattleArr[i].mech.heat.."/"..partyBattleArr[i].mech.maxHeat, 50, 25 + yOff, 400, "right") 
             else 
+                -- name
                 love.graphics.setColor(1, 1, 1)
                 love.graphics.printf("[P]-"..partyBattleArr[i].name, 25, yOff, 400, "left")
+                -- hp
                 love.graphics.setColor(1, 0.5, 0.5)
-                love.graphics.printf("HP:"..partyBattleArr[i].pilot.hp.."/"..partyBattleArr[i].pilot.maxHP, 50, yOff, 400, "right") 
+                love.graphics.printf("HP:"..partyBattleArr[i].pilot.hp.."/"..partyBattleArr[i].pilot.maxHP, 50, yOff, 400, "right")
+                -- mana
                 love.graphics.setColor(0.5, 0.5, 1)
                 love.graphics.printf("Stamina:"..partyBattleArr[i].pilot.stamina.."/"..partyBattleArr[i].pilot.maxStam, 50, 25 + yOff, 400, "right") 
             end

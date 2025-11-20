@@ -15,6 +15,9 @@ function initParty()
             , stamina = 25
             , maxStam = 25
             , speed = 10
+            , startTurnCharge = 10
+            , currentTurnCharge = 0
+            , maxTurnCharge = 150
         }
         , isMechedUp = false
         , mech = {
@@ -23,6 +26,9 @@ function initParty()
             , heat = 25
             , maxHeat = 25
             , speed = 10
+            , startTurnCharge = 30
+            , currentTurnCharge = 0
+            , maxTurnCharge = 100
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -63,6 +69,9 @@ function initParty()
             , stamina = 25
             , maxStam = 25
             , speed = 10
+            , startTurnCharge = 0
+            , currentTurnCharge = 0
+            , maxTurnCharge = 100
         }
         , isMechedUp = false
         , mech = {
@@ -71,6 +80,9 @@ function initParty()
             , heat = 15
             , maxHeat = 15
             , speed = 15
+            , startTurnCharge = 50
+            , currentTurnCharge = 0
+            , maxTurnCharge = 100
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -111,6 +123,9 @@ function initParty()
             , stamina = 35
             , maxStam = 35
             , speed = 11
+            , startTurnCharge = 0
+            , currentTurnCharge = 0
+            , maxTurnCharge = 100
         }
         , isMechedUp = false
         , mech = {
@@ -119,6 +134,9 @@ function initParty()
             , heat = 30
             , maxHeat = 30
             , speed = 9
+            , startTurnCharge = 0
+            , currentTurnCharge = 0
+            , maxTurnCharge = 100
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
