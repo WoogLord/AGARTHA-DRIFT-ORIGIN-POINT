@@ -2,11 +2,11 @@
 
 function initParty()
     --==+==--
-    player = {
+    Marc = {
           x = WindWidth / 2 + ssWidth
         , y = WindHeight / 2 + ssHeight
-        , mapTileX = 8
-        , mapTileY = 8
+        , mapTileX = 1
+        , mapTileY = 1
         , inParty = true
         , name = "Marc"
         , pilot = {
@@ -76,7 +76,7 @@ function initParty()
             , maxTurnCharge = 100
             , abilities = {}
         }
-        , isMechedUp = false
+        , isMechedUp = true
         , mech = {
               hp = 35
             , maxHP = 35
@@ -176,6 +176,8 @@ function initParty()
     -- Alfred = player
     -- Alfred.name = "Alfred"
 
+    player = Marc
+    alphaDecay = 1
     for i = 1, #player.animationArray.VanityNames, 1 do
         for j = 1, player.animationArray.Frames[i], 1 do
             player.animationArray.Animations[i][j] = love.graphics.newQuad(
@@ -209,21 +211,24 @@ function initEnemies()
     currentBattleEnemies = {
         "Rat"
     }
-    enemy_01 = {
+
+    Rat = {
           x = WindWidth / 2 + ssWidth
         , y = WindHeight / 2 + ssHeight
-        , inParty = true
-        , name = "Rat"
+        , name = "Rattimus"
+        , unitID = 01
         , pilot = {
               hp = 5
             , maxHP = 5
             , stamina = 15
             , maxStam = 15
             , speed = 5
-            , startTurnCharge = 75
-            , currentTurnCharge = 75
+            , startTurnCharge = 70
+            , currentTurnCharge = 0
             , maxTurnCharge = 75
             , abilities = {}
+            , xpValue = 5
+            , aiScript = function () end
         }
         , isMechedUp = false
         , mech = {
@@ -232,10 +237,12 @@ function initEnemies()
             , heat = 20
             , maxHeat = 20
             , speed = 5
-            , startTurnCharge = 50
-            , currentTurnCharge = 50
+            , startTurnCharge = 45
+            , currentTurnCharge = 0
             , maxTurnCharge = 50
             , abilities = {}
+            , xpValue = 15
+            , aiScript = function () end
         }
         , facingDirection = "Left"
         , currentAnimState = "Idle"
@@ -261,5 +268,9 @@ function initEnemies()
                 {}, {}, {}, {}
             }
         }
+    }
+    enemyIDArr = {
+            ID = {01}
+        , Arr = {Rat}
     }
 end

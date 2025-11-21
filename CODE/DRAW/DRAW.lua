@@ -139,7 +139,16 @@ function drawOverworld()
     love.graphics.draw(tilemapEnemies_01
         ,mapOffsetX,mapOffsetY
         ,0,3,3)
-        
+    
+    ghostParticles = {}
+
+    table.insert(ghostParticles)
+    if alphaDecay > 0 then    
+        alphaDecay = math.max(alphaDecay - (spriteTimer / 128), 0)
+        love.graphics.setColor(1,1,1,alphaDecay)
+        love.graphics.rectangle("fill", overworldEnemies[4].x * math.sin(spriteTimer / 4), overworldEnemies[4].y, 12, 12, 15)
+    end
+
     drawPlayer()
     -- draw Foreground
 end

@@ -8,8 +8,16 @@ function overworldManager()
     enemyTestIndex = 4
     -- OKAY this doesnt work because it checks players position ON THE SCREEN
     -- against the enemies MAP positioning
-    if          player.x > overworldEnemies[enemyTestIndex].x 
-            and player.x < overworldEnemies[enemyTestIndex].x + ssWidth
+    -- 2. check if player contacts a wall collider
+
+    -- 3. check if player contacts an enemy
+    newEncounter(Rat, tilemapGround_01)
+end
+
+function newEncounter(_enemies, _background)
+    -- include background variable so scenes/environments are dynamic
+    if          player.mapTrueX > overworldEnemies[enemyTestIndex].x 
+            and player.mapTrueX < overworldEnemies[enemyTestIndex].x + ssWidth
             -- and player.y < overworldEnemies[2].y 
             -- and player.y > overworldEnemies[2].y + ssHeight 
             then
@@ -20,12 +28,9 @@ function overworldManager()
         ally1.x, ally1.y = currWindWidth / 5, currWindHeight / 3
         ally2.x, ally2.y = currWindWidth / 5, currWindHeight / 1.5
         turnCounter = 0
+        enemy_01 = enemyIDArr.Arr[overworldEnemies[enemyTestIndex].unitID]
         player.inBattle = true
         player.facingDirection = "Right"
-        print("Collided with enemy "..enemyTestIndex.." at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
+        print("Collided with enemy of ID: "..overworldEnemies[enemyTestIndex].unitID.." "..enemyTestIndex.." at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
     end
-    -- 2. check if player contacts a wall collider
-
-    -- 3. check if player contacts an enemy
-
 end

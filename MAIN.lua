@@ -40,7 +40,7 @@ end
 
 function love.update(dt)
     love.timer.sleep(1/60)
-    spriteTimer=spriteTimer + dt
+    spriteTimer = spriteTimer + dt
     animTiming = math.ceil(spriteTimer % 4)
     -- print(animTiming)
     
