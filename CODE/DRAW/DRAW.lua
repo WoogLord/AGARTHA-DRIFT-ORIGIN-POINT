@@ -130,6 +130,10 @@ function drawOverworld()
     local mapOffsetX = ssWidth * (-1 * player.mapTileX * graphicsScale)
     local mapOffsetY = ssHeight * (-1 * player.mapTileY * graphicsScale)
 
+    
+    love.graphics.draw(tilemapSubGround_01
+        ,mapOffsetX,mapOffsetY
+        ,0,3,3)
     love.graphics.draw(tilemapGround_01
         ,mapOffsetX,mapOffsetY
         ,0,3,3)

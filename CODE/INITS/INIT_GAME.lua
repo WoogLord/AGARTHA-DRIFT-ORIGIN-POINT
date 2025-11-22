@@ -59,6 +59,7 @@ spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0
 -- spritesheetAlfred
 
 -- Tilemaps
+tilemapSubGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-SUBGROUND.png")
 tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
 tilemapGround_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
 -- tilemapGroundFluff_01
