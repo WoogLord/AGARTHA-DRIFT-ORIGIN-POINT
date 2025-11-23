@@ -69,6 +69,7 @@ function takeTurn(_turnTaker)
     if _turnTaker == player then
         print("Player's turn")
         if _turnTaker.isMechedUp then
+            -- some ability here
             _turnTaker.mech.currentTurnCharge = 0
         else
             _turnTaker.pilot.currentTurnCharge = 0

@@ -29,6 +29,7 @@ updownFloating = 0
 timerNoInput = 0
 graphicsScale = 3
 ssWidth, ssHeight = 32,32
+moveSpeedDampener = 0.40
 
 --==+==-- "floats" --==+==--
 turnChargeReduction = 0.05

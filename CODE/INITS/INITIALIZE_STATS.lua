@@ -1,4 +1,56 @@
 -- Stat initialization
+local AllyClass = {}
+AllyClass.__index = AllyClass
+
+function AllyClass:new(
+        _x, _y, _name, _inParty
+
+        , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+        , _pilotSpeed     
+        , _mechHP,  _mechMaxHP, _mechHeat, _mechMaxHeat
+        , _mechSpeed
+    )
+    local tAC = {} -- tAC = tempAllyClass
+    setmetatable(tAC, AllyClass)
+    tAC.x,tAC.y,tAC.name, tAC.inParty = _x, _y, _name, _inParty
+
+    tAC.pilot = {
+        HP = _pilotHP
+        , maxHP = _pilotMaxHP
+        , stamina = _pilotStamina
+        , maxStam =  _pilotMaxStam
+        , speed = _pilotSpeed
+    }
+    tAC.mech = {
+        HP = _mechHP
+        , maxHP = _mechMaxHP
+        , heat = _mechHeat
+        , maxHeat = _mechMaxHeat
+        , speed = _mechSpeed
+    }
+    return tAC
+end
+
+function AllyClass:PrintData()
+    print("\n--==+==-- AllyClass --==+==--")
+    print("x: "..self.x.."\ny: "..self.y.."\nname: "..self.name.."\ninParty: "..tostring(self.inParty))
+    print("\n--== Pilot ==--")
+    print("HP: "..self.pilot.HP.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam)
+    print("speed: "..self.pilot.speed)
+    print("\n--== Mech ==--")
+    print("HP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat)
+    print("speed: "..self.mech.speed)
+end
+
+local testAllyClass = AllyClass:new(
+    128, 128, "Test", true
+
+    , 10, 10, 25, 25
+    , 10   
+    , 15,  15, 25, 25
+    , 10
+)
+testAllyClass:PrintData()
 
 function initParty()
     --==+==--

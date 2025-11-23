@@ -146,7 +146,7 @@ function drawOverworld()
     
     ghostParticles = {}
 
-    table.insert(ghostParticles)
+    -- table.insert(ghostParticles)
     if alphaDecay > 0 then    
         alphaDecay = math.max(alphaDecay - (spriteTimer / 128), 0)
         love.graphics.setColor(1,1,1,alphaDecay)
