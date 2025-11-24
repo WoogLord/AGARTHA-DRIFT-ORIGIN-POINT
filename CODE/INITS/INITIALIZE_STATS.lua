@@ -3,22 +3,28 @@ local AllyClass = {}
 AllyClass.__index = AllyClass
 
 function AllyClass:new(
-        _x, _y, _name, _inParty
+          _name, _x, _y
+        , _inParty, _inBattle
+        , _facingDirection, _currentAnimState, _currentAnimArrIndex
 
         , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , _pilotEquipmentHead, _pilotEquipmentGloves, _pilotEquipmentBoots
 
         , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , _mechEquipmentHead, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentChassis
     )
     local tAC = {} -- tAC = tempAllyClass
     setmetatable(tAC, AllyClass)
 
-    tAC.x,tAC.y,tAC.name, tAC.inParty = _x, _y, _name, _inParty
+    tAC.name, tAC.x,tAC.y = _name, _x, _y
+    tAC.inParty, tAC.inBattle = _inParty, _inBattle
+    tAC.facingDirection, tAC.currentAnimState, tAC.currentAnimArrIndex = _facingDirection, _currentAnimState, _currentAnimArrIndex
 
     tAC.pilot = {
         HP = _pilotHP, maxHP = _pilotMaxHP, stamina = _pilotStamina, maxStam =  _pilotMaxStam
@@ -26,6 +32,9 @@ function AllyClass:new(
         , abilities = {
               ability_01 = _pilotAbility_01, ability_02 = _pilotAbility_02, ability_03 = _pilotAbility_03, ability_04 = _pilotAbility_04
             , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
+        }
+        , equipment = {
+              head = _pilotEquipmentHead, gloves = _pilotEquipmentGloves, boots = _pilotEquipmentBoots
         }
     }
     tAC.mech = {
@@ -35,37 +44,54 @@ function AllyClass:new(
               ability_01 = _mechAbility_01, ability_02 = _mechAbility_02, ability_03 = _mechAbility_03, ability_04 = _mechAbility_04
             , ability_05 = _mechAbility_05, ability_06 = _mechAbility_06, ability_07 = _mechAbility_07, ability_08 = _mechAbility_08
         }
+        , equipment = {
+              head = _mechEquipmentHead, rightarm = _mechEquipmentRArm, leftarm = _mechEquipmentLArm, chassis = _mechEquipmentChassis
+        }
     }
     return tAC
 end
 
 function AllyClass:PrintData()
-    print("\n--==+==-- AllyClass --==+==--")
-    print("x: "..self.x.."\ny: "..self.y.."\nname: "..self.name.."\ninParty: "..tostring(self.inParty))
-    print("\n--== Pilot ==--")
-    print("HP: "..self.pilot.HP.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam)
-    print("speed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge)
-    print("currentTurnChg: "..self.pilot.currentTurnChg.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge)
-    print("-- Pilot Abilities --")
-    print("ability_01: "..self.pilot.abilities.ability_01.."\nability_02: "..self.pilot.abilities.ability_02)
-    print("ability_03: "..self.pilot.abilities.ability_03.."\nability_04: "..self.pilot.abilities.ability_04)
-    print("ability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06)
-    print("ability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08)
-    print("\n--== Mech ==--")
-    print("HP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat)
-    print("speed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge)
-    print("currentTurnChg: "..self.mech.currentTurnChg.."\nmaxTurnCharge: "..self.mech.maxTurnCharge)
-    print("-- Mech Abilities --")
-    print("ability_01: "..self.mech.abilities.ability_01.."\nability_02: "..self.mech.abilities.ability_02)
-    print("ability_03: "..self.mech.abilities.ability_03.."\nability_04: "..self.mech.abilities.ability_04)
-    print("ability_05: "..self.mech.abilities.ability_05.."\nability_06: "..self.mech.abilities.ability_06)
-    print("ability_07: "..self.mech.abilities.ability_07.."\nability_08: "..self.mech.abilities.ability_08)
-    print("\n")
+    print("\n--==+==-- AllyClass --==+==--"
+        .."\nname: "..self.name.."\nx: "..self.x.."\ny: "..self.y
+        .."\ninParty: "..tostring(self.inParty).."\ninBattle: "..tostring(self.inBattle)
+        .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
+        .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
+        .."\n\n--== Pilot ==--"
+        .."\nHP: "..self.pilot.HP.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
+        .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
+        .."\ncurrentTurnChg: "..self.pilot.currentTurnChg.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
+        .."\n-- Pilot Abilities --"
+        .."\nability_01: "..self.pilot.abilities.ability_01.."\nability_02: "..self.pilot.abilities.ability_02
+        .."\nability_03: "..self.pilot.abilities.ability_03.."\nability_04: "..self.pilot.abilities.ability_04
+        .."\nability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06
+        .."\nability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08
+        .."\n-- Pilot Equipment --"
+        .."\nhead: "..self.pilot.equipment.head.."\ngloves: "..self.pilot.equipment.gloves
+        .."\nboots: "..self.pilot.equipment.boots
+        .."\n\n--== Mech ==--"
+        .."\nHP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
+        .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
+        .."\ncurrentTurnChg: "..self.mech.currentTurnChg.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
+        .."\n-- Mech Abilities --"
+        .."\nability_01: "..self.mech.abilities.ability_01.."\nability_02: "..self.mech.abilities.ability_02
+        .."\nability_03: "..self.mech.abilities.ability_03.."\nability_04: "..self.mech.abilities.ability_04
+        .."\nability_05: "..self.mech.abilities.ability_05.."\nability_06: "..self.mech.abilities.ability_06
+        .."\nability_07: "..self.mech.abilities.ability_07.."\nability_08: "..self.mech.abilities.ability_08
+        .."\n-- Mech Equipment --"
+        .."\nhead: "..self.mech.equipment.head.."\nrightarm: "..self.mech.equipment.rightarm
+        .."\nleftarm: "..self.mech.equipment.leftarm.."\nchassis: "..self.mech.equipment.chassis
+        .."\n"
+    )
 end
 
 local testAllyClass = AllyClass:new(
-    -- _x, _y, _name, _inParty
-    128, 128, "Test", true
+    --   _name, _x, _y
+    "Test", 128, 128
+    -- , _inParty, _inBattle
+    , true, true
+    -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
+    , "Down", "Idle", 3 -- 3 is IdleDown
 
     -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
     , 10, 10, 25, 25
@@ -76,6 +102,9 @@ local testAllyClass = AllyClass:new(
     , 1, 2, 0, 0
     , 0, 0, 0, 0
 
+    -- , _pilotEquipmentHead, _pilotEquipmentGloves, _pilotEquipmentBoots
+    , 0, 0, 0 -- Magic numbers?  could be "Nothing"
+
     -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
     , 15,  15, 25, 25
     -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
@@ -84,6 +113,9 @@ local testAllyClass = AllyClass:new(
     -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
     , 1, 2, 0, 0
     , 0, 0, 0, 0
+
+    -- , _mechEquipmentHead, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentChassis
+    , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
 )
 testAllyClass:PrintData()
 
