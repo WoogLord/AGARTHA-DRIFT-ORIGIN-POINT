@@ -11,7 +11,12 @@ function AllyClass:new(
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
-        , _pilotEquipmentHead, _pilotEquipmentGloves, _pilotEquipmentBoots
+        , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentChest
+        , _pilotEquipmentRArm, _pilotEquipmentLArm
+        , _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+        , _pilotEquipmentGloves_pilotEquipmentPants
+        , _pilotEquipmentRLeg, _pilotEquipmentLLeg
+        , _pilotEquipmentBoots
 
         , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
@@ -34,7 +39,12 @@ function AllyClass:new(
             , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
         }
         , equipment = {
-              head = _pilotEquipmentHead, gloves = _pilotEquipmentGloves, boots = _pilotEquipmentBoots
+              head = _pilotEquipmentHead, back = _pilotEquipmentBack, chest = _pilotEquipmentChest
+            , rightArm = _pilotEquipmentRArm, leftArm = _pilotEquipmentLArm
+            , rightWeapon = _pilotEquipmentRWeapon, leftWeapon = _pilotEquipmentLWeapon
+            , gloves = _pilotEquipmentGloves, pants = _pilotEquipmentPants
+            , rightLeg = _pilotEquipmentRLeg, leftLeg = _pilotEquipmentLLeg
+            , boots = _pilotEquipmentBoots
         }
     }
     tAC.mech = {
@@ -67,7 +77,11 @@ function AllyClass:PrintData()
         .."\nability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06
         .."\nability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08
         .."\n-- Pilot Equipment --"
-        .."\nhead: "..self.pilot.equipment.head.."\ngloves: "..self.pilot.equipment.gloves
+        .."\nhead: "..self.pilot.equipment.head.."\nback: "..self.pilot.equipment.back.."\nchest: "..self.pilot.equipment.chest
+        .."\nrightarm: "..self.pilot.equipment.rightArm.."\nleftarm: "..self.pilot.equipment.leftArm
+        .."\nrightWeapon: "..self.pilot.equipment.rightWeapon.."\nleftWeapon: "..self.pilot.equipment.leftWeapon
+        .."\ngloves: "..self.pilot.equipment.gloves.."\npants: "..self.pilot.equipment.pants
+        .."\nrightLeg: "..self.pilot.equipment.rightLeg.."\nleftLeg: "..self.pilot.equipment.leftLeg
         .."\nboots: "..self.pilot.equipment.boots
         .."\n\n--== Mech ==--"
         .."\nHP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
@@ -102,8 +116,12 @@ local testAllyClass = AllyClass:new(
     , 1, 2, 0, 0
     , 0, 0, 0, 0
 
-    -- , _pilotEquipmentHead, _pilotEquipmentGloves, _pilotEquipmentBoots
+    -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentChest
     , 0, 0, 0 -- Magic numbers?  could be "Nothing"
+    -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+    , 0, 0, 0, 0
+    -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+    , 0, 0, 0, 0, 0
 
     -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
     , 15,  15, 25, 25
