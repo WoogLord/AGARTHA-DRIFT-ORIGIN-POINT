@@ -4,17 +4,18 @@ AllyClass.__index = AllyClass
 
 function AllyClass:new(
           _name, _x, _y
-        , _inParty, _inBattle
+        , _inParty, _inBattle, _isMechedUp
         , _facingDirection, _currentAnimState, _currentAnimArrIndex
 
         , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
-        , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentChest
+        , _pilotEquipmentHead, _pilotEquipmentBack
+        , _pilotEquipmentShoulders, _pilotEquipmentChest
         , _pilotEquipmentRArm, _pilotEquipmentLArm
         , _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
-        , _pilotEquipmentGloves_pilotEquipmentPants
+        , _pilotEquipmentGloves, _pilotEquipmentPants
         , _pilotEquipmentRLeg, _pilotEquipmentLLeg
         , _pilotEquipmentBoots
 
@@ -22,13 +23,19 @@ function AllyClass:new(
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
-        , _mechEquipmentHead, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentChassis
+        , _mechEquipmentHead, _mechEquipmentBack
+        , _mechEquipmentRShoulder, _mechEquipmentLShoulder
+        , _mechEquipmentChassis
+        , _mechEquipmentRArm, _mechEquipmentLArm
+        , _mechEquipmentRWeapon, _mechEquipmentLWeapon
+        , _mechEquipmentRLeg, _mechEquipmentLLeg
+        , _mechEquipmentAuxillary, _mechEquipmentThrusters
     )
     local tAC = {} -- tAC = tempAllyClass
     setmetatable(tAC, AllyClass)
 
-    tAC.name, tAC.x,tAC.y = _name, _x, _y
-    tAC.inParty, tAC.inBattle = _inParty, _inBattle
+    tAC.name, tAC.x, tAC.y = _name, _x, _y
+    tAC.inParty, tAC.inBattle, tAC.isMechedUp = _inParty, _inBattle, _isMechedUp
     tAC.facingDirection, tAC.currentAnimState, tAC.currentAnimArrIndex = _facingDirection, _currentAnimState, _currentAnimArrIndex
 
     tAC.pilot = {
@@ -39,7 +46,8 @@ function AllyClass:new(
             , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
         }
         , equipment = {
-              head = _pilotEquipmentHead, back = _pilotEquipmentBack, chest = _pilotEquipmentChest
+              head = _pilotEquipmentHead, back = _pilotEquipmentBack
+            , shoulders = _pilotEquipmentShoulders, chest = _pilotEquipmentChest
             , rightArm = _pilotEquipmentRArm, leftArm = _pilotEquipmentLArm
             , rightWeapon = _pilotEquipmentRWeapon, leftWeapon = _pilotEquipmentLWeapon
             , gloves = _pilotEquipmentGloves, pants = _pilotEquipmentPants
@@ -55,7 +63,13 @@ function AllyClass:new(
             , ability_05 = _mechAbility_05, ability_06 = _mechAbility_06, ability_07 = _mechAbility_07, ability_08 = _mechAbility_08
         }
         , equipment = {
-              head = _mechEquipmentHead, rightarm = _mechEquipmentRArm, leftarm = _mechEquipmentLArm, chassis = _mechEquipmentChassis
+              head = _mechEquipmentHead, back = _mechEquipmentBack
+            , rightShoulder = _mechEquipmentRShoulder, leftShoulder = _mechEquipmentLShoulder
+            , chassis = _mechEquipmentChassis
+            , rightarm = _mechEquipmentRArm, leftarm = _mechEquipmentLArm
+            , rightWeapon = _mechEquipmentRWeapon, leftWeapon = _mechEquipmentLWeapon
+            , rightLeg = _mechEquipmentRLeg, leftLeg = _mechEquipmentLLeg
+            , auxillary = _mechEquipmentAuxillary, thrusters = _mechEquipmentThrusters
         }
     }
     return tAC
@@ -64,20 +78,21 @@ end
 function AllyClass:PrintData()
     print("\n--==+==-- AllyClass --==+==--"
         .."\nname: "..self.name.."\nx: "..self.x.."\ny: "..self.y
-        .."\ninParty: "..tostring(self.inParty).."\ninBattle: "..tostring(self.inBattle)
+        .."\ninParty: "..tostring(self.inParty).."\ninBattle: "..tostring(self.inBattle).."\nisMechedUp: "..tostring(self.isMechedUp)
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
         .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
         .."\n\n--== Pilot ==--"
         .."\nHP: "..self.pilot.HP.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
         .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
         .."\ncurrentTurnChg: "..self.pilot.currentTurnChg.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
-        .."\n-- Pilot Abilities --"
+        .."\n\n-- Pilot Abilities --"
         .."\nability_01: "..self.pilot.abilities.ability_01.."\nability_02: "..self.pilot.abilities.ability_02
         .."\nability_03: "..self.pilot.abilities.ability_03.."\nability_04: "..self.pilot.abilities.ability_04
         .."\nability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06
         .."\nability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08
-        .."\n-- Pilot Equipment --"
-        .."\nhead: "..self.pilot.equipment.head.."\nback: "..self.pilot.equipment.back.."\nchest: "..self.pilot.equipment.chest
+        .."\n\n-- Pilot Equipment --"
+        .."\nhead: "..self.pilot.equipment.head.."\nback: "..self.pilot.equipment.back
+        .."\nshoulders: "..self.pilot.equipment.shoulders.."\nchest: "..self.pilot.equipment.chest
         .."\nrightarm: "..self.pilot.equipment.rightArm.."\nleftarm: "..self.pilot.equipment.leftArm
         .."\nrightWeapon: "..self.pilot.equipment.rightWeapon.."\nleftWeapon: "..self.pilot.equipment.leftWeapon
         .."\ngloves: "..self.pilot.equipment.gloves.."\npants: "..self.pilot.equipment.pants
@@ -87,14 +102,19 @@ function AllyClass:PrintData()
         .."\nHP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
         .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
         .."\ncurrentTurnChg: "..self.mech.currentTurnChg.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
-        .."\n-- Mech Abilities --"
+        .."\n\n-- Mech Abilities --"
         .."\nability_01: "..self.mech.abilities.ability_01.."\nability_02: "..self.mech.abilities.ability_02
         .."\nability_03: "..self.mech.abilities.ability_03.."\nability_04: "..self.mech.abilities.ability_04
         .."\nability_05: "..self.mech.abilities.ability_05.."\nability_06: "..self.mech.abilities.ability_06
         .."\nability_07: "..self.mech.abilities.ability_07.."\nability_08: "..self.mech.abilities.ability_08
-        .."\n-- Mech Equipment --"
-        .."\nhead: "..self.mech.equipment.head.."\nrightarm: "..self.mech.equipment.rightarm
-        .."\nleftarm: "..self.mech.equipment.leftarm.."\nchassis: "..self.mech.equipment.chassis
+        .."\n\n-- Mech Equipment --"
+        .."\nhead: "..self.mech.equipment.head.."\nback: "..self.mech.equipment.back
+        .."\nrightShoulder: "..self.mech.equipment.rightShoulder.."\nleftShoulder: "..self.mech.equipment.leftShoulder
+        .."\nchassis: "..self.mech.equipment.chassis
+        .."\nrightarm: "..self.mech.equipment.rightarm.."\nleftarm: "..self.mech.equipment.leftarm
+        .."\nrightWeapon: "..self.mech.equipment.rightWeapon.."\nleftWeapon: "..self.mech.equipment.leftWeapon
+        .."\nrightLeg: "..self.mech.equipment.rightLeg.."\nleftLeg: "..self.mech.equipment.leftLeg
+        .."\nauxillary: "..self.mech.equipment.auxillary.."\nthrusters: "..self.mech.equipment.thrusters
         .."\n"
     )
 end
@@ -102,11 +122,12 @@ end
 local testAllyClass = AllyClass:new(
     --   _name, _x, _y
     "Test", 128, 128
-    -- , _inParty, _inBattle
-    , true, true
+    -- , _inParty, _inBattle, _isMechedUp
+    , true, false, false
     -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
     , "Down", "Idle", 3 -- 3 is IdleDown
 
+    --== Pilot Stats ==--
     -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
     , 10, 10, 25, 25
     -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
@@ -116,15 +137,17 @@ local testAllyClass = AllyClass:new(
     , 1, 2, 0, 0
     , 0, 0, 0, 0
 
-    -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentChest
-    , 0, 0, 0 -- Magic numbers?  could be "Nothing"
+    --== Pilot Equipment ==--
+    -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
+    , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
     -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
     , 0, 0, 0, 0
     -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
     , 0, 0, 0, 0, 0
 
+    --== Mech Stats ==--
     -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
-    , 15,  15, 25, 25
+    , 15, 15, 25, 25
     -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
     , 10, 30, 0, 100
     -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
@@ -132,8 +155,13 @@ local testAllyClass = AllyClass:new(
     , 1, 2, 0, 0
     , 0, 0, 0, 0
 
-    -- , _mechEquipmentHead, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentChassis
+    --== Mech Equipment ==--
+    -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
     , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+    -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
+    , 0, 0, 0, 0, 0
+    -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
+    , 0, 0, 0, 0
 )
 testAllyClass:PrintData()
 
