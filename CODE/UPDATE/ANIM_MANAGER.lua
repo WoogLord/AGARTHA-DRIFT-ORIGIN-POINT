@@ -26,13 +26,18 @@ function AnimClass:PrintData()
 end
 
 function AnimClass:BuildAnimations(_spriteSheet)
+    local retArr = {{},{},{},{},{},{},{},{}}
     for i = 1, #self.vanityNames, 1 do
         for j = 1, self.frames[i], 1  do
             self.animations[i][j] = love.graphics.newQuad(
                 ssWidth*(j-1), (i-1) * ssHeight, ssWidth, ssHeight, _spriteSheet:getDimensions()
             )
+            retArr[i][j] = love.graphics.newQuad(
+                ssWidth*(j-1), (i-1) * ssHeight, ssWidth, ssHeight, _spriteSheet:getDimensions()
+            )
         end
     end
+    return retArr
 end
 
 mainAnimationArray = AnimClass:new(
@@ -63,8 +68,11 @@ mainAnimationArray = AnimClass:new(
     }
 )
 mainAnimationArray:PrintData()
+playerAnimArrTest = mainAnimationArray:BuildAnimations(spritesheetPlayer)
+print(playerAnimArrTest[1][1])
 
 function animStateMachine() -- PROBLEM, this is just for the player...
+    print(player.animationArray.Animations[1][1])
     if player.inBattle then
         if player.currentAnimState == "Idle" then
             if player.facingDirection == "Right" 

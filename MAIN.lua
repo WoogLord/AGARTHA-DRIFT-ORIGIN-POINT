@@ -64,6 +64,8 @@ function love.draw()
         else drawOverworld() end
     end
     drawPaused()
+    love.graphics.draw(spritesheetPlayer, playerAnimArrTest[1][1],256,256)
+    love.graphics.draw(spritesheetPlayer, player.animationArray.Animations[1][1],312,312)
     
     -- Debug stuff
     love.graphics.setColor(1,1,1)
