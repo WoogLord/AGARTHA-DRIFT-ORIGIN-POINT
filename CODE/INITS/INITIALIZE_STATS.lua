@@ -204,21 +204,27 @@ function initParty()
         , animationArray = {
               VanityNames = {
                 "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
+                , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
             }
             , Frames = {
                 4,4,4,4
+                ,4,4,4,4
             }
             , Direction = {
                 "Up", "Left", "Down", "Right"
+                , "Up", "Left", "Down", "Right"
             }
             , State = {
                 "Idle", "Idle", "Idle", "Idle"
+                , "Walk", "Walk", "Walk", "Walk"
             }
             , SpriteSheetRow = {
                 0, 1, 2, 3
+                ,4,5,6,7
             }
             , Animations = { -- loop this later
                 {}, {}, {}, {}
+                ,{}, {}, {}, {}
             }
         }
     }

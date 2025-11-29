@@ -25,25 +25,41 @@ function AnimClass:PrintData()
     end
 end
 
+function AnimClass:BuildAnimations(_spriteSheet)
+    for i = 1, #self.vanityNames, 1 do
+        for j = 1, self.frames[i], 1  do
+            self.animations[i][j] = love.graphics.newQuad(
+                ssWidth*(j-1), (i-1) * ssHeight, ssWidth, ssHeight, _spriteSheet:getDimensions()
+            )
+        end
+    end
+end
+
 mainAnimationArray = AnimClass:new(
     { -- _vanityNames
         "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
+        , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
     }
     , { -- _state
         "Idle", "Idle", "Idle", "Idle"
+        , "Walk", "Walk", "Walk", "Walk"
     }
     , { -- _direction
         "Up", "Left", "Down", "Right"
+        , "Up", "Left", "Down", "Right"
     }
-    , { -- _spriteSheetRow
+    , { -- _spriteSheetRow -- needed?
         0, 1, 2, 3
+        , 4, 5, 6, 7
     }
     , { -- _frames
-        4,4,4,4
+        4, 4, 4, 4
+        , 4, 4, 4, 4
     }
     , { -- _animations
         -- loop this later
         {}, {}, {}, {}
+        , {}, {}, {}, {}
     }
 )
 mainAnimationArray:PrintData()
@@ -82,6 +98,32 @@ function animStateMachine() -- PROBLEM, this is just for the player...
                 then CurrentAnimArray = 
                     player.animationArray.Animations[
                         returnIndexGivenArrayValue(player.animationArray.VanityNames, "IdleRight")
+                    ]
+                    -- player.animationArray.Animations
+            end
+        elseif player.currentAnimState == "Walk" then
+                if player.facingDirection == "Up" 
+                then CurrentAnimArray = 
+                    player.animationArray.Animations[
+                        returnIndexGivenArrayValue(player.animationArray.VanityNames, "WalkUp")
+                    ]
+                    -- player.animationArray.Animations
+            elseif player.facingDirection == "Left" 
+                then CurrentAnimArray = 
+                    player.animationArray.Animations[
+                        returnIndexGivenArrayValue(player.animationArray.VanityNames, "WalkLeft")
+                    ]
+                    -- player.animationArray.Animations
+            elseif player.facingDirection == "Down" 
+                then CurrentAnimArray = 
+                    player.animationArray.Animations[
+                        returnIndexGivenArrayValue(player.animationArray.VanityNames, "WalkDown")
+                    ]
+                    -- player.animationArray.Animations
+            elseif player.facingDirection == "Right" 
+                then CurrentAnimArray = 
+                    player.animationArray.Animations[
+                        returnIndexGivenArrayValue(player.animationArray.VanityNames, "WalkRight")
                     ]
                     -- player.animationArray.Animations
             end
