@@ -51,7 +51,7 @@ end
 function drawPlayer()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(spritesheetPlayer
-        , CurrentAnimArray[animTiming]
+        , player.CurrentAnimArray[animTiming]
         , player.x, player.y
         , 0
         , 3, 3
@@ -75,7 +75,7 @@ end
 function drawAlly1()
     love.graphics.setColor(1, 0.5, 0.5)
     love.graphics.draw(spritesheetPlayer
-        , CurrentAnimArray[animTiming]
+        , player.CurrentAnimArray[animTiming]
         , ally1.x, ally1.y
         , 0
         , 3, 3
@@ -100,7 +100,7 @@ end
 function drawAlly2()
     love.graphics.setColor(0.5, 0.5, 1)
     love.graphics.draw(spritesheetPlayer
-        , CurrentAnimArray[animTiming]
+        , player.CurrentAnimArray[animTiming]
         , ally2.x, ally2.y
         , 0
         , 3, 3
@@ -168,7 +168,7 @@ end
 function drawEnemies()
     love.graphics.setColor(0.5, 0.5, 0.5)
     love.graphics.draw(spritesheetPlayer
-        , CurrentAnimArray[animTiming]
+        , player.CurrentAnimArray[animTiming]
         , enemy_01.x, enemy_01.y
         , 0
         , 3, 3

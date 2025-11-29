@@ -31,6 +31,7 @@ function newEncounter(_enemies, _background)
         enemy_01 = enemyIDArr.Arr[overworldEnemies[enemyTestIndex].unitID]
         player.inBattle = true
         player.facingDirection = "Right"
+        player.currentAnimState = "Idle"
         print("Collided with enemy of ID: "..overworldEnemies[enemyTestIndex].unitID.." "..enemyTestIndex.." at x = ".. overworldEnemies[enemyTestIndex].x .. ", y = ".. overworldEnemies[enemyTestIndex].y)        
     end
 end

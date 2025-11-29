@@ -39,8 +39,8 @@ function AllyClass:new(
     tAC.facingDirection, tAC.currentAnimState, tAC.currentAnimArrIndex = _facingDirection, _currentAnimState, _currentAnimArrIndex
 
     tAC.pilot = {
-        HP = _pilotHP, maxHP = _pilotMaxHP, stamina = _pilotStamina, maxStam =  _pilotMaxStam
-        , speed = _pilotSpeed, startTurnCharge = _pilotStartTurnChg, currentTurnChg = _pilotCurrTurnChg, maxTurnCharge = _pilotMaxTurnChg
+        hp = _pilotHP, maxHP = _pilotMaxHP, stamina = _pilotStamina, maxStam =  _pilotMaxStam
+        , speed = _pilotSpeed, startTurnCharge = _pilotStartTurnChg, currentTurnCharge = _pilotCurrTurnChg, maxTurnCharge = _pilotMaxTurnChg
         , abilities = {
               ability_01 = _pilotAbility_01, ability_02 = _pilotAbility_02, ability_03 = _pilotAbility_03, ability_04 = _pilotAbility_04
             , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
@@ -56,8 +56,8 @@ function AllyClass:new(
         }
     }
     tAC.mech = {
-        HP = _mechHP, maxHP = _mechMaxHP, heat = _mechHeat, maxHeat = _mechMaxHeat
-        , speed = _mechSpeed, startTurnCharge = _mechStartTurnChg, currentTurnChg = _mechCurrTurnChg, maxTurnCharge = _mechMaxTurnChg
+        hp = _mechHP, maxHP = _mechMaxHP, heat = _mechHeat, maxHeat = _mechMaxHeat
+        , speed = _mechSpeed, startTurnCharge = _mechStartTurnChg, currentTurnCharge = _mechCurrTurnChg, maxTurnCharge = _mechMaxTurnChg
         , abilities = {
               ability_01 = _mechAbility_01, ability_02 = _mechAbility_02, ability_03 = _mechAbility_03, ability_04 = _mechAbility_04
             , ability_05 = _mechAbility_05, ability_06 = _mechAbility_06, ability_07 = _mechAbility_07, ability_08 = _mechAbility_08
@@ -82,9 +82,9 @@ function AllyClass:PrintData()
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
         .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
         .."\n\n--== Pilot ==--"
-        .."\nHP: "..self.pilot.HP.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
+        .."\nHP: "..self.pilot.hp.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
         .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
-        .."\ncurrentTurnChg: "..self.pilot.currentTurnChg.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
+        .."\ncurrentTurnChg: "..self.pilot.currentTurnCharge.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
         .."\n\n-- Pilot Abilities --"
         .."\nability_01: "..self.pilot.abilities.ability_01.."\nability_02: "..self.pilot.abilities.ability_02
         .."\nability_03: "..self.pilot.abilities.ability_03.."\nability_04: "..self.pilot.abilities.ability_04
@@ -99,9 +99,9 @@ function AllyClass:PrintData()
         .."\nrightLeg: "..self.pilot.equipment.rightLeg.."\nleftLeg: "..self.pilot.equipment.leftLeg
         .."\nboots: "..self.pilot.equipment.boots
         .."\n\n--== Mech ==--"
-        .."\nHP: "..self.mech.HP.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
+        .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
         .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
-        .."\ncurrentTurnChg: "..self.mech.currentTurnChg.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
+        .."\ncurrentTurnChg: "..self.mech.currentTurnCharge.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
         .."\n\n-- Mech Abilities --"
         .."\nability_01: "..self.mech.abilities.ability_01.."\nability_02: "..self.mech.abilities.ability_02
         .."\nability_03: "..self.mech.abilities.ability_03.."\nability_04: "..self.mech.abilities.ability_04
@@ -167,67 +167,113 @@ testAllyClass:PrintData()
 
 function initParty()
     --==+==--
-    Marc = {
-          x = WindWidth / 2 + ssWidth
-        , y = WindHeight / 2 + ssHeight
-        , mapTileX = 1
-        , mapTileY = 1
-        , inParty = true
-        , name = "Marc"
-        , pilot = {
-              hp = 10
-            , maxHP = 10
-            , stamina = 25
-            , maxStam = 25
-            , speed = 10
-            , startTurnCharge = 10
-            , currentTurnCharge = 0
-            , maxTurnCharge = 150
-            , abilities = {}
-        }
-        , isMechedUp = false
-        , mech = {
-              hp = 10
-            , maxHP = 10
-            , heat = 25
-            , maxHeat = 25
-            , speed = 10
-            , startTurnCharge = 30
-            , currentTurnCharge = 0
-            , maxTurnCharge = 100
-            , abilities = {}
-        }
-        , facingDirection = "Down"
-        , currentAnimState = "Idle"
-        , currentAnimArrIndex = 3 -- Facing Down
-        , inBattle = false
-        , animationArray = {
-              VanityNames = {
-                "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
-                , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
-            }
-            , Frames = {
-                4,4,4,4
-                ,4,4,4,4
-            }
-            , Direction = {
-                "Up", "Left", "Down", "Right"
-                , "Up", "Left", "Down", "Right"
-            }
-            , State = {
-                "Idle", "Idle", "Idle", "Idle"
-                , "Walk", "Walk", "Walk", "Walk"
-            }
-            , SpriteSheetRow = {
-                0, 1, 2, 3
-                ,4,5,6,7
-            }
-            , Animations = { -- loop this later
-                {}, {}, {}, {}
-                ,{}, {}, {}, {}
-            }
-        }
-    }
+    Marc = AllyClass:new(
+        --   _name, _x, _y
+        "Marc", (WindWidth / 2 + ssWidth), (WindHeight / 2 + ssHeight)
+        -- , _inParty, _inBattle, _isMechedUp
+        , true, false, false
+        -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
+        , "Down", "Idle", 3 -- 3 is IdleDown
+
+        --== Pilot Stats ==--
+        -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+        , 10, 10, 25, 25
+        -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
+        , 10, 10, 0, 150
+        -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
+        -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , 1, 2, 0, 0
+        , 0, 0, 0, 0
+
+        --== Pilot Equipment ==--
+        -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
+        , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+        -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+        , 0, 0, 0, 0
+        -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+        , 0, 0, 0, 0, 0
+
+        --== Mech Stats ==--
+        -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
+        , 15, 15, 25, 25
+        -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
+        , 10, 30, 0, 100
+        -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
+        -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , 1, 2, 0, 0
+        , 0, 0, 0, 0
+
+        --== Mech Equipment ==--
+        -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
+        , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+        -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
+        , 0, 0, 0, 0, 0
+        -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
+        , 0, 0, 0, 0
+    )
+    
+    -- Marc = {
+    --       x = WindWidth / 2 + ssWidth
+    --     , y = WindHeight / 2 + ssHeight
+    --     , mapTileX = 1
+    --     , mapTileY = 1
+    --     , inParty = true
+    --     , name = "Marc"
+    --     , pilot = {
+    --           hp = 10
+    --         , maxHP = 10
+    --         , stamina = 25
+    --         , maxStam = 25
+    --         , speed = 10
+    --         , startTurnCharge = 10
+    --         , currentTurnCharge = 0
+    --         , maxTurnCharge = 150
+    --         , abilities = {}
+    --     }
+    --     , isMechedUp = false
+    --     , mech = {
+    --           hp = 10
+    --         , maxHP = 10
+    --         , heat = 25
+    --         , maxHeat = 25
+    --         , speed = 10
+    --         , startTurnCharge = 30
+    --         , currentTurnCharge = 0
+    --         , maxTurnCharge = 100
+    --         , abilities = {}
+    --     }
+    --     , facingDirection = "Down"
+    --     , currentAnimState = "Idle"
+    --     , currentAnimArrIndex = 3 -- Facing Down
+    --     , inBattle = false
+    --     , animationArray = {
+    --           VanityNames = {
+    --             "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
+    --             , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
+    --         }
+    --         , Frames = {
+    --             4,4,4,4
+    --             ,4,4,4,4
+    --         }
+    --         , Direction = {
+    --             "Up", "Left", "Down", "Right"
+    --             , "Up", "Left", "Down", "Right"
+    --         }
+    --         , State = {
+    --             "Idle", "Idle", "Idle", "Idle"
+    --             , "Walk", "Walk", "Walk", "Walk"
+    --         }
+    --         , SpriteSheetRow = {
+    --             0, 1, 2, 3
+    --             ,4,5,6,7
+    --         }
+    --         , Animations = { -- loop this later
+    --             {}, {}, {}, {}
+    --             ,{}, {}, {}, {}
+    --         }
+    --     }
+    -- }
+    
 
     Anthony = {
           x = WindWidth / 2 + ssWidth
@@ -348,14 +394,18 @@ function initParty()
     -- Alfred.name = "Alfred"
 
     player = Marc
+    player.mapTileX, player.mapTileY = 1, 1
+    -- player.Animations = {{},{},{},{},{},{},{},{}}
+
     alphaDecay = 1
-    for i = 1, #player.animationArray.VanityNames, 1 do
-        for j = 1, player.animationArray.Frames[i], 1 do
-            player.animationArray.Animations[i][j] = love.graphics.newQuad(
-                ssWidth*(j-1), player.animationArray.SpriteSheetRow[i] * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions()
-            )
-        end
-    end
+    -- for i = 1, #player.animationArray.VanityNames, 1 do
+    --     for j = 1, player.animationArray.Frames[i], 1 do
+    --         player.animationArray.Animations[i][j] = love.graphics.newQuad(
+    --             ssWidth*(j-1), player.animationArray.SpriteSheetRow[i] * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions()
+    --         )
+    --     end
+    -- end
+    player.Animations = mainAnimationArray:BuildAnimations(spritesheetPlayer)
     for i = 1, #Anthony.animationArray.VanityNames, 1 do
         for j = 1, Anthony.animationArray.Frames[i], 1 do
             Anthony.animationArray.Animations[i][j] = love.graphics.newQuad(
