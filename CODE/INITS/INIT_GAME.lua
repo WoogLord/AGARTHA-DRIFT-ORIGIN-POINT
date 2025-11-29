@@ -54,20 +54,22 @@ menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
 selOptionMain = 1
 selOptionPause = 1
 
--- Sprite Sheet for all Characters (loop? maybe an array)
-spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
--- spritesheetAnthony
--- spritesheetAlfred
+function initSpriteSheets()
+    -- Sprite Sheet for all Characters (loop? maybe an array)
+    spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
+    -- spritesheetAnthony
+    -- spritesheetAlfred
 
--- Tilemaps
-tilemapSubGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-SUBGROUND.png")
-tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
-tilemapGround_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
--- tilemapGroundFluff_01
--- tilemapColliders_01
-tilemapEnemies_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
-encounterHitbox = love.graphics.newQuad(0, 0, ssWidth, ssHeight, tilemapEnemies_01:getDimensions())
-tilemapEnemies_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
--- targetEnemyTile_ImageData = love.image.newImageData(32,32,tilemapEnemies_01_ImageData)
+    -- Tilemaps
+    tilemapSubGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-SUBGROUND.png")
+    tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
+    tilemapGround_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")
+    -- tilemapGroundFluff_01
+    -- tilemapColliders_01
+    tilemapEnemies_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
+    encounterHitbox = love.graphics.newQuad(0, 0, ssWidth, ssHeight, tilemapEnemies_01:getDimensions())
+    tilemapEnemies_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
+    -- targetEnemyTile_ImageData = love.image.newImageData(32,32,tilemapEnemies_01_ImageData)
+end
 
 overworldEnemies = {}

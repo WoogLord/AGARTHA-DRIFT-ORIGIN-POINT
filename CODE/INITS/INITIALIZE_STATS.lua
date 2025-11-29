@@ -8,6 +8,7 @@ function AllyClass:new(
         , _facingDirection, _currentAnimState, _currentAnimArrIndex
 
         , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+        , _pilotAttack
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
@@ -20,6 +21,7 @@ function AllyClass:new(
         , _pilotEquipmentBoots
 
         , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
+        , _mechAttack
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
@@ -40,6 +42,7 @@ function AllyClass:new(
 
     tAC.pilot = {
         hp = _pilotHP, maxHP = _pilotMaxHP, stamina = _pilotStamina, maxStam =  _pilotMaxStam
+        , attack = _pilotAttack
         , speed = _pilotSpeed, startTurnCharge = _pilotStartTurnChg, currentTurnCharge = _pilotCurrTurnChg, maxTurnCharge = _pilotMaxTurnChg
         , abilities = {
               ability_01 = _pilotAbility_01, ability_02 = _pilotAbility_02, ability_03 = _pilotAbility_03, ability_04 = _pilotAbility_04
@@ -57,6 +60,7 @@ function AllyClass:new(
     }
     tAC.mech = {
         hp = _mechHP, maxHP = _mechMaxHP, heat = _mechHeat, maxHeat = _mechMaxHeat
+        , attack = _mechAttack
         , speed = _mechSpeed, startTurnCharge = _mechStartTurnChg, currentTurnCharge = _mechCurrTurnChg, maxTurnCharge = _mechMaxTurnChg
         , abilities = {
               ability_01 = _mechAbility_01, ability_02 = _mechAbility_02, ability_03 = _mechAbility_03, ability_04 = _mechAbility_04
@@ -83,6 +87,7 @@ function AllyClass:PrintData()
         .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
         .."\n\n--== Pilot ==--"
         .."\nHP: "..self.pilot.hp.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
+        .."\nattack: "..self.pilot.attack
         .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
         .."\ncurrentTurnChg: "..self.pilot.currentTurnCharge.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
         .."\n\n-- Pilot Abilities --"
@@ -100,6 +105,7 @@ function AllyClass:PrintData()
         .."\nboots: "..self.pilot.equipment.boots
         .."\n\n--== Mech ==--"
         .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
+        .."\nattack: "..self.mech.attack
         .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
         .."\ncurrentTurnChg: "..self.mech.currentTurnCharge.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
         .."\n\n-- Mech Abilities --"
@@ -130,38 +136,42 @@ local testAllyClass = AllyClass:new(
     --== Pilot Stats ==--
     -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
     , 10, 10, 25, 25
+    -- , _pilotAttack
+    , 1
     -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
     , 10, 10, 0, 150
     -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
     -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
-    , 1, 2, 0, 0
-    , 0, 0, 0, 0
+    , 2, 3, 1, 1
+    , 1, 1, 1, 1
 
     --== Pilot Equipment ==--
     -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
-    , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+    , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
     -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
-    , 0, 0, 0, 0
+    , 1, 1, 1, 1
     -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
-    , 0, 0, 0, 0, 0
+    , 1, 1, 1, 1, 1
 
     --== Mech Stats ==--
     -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
     , 15, 15, 25, 25
+    -- , _mechAttack
+    , 1
     -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
     , 10, 30, 0, 100
     -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
     -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
-    , 1, 2, 0, 0
-    , 0, 0, 0, 0
+    , 2, 3, 1, 1
+    , 1, 1, 1, 1
 
     --== Mech Equipment ==--
     -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
-    , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+    , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
     -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
-    , 0, 0, 0, 0, 0
+    , 1, 1, 1, 1, 1
     -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
-    , 0, 0, 0, 0
+    , 1, 1, 1, 1
 )
 testAllyClass:PrintData()
 
@@ -178,38 +188,42 @@ function initParty()
         --== Pilot Stats ==--
         -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
         , 10, 10, 25, 25
+        -- , _pilotAttack
+        , 1
         -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , 10, 10, 0, 150
         -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
-        , 1, 2, 0, 0
-        , 0, 0, 0, 0
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
 
         --== Pilot Equipment ==--
         -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
-        , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
         -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
-        , 0, 0, 0, 0
-        -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
-        , 0, 0, 0, 0, 0
+        , 1, 1, 1, 1
+        -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+        , 2, 1, 1, 1, 1
 
         --== Mech Stats ==--
         -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
         , 15, 15, 25, 25
+        -- , _mechAttack
+        , 1
         -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , 10, 30, 0, 100
         -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
-        , 1, 2, 0, 0
-        , 0, 0, 0, 0
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
 
         --== Mech Equipment ==--
         -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
-        , 0, 0, 0, 0 -- Magic numbers?  could be "Nothing"
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
         -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
-        , 0, 0, 0, 0, 0
+        , 1, 1, 1, 1, 1
         -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
-        , 0, 0, 0, 0
+        , 1, 1, 1, 1
     )
     
     -- Marc = {

@@ -1,10 +1,18 @@
 -- Draw States
 
-function drawPilotParts(_equipmentArray)
+function drawPilotParts(_equipmentArray, _facingDirection, _x, _y)
+        if _facingDirection == "Up" then
+        
+    elseif _facingDirection == "Left" then
 
+    elseif _facingDirection == "Down" then
+
+    elseif _facingDirection == "Right" then
+
+    end
 end
 
-function drawMechParts(_equipmentArray)
+function drawMechParts(_equipmentArray, _facingDirection)
 
 end
 
@@ -60,9 +68,9 @@ end
 function drawPlayer()
     love.graphics.setColor(1,1,1)
     if player.isMechedUp then
-        drawMechParts(player.mech.equipment)
+        drawMechParts(player.mech.equipment, player.facingDirection, player.x, player.y)
     else
-        drawPilotParts(player.pilot.equipment)
+        drawPilotParts(player.pilot.equipment, player.facingDirection, player.x, player.y)
         love.graphics.draw(spritesheetPlayer, player.CurrentAnimArray[animTiming], player.x, player.y, 0, 3, 3)
     end
     if player.inBattle then 

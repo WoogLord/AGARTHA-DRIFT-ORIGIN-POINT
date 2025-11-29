@@ -33,6 +33,8 @@ function love.load()
     love.window.setFullscreen(isFullScreen)
     love.graphics.setFont(Font)
 
+    initSpriteSheets()
+    initEquipment()
     initParty()
     initEnemies()
     spawnEnemies()
@@ -50,6 +52,7 @@ function love.update(dt)
     else overworldManager() end
 
     speedManager(dt)
+    statsManager()
     musicManager()
     animStateMachine()
 end
