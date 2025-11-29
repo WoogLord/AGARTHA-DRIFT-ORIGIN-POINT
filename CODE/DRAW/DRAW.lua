@@ -1,4 +1,13 @@
 -- Draw States
+
+function drawPilotParts(_equipmentArray)
+
+end
+
+function drawMechParts(_equipmentArray)
+
+end
+
 function drawMainMenu()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(bgTitle,0,0,0,6,6)
@@ -50,12 +59,12 @@ end
 
 function drawPlayer()
     love.graphics.setColor(1,1,1)
-    love.graphics.draw(spritesheetPlayer
-        , player.CurrentAnimArray[animTiming]
-        , player.x, player.y
-        , 0
-        , 3, 3
-    )
+    if player.isMechedUp then
+        drawMechParts(player.mech.equipment)
+    else
+        drawPilotParts(player.pilot.equipment)
+        love.graphics.draw(spritesheetPlayer, player.CurrentAnimArray[animTiming], player.x, player.y, 0, 3, 3)
+    end
     if player.inBattle then 
         -- currTurnCharge
         love.graphics.setColor(0.5, 0, 0.5)
