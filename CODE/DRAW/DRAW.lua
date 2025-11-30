@@ -71,7 +71,7 @@ function drawPlayer()
         drawMechParts(player.mech.equipment, player.facingDirection, player.x, player.y)
     else
         drawPilotParts(player.pilot.equipment, player.facingDirection, player.x, player.y)
-        love.graphics.draw(spritesheetPlayer, player.CurrentAnimArray[animTiming], player.x, player.y, 0, 3, 3)
+        love.graphics.draw(ssPilot_ALL_Nothing, player.CurrentAnimArray[animTiming], player.x, player.y, 0, 3, 3)
     end
     if player.inBattle then 
         -- currTurnCharge

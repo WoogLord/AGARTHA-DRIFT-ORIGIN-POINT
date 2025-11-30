@@ -28,7 +28,7 @@ function statsManager()
 
     --== Health ==--
     player.pilot.maxHP = 10 + mainEquipmentPilotGlovesArray.stats.baseHP[player.pilot.equipment.gloves]
-    player.pilot.hp = player.pilot.maxHP
+    -- player.pilot.hp = player.pilot.maxHP
 
     --== Attack ==--
     player.pilot.attack = 1 + mainEquipmentPilotGlovesArray.stats.baseAttack[player.pilot.equipment.gloves]

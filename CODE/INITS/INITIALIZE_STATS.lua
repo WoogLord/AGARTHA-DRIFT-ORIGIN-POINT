@@ -419,7 +419,9 @@ function initParty()
     --         )
     --     end
     -- end
-    player.Animations = mainAnimationArray:BuildAnimations(spritesheetPlayer)
+    
+    -- BELOW DOESNT DO ANYTHING?!?
+    player.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
     for i = 1, #Anthony.animationArray.VanityNames, 1 do
         for j = 1, Anthony.animationArray.Frames[i], 1 do
             Anthony.animationArray.Animations[i][j] = love.graphics.newQuad(
