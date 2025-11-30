@@ -15,7 +15,6 @@ local drawFunctions require "CODE.DRAW.DRAW"
 
 -- UPDATE folder
 local inputFunctions require "CODE.UPDATE.INPUTS"
-local cameraFunctions require "CODE.UPDATE.CAMERA"
 local audioManagerFunctions require "CODE.UPDATE.AUDIO_MANAGER"
 local statsManagerFunctions require "CODE.UPDATE.STATS_MANAGER"
 local overworldManagerFunctions require "CODE.UPDATE.OVERWORLD_MANAGER"

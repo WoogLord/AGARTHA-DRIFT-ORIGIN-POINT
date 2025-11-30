@@ -28,7 +28,7 @@ spriteTimer = 0
 updownFloating = 0
 timerNoInput = 0
 graphicsScale = 3
-ssWidth, ssHeight = 32,32
+tileWH, tileWH = 32,32
 moveSpeedDampener = 0.40
 
 --==+==-- "floats" --==+==--
@@ -68,7 +68,7 @@ function initSpriteSheets()
     -- tilemapGroundFluff_01
     -- tilemapColliders_01
     tilemapEnemies_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
-    encounterHitbox = love.graphics.newQuad(0, 0, ssWidth, ssHeight, tilemapEnemies_01:getDimensions())
+    encounterHitbox = love.graphics.newQuad(0, 0, tileWH, tileWH, tilemapEnemies_01:getDimensions())
     tilemapEnemies_01_ImageData = love.image.newImageData("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-ENEMY_SPAWNS.png")
     -- targetEnemyTile_ImageData = love.image.newImageData(32,32,tilemapEnemies_01_ImageData)
 end

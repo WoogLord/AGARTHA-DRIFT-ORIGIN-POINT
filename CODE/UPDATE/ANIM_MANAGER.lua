@@ -30,10 +30,10 @@ function AnimClass:BuildAnimations(_spriteSheet)
     for i = 1, #self.vanityNames, 1 do
         for j = 1, self.frames[i], 1  do
             self.animations[i][j] = love.graphics.newQuad(
-                ssWidth*(j-1), (i-1) * ssHeight, ssWidth, ssHeight, _spriteSheet:getDimensions()
+                tileWH*(j-1), (i-1) * tileWH, tileWH, tileWH, _spriteSheet:getDimensions()
             )
             retArr[i][j] = love.graphics.newQuad(
-                ssWidth*(j-1), (i-1) * ssHeight, ssWidth, ssHeight, _spriteSheet:getDimensions()
+                tileWH*(j-1), (i-1) * tileWH, tileWH, tileWH, _spriteSheet:getDimensions()
             )
         end
     end

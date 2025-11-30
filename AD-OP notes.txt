@@ -1,4 +1,0 @@
-
-### TILEMAPS
-Holy Moly this is GREAT for tileset references
-https://github.com/godotengine/godot-docs/issues/3316

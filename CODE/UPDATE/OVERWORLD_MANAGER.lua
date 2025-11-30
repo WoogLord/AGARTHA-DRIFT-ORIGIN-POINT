@@ -17,9 +17,9 @@ end
 function newEncounter(_enemies, _background)
     -- include background variable so scenes/environments are dynamic
     if          player.mapTrueX > overworldEnemies[enemyTestIndex].x 
-            and player.mapTrueX < overworldEnemies[enemyTestIndex].x + ssWidth
+            and player.mapTrueX < overworldEnemies[enemyTestIndex].x + tileWH
             -- and player.y < overworldEnemies[2].y 
-            -- and player.y > overworldEnemies[2].y + ssHeight 
+            -- and player.y > overworldEnemies[2].y + tileWH 
             then
         -- play cutscene
         -- Have an anim where player current world position slides to fighting one

@@ -179,7 +179,7 @@ function initParty()
     --==+==--
     Marc = AllyClass:new(
         --   _name, _x, _y
-        "Marc", (WindWidth / 2 + ssWidth), (WindHeight / 2 + ssHeight)
+        "Marc", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
         -- , _inParty, _inBattle, _isMechedUp
         , true, false, false
         -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
@@ -227,8 +227,8 @@ function initParty()
     )
     
     -- Marc = {
-    --       x = WindWidth / 2 + ssWidth
-    --     , y = WindHeight / 2 + ssHeight
+    --       x = WindWidth / 2 + tileWH
+    --     , y = WindHeight / 2 + tileWH
     --     , mapTileX = 1
     --     , mapTileY = 1
     --     , inParty = true
@@ -290,8 +290,8 @@ function initParty()
     
 
     Anthony = {
-          x = WindWidth / 2 + ssWidth
-        , y = WindHeight / 2 + ssHeight
+          x = WindWidth / 2 + tileWH
+        , y = WindHeight / 2 + tileWH
         , mapTileX = 8
         , mapTileY = 8
         , inParty = true
@@ -346,8 +346,8 @@ function initParty()
     }
 
     Alfred = {
-          x = WindWidth / 2 + ssWidth
-        , y = WindHeight / 2 + ssHeight
+          x = WindWidth / 2 + tileWH
+        , y = WindHeight / 2 + tileWH
         , mapTileX = 8
         , mapTileY = 8
         , inParty = true
@@ -415,7 +415,7 @@ function initParty()
     -- for i = 1, #player.animationArray.VanityNames, 1 do
     --     for j = 1, player.animationArray.Frames[i], 1 do
     --         player.animationArray.Animations[i][j] = love.graphics.newQuad(
-    --             ssWidth*(j-1), player.animationArray.SpriteSheetRow[i] * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions()
+    --             tileWH*(j-1), player.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
     --         )
     --     end
     -- end
@@ -425,20 +425,20 @@ function initParty()
     for i = 1, #Anthony.animationArray.VanityNames, 1 do
         for j = 1, Anthony.animationArray.Frames[i], 1 do
             Anthony.animationArray.Animations[i][j] = love.graphics.newQuad(
-                ssWidth*(j-1), Anthony.animationArray.SpriteSheetRow[i] * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions()
+                tileWH*(j-1), Anthony.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
             )
         end
     end
     for i = 1, #Alfred.animationArray.VanityNames, 1 do
         for j = 1, Alfred.animationArray.Frames[i], 1 do
             Alfred.animationArray.Animations[i][j] = love.graphics.newQuad(
-                ssWidth*(j-1), Alfred.animationArray.SpriteSheetRow[i] * ssHeight, ssWidth, ssHeight, spritesheetPlayer:getDimensions()
+                tileWH*(j-1), Alfred.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
             )
         end
     end
 
     player.playerInitX, player.playerInitY = player.x, player.y
-    player.mapTrueX, player.mapTrueY = (player.mapTileX * ssWidth) , (player.mapTileY * ssHeight)
+    player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
 
     ally1 = Anthony
     ally2 = Alfred
@@ -450,8 +450,8 @@ function initEnemies()
     }
 
     Rat = {
-          x = WindWidth / 2 + ssWidth
-        , y = WindHeight / 2 + ssHeight
+          x = WindWidth / 2 + tileWH
+        , y = WindHeight / 2 + tileWH
         , name = "Rattimus"
         , unitID = 01
         , pilot = {

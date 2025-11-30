@@ -77,13 +77,13 @@ function drawPlayer()
         -- currTurnCharge
         love.graphics.setColor(0.5, 0, 0.5)
         if player.isMechedUp then
-            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.mech.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", player.x - (tileWH * graphicsScale)/3, player.y + (tileWH * graphicsScale)+9, player.mech.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.mech.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", player.x - (tileWH * graphicsScale)/3, player.y + (tileWH * graphicsScale)+9, player.mech.currentTurnCharge, 15)
         else
-            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.pilot.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", player.x - (tileWH * graphicsScale)/3, player.y + (tileWH * graphicsScale)+9, player.pilot.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", player.x - (ssWidth * graphicsScale)/3, player.y + (ssHeight * graphicsScale)+9, player.pilot.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", player.x - (tileWH * graphicsScale)/3, player.y + (tileWH * graphicsScale)+9, player.pilot.currentTurnCharge, 15)
         end
     end
     love.graphics.setColor(1,1,1)
@@ -102,13 +102,13 @@ function drawAlly1()
         -- currTurnCharge
         love.graphics.setColor(0.5, 0, 0.5)
         if ally1.isMechedUp then
-            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.mech.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", ally1.x - (tileWH * graphicsScale)/3, ally1.y + (tileWH * graphicsScale)+9, ally1.mech.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.mech.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", ally1.x - (tileWH * graphicsScale)/3, ally1.y + (tileWH * graphicsScale)+9, ally1.mech.currentTurnCharge, 15)
         else
-            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.pilot.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", ally1.x - (tileWH * graphicsScale)/3, ally1.y + (tileWH * graphicsScale)+9, ally1.pilot.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", ally1.x - (ssWidth * graphicsScale)/3, ally1.y + (ssHeight * graphicsScale)+9, ally1.pilot.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", ally1.x - (tileWH * graphicsScale)/3, ally1.y + (tileWH * graphicsScale)+9, ally1.pilot.currentTurnCharge, 15)
         end
     end
     love.graphics.setColor(1,1,1)
@@ -127,13 +127,13 @@ function drawAlly2()
         -- currTurnCharge
         love.graphics.setColor(0.5, 0, 0.5)
         if ally2.isMechedUp then
-            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.mech.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", ally2.x - (tileWH * graphicsScale)/3, ally2.y + (tileWH * graphicsScale)+9, ally2.mech.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.mech.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", ally2.x - (tileWH * graphicsScale)/3, ally2.y + (tileWH * graphicsScale)+9, ally2.mech.currentTurnCharge, 15)
         else
-            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.pilot.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", ally2.x - (tileWH * graphicsScale)/3, ally2.y + (tileWH * graphicsScale)+9, ally2.pilot.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", ally2.x - (ssWidth * graphicsScale)/3, ally2.y + (ssHeight * graphicsScale)+9, ally2.pilot.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", ally2.x - (tileWH * graphicsScale)/3, ally2.y + (tileWH * graphicsScale)+9, ally2.pilot.currentTurnCharge, 15)
         end
     end
     love.graphics.setColor(1,1,1)
@@ -144,8 +144,8 @@ function drawOverworld()
         -- camera needed here maybe
         -- so player now has mapX and mapY, we can just use player
         -- so we need an offset based off the center and scale of the tile set
-    local mapOffsetX = ssWidth * (-1 * player.mapTileX * graphicsScale)
-    local mapOffsetY = ssHeight * (-1 * player.mapTileY * graphicsScale)
+    local mapOffsetX = tileWH * (-1 * player.mapTileX * graphicsScale)
+    local mapOffsetY = tileWH * (-1 * player.mapTileY * graphicsScale)
 
     
     love.graphics.draw(tilemapSubGround_01
@@ -195,13 +195,13 @@ function drawEnemies()
         -- currTurnCharge
         love.graphics.setColor(0.5, 0, 0.5)
         if enemy_01.isMechedUp then
-            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.mech.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", enemy_01.x - (tileWH * graphicsScale)/3, enemy_01.y + (tileWH * graphicsScale)+9, enemy_01.mech.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.mech.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", enemy_01.x - (tileWH * graphicsScale)/3, enemy_01.y + (tileWH * graphicsScale)+9, enemy_01.mech.currentTurnCharge, 15)
         else
-            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.pilot.maxTurnCharge, 15)
+            love.graphics.rectangle("fill", enemy_01.x - (tileWH * graphicsScale)/3, enemy_01.y + (tileWH * graphicsScale)+9, enemy_01.pilot.maxTurnCharge, 15)
             love.graphics.setColor(0.75, 0 ,0.75)
-            love.graphics.rectangle("fill", enemy_01.x - (ssWidth * graphicsScale)/3, enemy_01.y + (ssHeight * graphicsScale)+9, enemy_01.pilot.currentTurnCharge, 15)
+            love.graphics.rectangle("fill", enemy_01.x - (tileWH * graphicsScale)/3, enemy_01.y + (tileWH * graphicsScale)+9, enemy_01.pilot.currentTurnCharge, 15)
         end
     end
     love.graphics.setColor(1,1,1)

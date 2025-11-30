@@ -16,22 +16,22 @@ function playerControls()
             if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
                 player.facingDirection = "Up"
                 player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / ssHeight)
+                player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
             elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
                 player.facingDirection = "Left"
                 player.currentAnimState = "Walk"
-                player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / ssWidth)
+                player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
             elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
                 player.facingDirection = "Down"
                 player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / ssHeight)
+                player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
             elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
                 player.facingDirection = "Right"
                 player.currentAnimState = "Walk"
-                player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / ssWidth)
+                player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
             end
             -- print("mapTileX/Y: "..player.mapTileX..", "..player.mapTileY..", mapTrueX/Y: "..player.mapTrueX..", "..player.mapTrueY)
-            player.mapTrueX, player.mapTrueY = (player.mapTileX * ssWidth) , (player.mapTileY * ssHeight)
+            player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
         end
     end
 end
