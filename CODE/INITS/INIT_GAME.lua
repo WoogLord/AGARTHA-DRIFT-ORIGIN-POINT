@@ -57,7 +57,7 @@ selOptionPause = 1
 function initSpriteSheets()
     -- Sprite Sheet for all Characters (loop? maybe an array)
     spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")
-    ssPilot_ALL_Nothing = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/PILOT_MASTER-SS-NothingRef.png")
+    ssPilot_ALL_Nothing = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/PILOT_MASTER-SS-NothingRef_v0.1.png")
     -- spritesheetAnthony
     -- spritesheetAlfred
 
