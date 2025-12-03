@@ -2,7 +2,7 @@ function initEquipment()
     -- this needs to contain a MASSIVE array for each equipmentType
     mainEquipmentPilotGlovesArray = {
           vanityNames = {
-            "Nothing", "Recruit"
+            "NOTHING", "RECRUIT"
         }
         , description = {
             "You are not wearing anything..."
