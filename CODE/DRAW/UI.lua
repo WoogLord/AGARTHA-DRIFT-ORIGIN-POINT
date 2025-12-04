@@ -14,6 +14,17 @@ buttonsSettings = {
     back = {x = 100, y = 150, w = 200, h = 50, label = "BACK", r=200, g=0, b=0}
 }
 
+buttonsInventory = {}
+for i=1, 36, 1 do
+    buttonsInventory[i] = {
+          x = (WindWidth / 3 * 2) + ((i % 6) * tileWH * graphicsScale) + (12 * (i % 6))
+        , y = (WindHeight / 4) + ((math.ceil(i / 6) - 1) * tileWH * graphicsScale) + (12 * (math.ceil(i / 6) - 1))
+        , w = tileWH * graphicsScale, h = tileWH * graphicsScale
+        , r = 0.1, b = 0.1, g = 0.1
+        , label = ""
+    }
+end
+
 function drawButton(button)
     if button.r then 
         love.graphics.setColor(button.r,button.b,button.g)
@@ -57,5 +68,11 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
                 love.graphics.printf("Stamina:"..partyBattleArr[i].pilot.stamina.."/"..partyBattleArr[i].pilot.maxStam, 50, 25 + yOff, 400, "right") 
             end
         end        
+    end
+end
+
+function inventoryUI()
+    for i=1, #buttonsInventory, 1 do
+        drawButton(buttonsInventory[i])
     end
 end

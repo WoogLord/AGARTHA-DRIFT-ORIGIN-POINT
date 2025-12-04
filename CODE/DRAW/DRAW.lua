@@ -1,6 +1,6 @@
 -- Draw States
 
-function drawPilotParts(_equipmentArray, _facingDirection, _x, _y)
+function drawPilotParts(_equipmentArray, _facingDirection, _x, _y, _scaleFactor)
         if _facingDirection == "Up" then
         
     elseif _facingDirection == "Left" then
@@ -65,13 +65,15 @@ function drawPaused()
     end
 end
 
-function drawPlayer()
+function drawPlayer(_scaleFactor)
     love.graphics.setColor(1,1,1)
+    _scaleFactor = _scaleFactor or 1
+    playerScale = graphicsScale * _scaleFactor
     if player.isMechedUp then
-        drawMechParts(player.mech.equipment, player.facingDirection, player.x, player.y)
+        drawMechParts(player.mech.equipment, player.facingDirection, player.x, player.y, playerScale)
     else
-        drawPilotParts(player.pilot.equipment, player.facingDirection, player.x, player.y)
-        love.graphics.draw(ssPilot_ALL_Nothing, player.CurrentAnimArray[animTiming], player.x, player.y, 0, 3, 3)
+        drawPilotParts(player.pilot.equipment, player.facingDirection, player.x, player.y, playerScale)
+        love.graphics.draw(ssPilot_ALL_Nothing, player.CurrentAnimArray[animTiming], player.x, player.y, 0, playerScale, playerScale)
     end
     if player.inBattle then 
         -- currTurnCharge
@@ -206,4 +208,9 @@ function drawEnemies()
     end
     love.graphics.setColor(1,1,1)
     
+end
+
+function drawInventory()
+    inventoryUI()
+    drawPlayer(2)
 end

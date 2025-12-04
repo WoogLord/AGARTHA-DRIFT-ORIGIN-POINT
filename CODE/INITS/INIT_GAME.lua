@@ -36,12 +36,13 @@ turnChargeReduction = 0.05
 
 --==+==-- strings --==+==--
 CurrentState = "MainMenu"
-PriorState = ""
-PriorStatePaused = ""
+PriorState = "MainMenu"
+PriorStatePaused = "MainMenu"
 
 --==+==-- bools --==+==--
 isFullScreen = true
 isDebug = false
+isInInventory = false
 
 --==+== UI ==+==--
 VersionInfoString = ADOPVersion .. " - Made with " .. _VERSION
@@ -53,6 +54,13 @@ menuOptionsMain = {"PLAY", "OPTIONS", "QUIT"}
 menuOptionsPaused = {"RESUME", "MAIN MENU", "QUIT"}
 selOptionMain = 1
 selOptionPause = 1
+
+-- inventory
+inventoryArray = {
+    equipmentType = {}
+    , equipmentID = {}
+    , itemXp = {}
+}
 
 function initSpriteSheets()
     -- Sprite Sheet for all Characters (loop? maybe an array)

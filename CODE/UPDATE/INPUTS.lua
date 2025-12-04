@@ -4,68 +4,74 @@ INPUTS_ARR = {
     fullscreen = "f", debug = "F1", pause = "escape"
     , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
     , select = {"return", "z"}, cancel = "x"
+    , inventory = {"i"}
 }
 
 function playerControls()
     if CurrentState == "Play" then
         if player.inBattle then
         else
-            player.currentAnimState = "Idle"
-            -- Angles are in UPLEFT, DOWNLEFT, DOWNRIGHT, UPRIGHT order, then UP, LEFT, DOWN, RIGHT
-            -- note: anims are still 4-directions
-            if (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
-                and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
-                player.facingDirection = "Up"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
-                player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
-            elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
-                and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
-                player.facingDirection = "Left"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
-                player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
-            elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
-                and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
-                player.facingDirection = "Down"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
-                player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
-            elseif (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
-                and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
-                player.facingDirection = "Right"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
-                player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
-            elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
-                player.facingDirection = "Up"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
-                -- if love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
-                --     player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
-                -- elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
-                --     player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
-                -- end
-            elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
-                player.facingDirection = "Left"
-                player.currentAnimState = "Walk"
-                player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
-                -- if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
-                --     player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
-                -- elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
-                --     player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
-                -- end
-            elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
-                player.facingDirection = "Down"
-                player.currentAnimState = "Walk"
-                player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
-            elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
-                player.facingDirection = "Right"
-                player.currentAnimState = "Walk"
-                player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
+            if isInInventory then
+                --== INVENTORY ==--
+            else
+                --== MOVEMENT ==--
+                player.currentAnimState = "Idle"
+                -- Angles are in UPLEFT, DOWNLEFT, DOWNRIGHT, UPRIGHT order, then UP, LEFT, DOWN, RIGHT
+                -- note: anims are still 4-directions
+                if (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
+                    and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
+                    player.facingDirection = "Up"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
+                    player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
+                elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
+                    and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
+                    player.facingDirection = "Left"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
+                    player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
+                elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
+                    and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
+                    player.facingDirection = "Down"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
+                    player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
+                elseif (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
+                    and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
+                    player.facingDirection = "Right"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
+                    player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
+                elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+                    player.facingDirection = "Up"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
+                    -- if love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+                    --     player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
+                    -- elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+                    --     player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
+                    -- end
+                elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+                    player.facingDirection = "Left"
+                    player.currentAnimState = "Walk"
+                    player.mapTileX = player.mapTileX - (graphicsScale * moveSpeed / tileWH)
+                    -- if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+                    --     player.mapTileY = player.mapTileY - (graphicsScale * moveSpeed / tileWH)
+                    -- elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+                    --     player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
+                    -- end
+                elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+                    player.facingDirection = "Down"
+                    player.currentAnimState = "Walk"
+                    player.mapTileY = player.mapTileY + (graphicsScale * moveSpeed / tileWH)
+                elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+                    player.facingDirection = "Right"
+                    player.currentAnimState = "Walk"
+                    player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
+                end
+                -- print("mapTileX/Y: "..player.mapTileX..", "..player.mapTileY..", mapTrueX/Y: "..player.mapTrueX..", "..player.mapTrueY)
+                player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
             end
-            -- print("mapTileX/Y: "..player.mapTileX..", "..player.mapTileY..", mapTrueX/Y: "..player.mapTrueX..", "..player.mapTrueY)
-            player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
         end
     end
 end
@@ -125,6 +131,15 @@ function love.keypressed(key)
             elseif menuOptionsPaused[selOptionPause] == "QUIT" then
                 love.event.quit()
             end
+        end
+    end
+
+    if CurrentState == "Play" then
+        if key == INPUTS_ARR.inventory[1] then 
+            isInInventory = not isInInventory
+        end
+        if isInInventory then
+            
         end
     end
 end

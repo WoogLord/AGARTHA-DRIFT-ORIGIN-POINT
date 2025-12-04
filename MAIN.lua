@@ -50,8 +50,15 @@ function love.update(dt)
     if player.inBattle then battleManager()
     else overworldManager() end
 
+    if isInInventory then 
+        player.facingDirection = "Left"
+        player.x, player.y = 250,250 
+    else 
+        player.x, player.y = (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH) 
+    end
+
     speedManager(dt)
-    statsManager()
+    statsManager(player)
     musicManager()
     animStateMachine()
 end
@@ -63,6 +70,7 @@ function love.draw()
         drawMainMenu()  
     elseif CurrentState == "Play" then
         if player.inBattle then drawBattle()
+        elseif isInInventory then drawInventory()
         else drawOverworld() end
     end
     drawPaused()
