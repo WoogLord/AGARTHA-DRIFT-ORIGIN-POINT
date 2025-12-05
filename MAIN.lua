@@ -56,7 +56,6 @@ function love.update(dt)
     else 
         player.x, player.y = (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH) 
     end
-
     speedManager(dt)
     statsManager(player)
     musicManager()
@@ -66,8 +65,9 @@ end
 function love.draw()
     currWindWidth, currWindHeight = love.graphics.getDimensions()
     love.graphics.setColor(1,1,1)
-    if CurrentState == "MainMenu" then
-        drawMainMenu()  
+
+    if CurrentState == "MainMenu" then drawMainMenu()
+    elseif CurrentState == "Options" then drawOptionsMenu()
     elseif CurrentState == "Play" then
         if player.inBattle then drawBattle()
         elseif isInInventory then drawInventory()
@@ -77,6 +77,7 @@ function love.draw()
     
     -- Debug stuff
     love.graphics.setColor(1,1,1)
+    love.graphics.setFont(Font)
     love.graphics.print(TestString, 5, currWindHeight-25-Font:getHeight(VersionInfoString))
     love.graphics.print(VersionInfoString, 5, currWindHeight-5-Font:getHeight(VersionInfoString))
 end

@@ -18,7 +18,7 @@ end
 
 function drawMainMenu()
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(bgTitle,0,0,0,6,6)
+    love.graphics.draw(bgTitle,0,0,0,graphicsScale*2,graphicsScale*2)
     -- have the scale factor be establi shed globally to handle resizing
 
     -- loop this
@@ -213,4 +213,18 @@ end
 function drawInventory()
     inventoryUI()
     drawPlayer(2)
+end
+
+function drawOptionsMenu()
+    love.graphics.setFont(bigFont)
+    for i, option in ipairs(menuOptionsOptions) do
+        if i == selOptionOptions then
+            love.graphics.setColor(0, 0, 1)  -- Highlight selected option in red
+        else
+            love.graphics.setColor(1, 1, 1)  -- Normal color
+        end
+        -- are things not centered?  check here lol, fix #option
+        love.graphics.print(option, currWindWidth / 2 - (#option * 10), currWindHeight / 2 + (i - 1) * 40)
+    end     
+    love.graphics.setColor(1, 1, 1)
 end

@@ -107,6 +107,25 @@ function love.keypressed(key)
                 love.event.quit()
             end
         end
+    elseif CurrentState == "Options" then
+        if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+            selOptionOptions = math.min(selOptionOptions + 1 , #menuOptionsOptions)
+        elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+            selOptionOptions = math.max(selOptionOptions - 1 , 1)
+        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
+            if menuOptionsOptions[selOptionOptions] == "MUSIC VOLUME" then
+                musicVolume = math.max(musicVolume - 0.1, 0)
+            end
+        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
+            if menuOptionsOptions[selOptionOptions] == "MUSIC VOLUME" then
+                musicVolume = math.min(musicVolume + 0.1, 1.0)
+            end
+        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+            if menuOptionsOptions[selOptionOptions] == "MAIN MENU" then
+                CurrentState = "MainMenu"
+                PriorState = "Options"
+            end
+        end
     end
 
     if isPaused == false then

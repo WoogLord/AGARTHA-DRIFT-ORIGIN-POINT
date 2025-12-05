@@ -1,4 +1,8 @@
 function musicManager()
+    musPlayGameDefault:setVolume(musicVolume) -- change this to be iterative
+    sfxTitleLogoVocal:setVolume(musicVolume)
+    musTitleScreen:setVolume(musicVolume)
+    musTitleLoadCutscene:setVolume(musicVolume)
     if CurrentState == "MainMenu" then
         if not musTitleLoadCutscene:isPlaying() then
             if not musTitleScreen:isPlaying() then
