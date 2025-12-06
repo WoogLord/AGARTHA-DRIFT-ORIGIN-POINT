@@ -13,6 +13,20 @@ function playerControls()
         else
             if isInInventory then
                 --== INVENTORY ==--
+                player.currentAnimState = "Idle"
+                if love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+                    player.facingDirection = "Up"
+                    player.currentAnimState = "Walk"
+                elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+                    player.facingDirection = "Left"
+                    player.currentAnimState = "Walk"
+                elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+                    player.facingDirection = "Down"
+                    player.currentAnimState = "Walk"
+                elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+                    player.facingDirection = "Right"
+                    player.currentAnimState = "Walk"
+                end
             else
                 --== MOVEMENT ==--
                 player.currentAnimState = "Idle"
@@ -144,9 +158,11 @@ function love.keypressed(key)
         elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
             if menuOptionsPaused[selOptionPause] == "RESUME" then
                 isPaused = false
+                selOptionPause = 1
             elseif menuOptionsPaused[selOptionPause] == "MAIN MENU" then
                 CurrentState = "MainMenu"
                 isPaused = false
+                selOptionPause = 1
             elseif menuOptionsPaused[selOptionPause] == "QUIT" then
                 love.event.quit()
             end
