@@ -20,6 +20,7 @@ local statsManagerFunctions require "CODE.UPDATE.STATS_MANAGER"
 local overworldManagerFunctions require "CODE.UPDATE.OVERWORLD_MANAGER"
 local battleManagerFunctions require "CODE.UPDATE.BATTLE_MANAGER"
 local animManagerFunctions require "CODE.UPDATE.ANIM_MANAGER"
+local inventoryManagerFunctions require "CODE.UPDATE.INVENTORY_MANAGER"
 
 function love.load()
     musTitleLoadCutscene:setVolume(0.25)

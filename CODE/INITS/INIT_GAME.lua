@@ -58,13 +58,6 @@ selOptionMain = 1
 selOptionPause = 1
 selOptionOptions = 1
 
--- inventory
-inventoryArray = {
-    equipmentType = {}
-    , equipmentID = {}
-    , itemXp = {}
-}
-
 function initSpriteSheets()
     -- Sprite Sheet for all Characters (loop? maybe an array)
     spritesheetPlayer = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/SS_PLAYER_v0.1.png")

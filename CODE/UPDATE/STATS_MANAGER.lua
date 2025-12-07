@@ -28,6 +28,7 @@ function initEquipment()
         { -- vanityNames
             "NOTHING", "RECRUIT"
         }
+        
         , { -- description
             "BALD BALD BALD BALD BALD" -- NOTHING
             , "Covers my Norwood 8" -- RECRUIT
@@ -254,6 +255,29 @@ function initEquipment()
         }
     )
 end
+
+equipKey = {
+    pilot = {"head", "back", "shoulders", "chest", "rightArm", "leftArm", "rightWeapon", "leftWeapon", "gloves", "pants", "rightLeg", "leftLeg", "boots"}
+    , mech = {}
+    , pilotArrays = {
+          mainEquipmentPilotHeadArray
+        , mainEquipmentPilotBackArray
+        , mainEquipmentPilotShouldersArray
+        , mainEquipmentPilotChestArray
+        , mainEquipmentPilotRArmArray
+        , mainEquipmentPilotLArmArray
+        , mainEquipmentPilotRWeaponArray
+        , mainEquipmentPilotLWeaponArray
+        , mainEquipmentPilotGlovesArray
+        , mainEquipmentPilotPantsArray
+        , mainEquipmentPilotRLegArray
+        , mainEquipmentPilotLLegArray
+        , mainEquipmentPilotBootsArray
+    }
+    , mechArrays = {
+        
+    }
+}
 
 function statsManager(_target)
     -- modify player stats CONSTANTLY, later make this on equipment swap!

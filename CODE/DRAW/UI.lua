@@ -59,7 +59,7 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
             else 
                 -- name
                 love.graphics.setColor(1, 1, 1)
-                love.graphics.printf("[P]-"..partyBattleArr[i].name, 25, yOff, 400, "left")
+                love.graphics.printf("[P] - "..partyBattleArr[i].name, 25, yOff, 400, "left")
                 -- hp
                 love.graphics.setColor(1, 0.5, 0.5)
                 love.graphics.printf("HP:"..partyBattleArr[i].pilot.hp.."/"..partyBattleArr[i].pilot.maxHP, 50, yOff, 400, "right")
@@ -74,5 +74,10 @@ end
 function inventoryUI()
     for i=1, #buttonsInventory, 1 do
         drawButton(buttonsInventory[i])
+        if isMouseOverButton(buttonsInventory[i]) then
+            -- draw descriptions
+            love.graphics.setColor(1, 1, 1)
+            love.graphics.printf(tostring(getEquipStatsFromInventory(i)), buttonsInventory[i].x+tileWH, buttonsInventory[i].y+tileWH, 200, "left")
+        end
     end
 end
