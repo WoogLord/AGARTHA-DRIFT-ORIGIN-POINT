@@ -65,6 +65,17 @@ function initSpriteSheets()
     -- spritesheetAnthony
     -- spritesheetAlfred
 
+    ssEquipmentIcons = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/EQUIPMENT_ICONS.png")
+    equipmentIconQuads = {{}, {}}
+    iconX, iconY = ssEquipmentIcons:getDimensions()
+    for i=1, (iconX / tileWH), 1 do
+        for j=1, (iconY / tileWH), 1 do
+            -- print(j)
+            -- print(i)
+            equipmentIconQuads[i][j] = love.graphics.newQuad((i-1)*tileWH ,(j-1)*tileWH, tileWH, tileWH, ssEquipmentIcons:getDimensions())
+        end
+    end
+
     -- Tilemaps
     tilemapSubGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-SUBGROUND.png")
     tilemapGround_01 = love.graphics.newImage("ASSETS/ART/TILEMAPS/TILEMAP_MASTER-GROUND.png")

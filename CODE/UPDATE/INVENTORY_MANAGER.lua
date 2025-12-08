@@ -4,6 +4,7 @@ for i=1, 36, 1 do
     inventoryArray[i] = {
         equipmentType = ""
         , equipmentID = 0
+        , equipmentIndex = 0
         , itemXp = 0
     }
     print(inventoryArray[i].equipmentType)
@@ -12,8 +13,10 @@ end
 inventoryArray[1] = {
         equipmentType = "gloves"
         , equipmentID = 2
+        , equipmentIndex = 9
         , itemXp = 0
     }
+
 function getEquipStatsFromInventory(_inventorySpotToCheck)
     if inventoryArray[_inventorySpotToCheck].equipmentType == "" then
         return ""

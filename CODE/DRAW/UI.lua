@@ -75,13 +75,24 @@ function inventoryUI()
     -- draw inventory
     for i=1, #buttonsInventory, 1 do
         drawButton(buttonsInventory[i])
+        -- draw inventory icons
+        -- ssEquipmentIcons
+        if inventoryArray[i].equipmentIndex == 0 or inventoryArray[i].equipmentID == 0 then
+            print("Error?!, no id or equipmentIndex to be rendered")
+        else
+            print(inventoryArray[i].equipmentIndex)
+            print(inventoryArray[i].equipmentID) 
+            love.graphics.draw(ssEquipmentIcons
+                , equipmentIconQuads[inventoryArray[i].equipmentID][inventoryArray[i].equipmentIndex]
+            , buttonsInventory[i].x, buttonsInventory[i].y, 0, graphicsScale, graphicsScale)
+        end
     end
 
     -- draw equips Inventory
 
-    -- draw inventory icons
-    
+   
     -- draw equipment icons
+    -- ssEquipmentIcons
 
     -- draw picked up Item
 
