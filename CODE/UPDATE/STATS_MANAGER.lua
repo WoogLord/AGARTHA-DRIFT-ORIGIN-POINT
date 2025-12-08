@@ -256,6 +256,7 @@ function initEquipment()
     )
 end
 
+-- THIS COULD BE EPIC BUT NOOOOOOOOOOOOOOO LUA MADE THIS NOT ACTUALLY RETURN TABLE REFS  (see INVENTORY_MANAGER -> getEquipStatsFromInventory for why my rant matters lol)
 equipKey = {
     pilot = {"head", "back", "shoulders", "chest", "rightArm", "leftArm", "rightWeapon", "leftWeapon", "gloves", "pants", "rightLeg", "leftLeg", "boots"}
     , mech = {}

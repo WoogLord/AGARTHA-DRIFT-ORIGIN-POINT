@@ -72,12 +72,25 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
 end
 
 function inventoryUI()
+    -- draw inventory
     for i=1, #buttonsInventory, 1 do
         drawButton(buttonsInventory[i])
-        if isMouseOverButton(buttonsInventory[i]) then
+    end
+
+    -- draw equips Inventory
+
+    -- draw inventory icons
+    
+    -- draw equipment icons
+
+    -- draw picked up Item
+
+    -- draw description
+    for j=1, #buttonsInventory, 1 do
+        if isMouseOverButton(buttonsInventory[j]) then
             -- draw descriptions
             love.graphics.setColor(1, 1, 1)
-            love.graphics.printf(tostring(getEquipStatsFromInventory(i)), buttonsInventory[i].x+tileWH, buttonsInventory[i].y+tileWH, 200, "left")
+            love.graphics.printf(tostring(getEquipStatsFromInventory(j)), buttonsInventory[j].x+tileWH, buttonsInventory[j].y+tileWH, 200, "left")
         end
     end
 end

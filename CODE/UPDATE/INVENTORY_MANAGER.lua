@@ -15,16 +15,26 @@ inventoryArray[1] = {
         , itemXp = 0
     }
 function getEquipStatsFromInventory(_inventorySpotToCheck)
-    local tempEquipArray = {}
     if inventoryArray[_inventorySpotToCheck].equipmentType == "" then
         return ""
-    else
-        print(equipKey.pilot)
-        print(inventoryArray[_inventorySpotToCheck].equipmentType)
-        print(returnIndexGivenArrayValue(equipKey.pilot, inventoryArray[_inventorySpotToCheck].equipmentType))
-        tempEquipArray = equipKey.pilotArrays[returnIndexGivenArrayValue(equipKey.pilot, inventoryArray[_inventorySpotToCheck].equipmentType)]
-        print(inventoryArray[_inventorySpotToCheck].equipmentID)
-        return tempEquipArray.description[inventoryArray[_inventorySpotToCheck].equipmentID]
+    elseif
+        -- print(equipKey.pilot)
+        -- print(inventoryArray[_inventorySpotToCheck].equipmentType)
+        -- print(returnIndexGivenArrayValue(equipKey.pilot, inventoryArray[_inventorySpotToCheck].equipmentType))
+        -- local index = returnIndexGivenArrayValue(equipKey.pilot, inventoryArray[_inventorySpotToCheck].equipmentType)
+        -- tempEquipArray = equipKey.pilotArrays[index]
+        -- print(inventoryArray[_inventorySpotToCheck].equipmentID)
+        -- print(tempEquipArray)
+        -- print(equipKey.pilotArrays[9])
+        -- return tempEquipArray.description[inventoryArray[_inventorySpotToCheck].equipmentID]
+
+        -- I WANTED AN ELEGANT SOLUTION
+        -- LUA GAVE ME NOTHING
+        -- BRUTEFORCE INITIATE
+        inventoryArray[_inventorySpotToCheck].equipmentType == "gloves" then
+        return mainEquipmentPilotGlovesArray.description[inventoryArray[_inventorySpotToCheck].equipmentID]
+    elseif inventoryArray[_inventorySpotToCheck].equipmentType == "pants" then
+
     end
 end
 
