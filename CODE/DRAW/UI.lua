@@ -25,6 +25,17 @@ for i=1, 36, 1 do
     }
 end
 
+buttonsEquipmentInventoryPilot = {
+      head = {x = playerInventX + (tileWH * graphicsScale * 0.5), y = playerInventY - (tileWH * graphicsScale * 2.1)
+        , w = tileWH * graphicsScale, h = tileWH * graphicsScale, r = 0.1, b = 0.1, g = 0.1, label = ""}
+    , back = {x = playerInventX - (tileWH * graphicsScale * 0.6), y = playerInventY - (tileWH * graphicsScale * 1.9)
+        , w = tileWH * graphicsScale, h = tileWH * graphicsScale, r = 0.1, b = 0.1, g = 0.1, label = ""}
+    , shoulders = {x = playerInventX + (tileWH * graphicsScale * 1.6), y = playerInventY - (tileWH * graphicsScale * 1.9)
+        , w = tileWH * graphicsScale, h = tileWH * graphicsScale, r = 0.1, b = 0.1, g = 0.1, label = ""}
+    , chest = {x = playerInventX + (tileWH * graphicsScale * 0.5), y = playerInventY - (tileWH * graphicsScale * 1.0)
+        , w = tileWH * graphicsScale, h = tileWH * graphicsScale, r = 0.1, b = 0.1, g = 0.1, label = ""}
+}
+
 function drawButton(button)
     if button.r then 
         love.graphics.setColor(button.r,button.b,button.g)
@@ -89,10 +100,24 @@ function inventoryUI()
     end
 
     -- draw equips Inventory
+    drawButton(buttonsEquipmentInventoryPilot.head)
+    drawButton(buttonsEquipmentInventoryPilot.back)
+    drawButton(buttonsEquipmentInventoryPilot.shoulders)
+    drawButton(buttonsEquipmentInventoryPilot.chest)
 
-   
+
     -- draw equipment icons
     -- ssEquipmentIcons
+    local pPE = player.pilot.equipment
+
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.head][1]
+        , buttonsEquipmentInventoryPilot.head.x, buttonsEquipmentInventoryPilot.head.y, 0, graphicsScale, graphicsScale)
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.back][2]
+        , buttonsEquipmentInventoryPilot.back.x, buttonsEquipmentInventoryPilot.back.y, 0, graphicsScale, graphicsScale)
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.shoulders][3]
+        , buttonsEquipmentInventoryPilot.shoulders.x, buttonsEquipmentInventoryPilot.shoulders.y, 0, graphicsScale, graphicsScale)
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.chest][4]
+        , buttonsEquipmentInventoryPilot.chest.x, buttonsEquipmentInventoryPilot.chest.y, 0, graphicsScale, graphicsScale)
 
     -- draw picked up Item
 
@@ -103,5 +128,20 @@ function inventoryUI()
             love.graphics.setColor(1, 1, 1)
             love.graphics.printf(tostring(getEquipStatsFromInventory(j)), buttonsInventory[j].x+tileWH, buttonsInventory[j].y+tileWH, 200, "left")
         end
+    end
+    love.graphics.setColor(1, 1, 1)
+
+    if isMouseOverButton(buttonsEquipmentInventoryPilot.head) then
+        love.graphics.printf(tostring(mainEquipmentPilotHeadArray.description[pPE.head])
+            , buttonsEquipmentInventoryPilot.head.x+tileWH, buttonsEquipmentInventoryPilot.head.y+tileWH, 200, "left")
+    elseif isMouseOverButton(buttonsEquipmentInventoryPilot.back) then
+        love.graphics.printf(tostring(mainEquipmentPilotBackArray.description[pPE.back])
+            , buttonsEquipmentInventoryPilot.back.x+tileWH, buttonsEquipmentInventoryPilot.back.y+tileWH, 200, "left")
+    elseif isMouseOverButton(buttonsEquipmentInventoryPilot.shoulders) then
+        love.graphics.printf(tostring(mainEquipmentPilotShouldersArray.description[pPE.shoulders])
+            , buttonsEquipmentInventoryPilot.shoulders.x+tileWH, buttonsEquipmentInventoryPilot.shoulders.y+tileWH, 200, "left")
+    elseif isMouseOverButton(buttonsEquipmentInventoryPilot.chest) then
+        love.graphics.printf(tostring(mainEquipmentPilotChestArray.description[pPE.chest])
+            , buttonsEquipmentInventoryPilot.chest.x+tileWH, buttonsEquipmentInventoryPilot.chest.y+tileWH, 200, "left")
     end
 end

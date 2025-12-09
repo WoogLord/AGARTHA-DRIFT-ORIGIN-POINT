@@ -19,6 +19,7 @@ timerNoInput = 0
 graphicsScale = 3
 tileWH = 32
 moveSpeedDampener = 0.40
+playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - tileWH/2
 
 --==+==-- "floats" --==+==--
 turnChargeReduction = 0.05

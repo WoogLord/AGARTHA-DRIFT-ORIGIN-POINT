@@ -54,7 +54,8 @@ function love.update(dt)
     if isInInventory then 
         -- player.facingDirection = "Left"
         -- player.x, player.y = 250,250 
-        player.x, player.y = (WindWidth / 2) - tileWH/2, (WindHeight / 2) - tileWH/2
+        playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - tileWH/2
+        player.x, player.y = playerInventX, playerInventY
     else 
         player.x, player.y = (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH) 
     end
