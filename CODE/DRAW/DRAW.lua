@@ -211,8 +211,8 @@ function drawEnemies()
 end
 
 function drawInventory()
-    inventoryUI()
     drawPlayer(2)
+    inventoryUI()
 end
 
 function drawOptionsMenu()
