@@ -114,6 +114,14 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
 end
 
 function inventoryUI()
+    love.graphics.setColor(1, 1, 1)
+    local pPE = player.pilot.equipment
+    -- draw bg art here
+
+    -- titles
+    love.graphics.print("EQUIPMENT", playerInventX + (tileWH * graphicsScale * 0.4), playerInventY - (currWindHeight / 4))
+    love.graphics.print("INVENTORY", (WindWidth / 3 * 2) + (tileWH * graphicsScale * 2.6), playerInventY - (currWindHeight / 4))
+
     -- draw inventory
     for i=1, #buttonsInventory, 1 do
         drawButton(buttonsInventory[i])
@@ -147,7 +155,6 @@ function inventoryUI()
 
     -- draw equipment icons
     -- ssEquipmentIcons
-    local pPE = player.pilot.equipment
 
     love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.head][1]
         , buttonsEquipmentInventoryPilot.head.x, buttonsEquipmentInventoryPilot.head.y, 0, graphicsScale, graphicsScale)
@@ -176,17 +183,30 @@ function inventoryUI()
     love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.boots][13]
         , buttonsEquipmentInventoryPilot.boots.x, buttonsEquipmentInventoryPilot.boots.y, 0, graphicsScale, graphicsScale)
 
+    -- draw current stats
+    local tYOffStats = currWindHeight / 4
+    love.graphics.printf(player.name.."'s STATS", 50, tYOffStats, 200, "center")
+    love.graphics.printf("----------------", 50, tYOffStats + 15, 200, "center")
+    love.graphics.setColor(1, 0.5, 0.5)
+    love.graphics.printf("HP:", 50, tYOffStats + 30, 100, "right")
+    love.graphics.printf(player.pilot.hp.."/"..player.pilot.maxHP, 150, tYOffStats + 30, 200, "left")
+    love.graphics.setColor(0.5, 0.5, 1)
+    love.graphics.printf("Stamina:", 50, tYOffStats + 60, 100, "right")
+    love.graphics.printf(player.pilot.stamina.."/"..player.pilot.maxStam, 150, tYOffStats + 60, 200, "left")
+    love.graphics.setColor(0.75, 0 ,0.75)
+    love.graphics.printf("Speed:", 50, tYOffStats + 90, 100, "right")
+    love.graphics.printf(player.pilot.speed, 150, tYOffStats + 90, 200, "left")
+    love.graphics.setColor(1, 1, 1)
+
     -- draw picked up Item
 
     -- draw description
     for j=1, #buttonsInventory, 1 do
         if isMouseOverButton(buttonsInventory[j]) then
             -- draw descriptions
-            love.graphics.setColor(1, 1, 1)
             love.graphics.printf(tostring(getEquipStatsFromInventory(j)), buttonsInventory[j].x+tileWH, buttonsInventory[j].y+tileWH, 200, "left")
         end
     end
-    love.graphics.setColor(1, 1, 1)
 
     if isMouseOverButton(buttonsEquipmentInventoryPilot.head) then
         love.graphics.printf(tostring(mainEquipmentPilotHeadArray.description[pPE.head])
