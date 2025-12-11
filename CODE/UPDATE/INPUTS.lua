@@ -128,11 +128,11 @@ function love.keypressed(key)
             selOptionOptions = math.max(selOptionOptions - 1 , 1)
         elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
             if menuOptionsOptions[selOptionOptions] == "MUSIC VOLUME" then
-                musicVolume = math.max(musicVolume - 0.1, 0)
+                musicVolume = math.max(musicVolume - 0.05, 0)
             end
         elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
             if menuOptionsOptions[selOptionOptions] == "MUSIC VOLUME" then
-                musicVolume = math.min(musicVolume + 0.1, 1.0)
+                musicVolume = math.min(musicVolume + 0.05, 1.0)
             end
         elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
             if menuOptionsOptions[selOptionOptions] == "MAIN MENU" then

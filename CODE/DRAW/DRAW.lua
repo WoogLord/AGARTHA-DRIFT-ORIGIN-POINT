@@ -218,13 +218,13 @@ end
 function drawOptionsMenu()
     love.graphics.setFont(bigFont)
     for i, option in ipairs(menuOptionsOptions) do
-        if i == selOptionOptions then
-            love.graphics.setColor(0, 0, 1)  -- Highlight selected option in red
-        else
-            love.graphics.setColor(1, 1, 1)  -- Normal color
-        end
-        -- are things not centered?  check here lol, fix #option
+        if i == selOptionOptions then love.graphics.setColor(0, 0, 1) else love.graphics.setColor(1, 1, 1) end
         love.graphics.print(option, currWindWidth / 2 - (#option * 10), currWindHeight / 2 + (i - 1) * 40)
-    end     
+    end
+    for j=1, 20, 1 do 
+        if math.floor(musicVolume*20) == j then love.graphics.setColor(0, 0, 1) else love.graphics.setColor(1, 1, 1) end
+        love.graphics.rectangle("fill", currWindWidth / 2 + (#menuOptionsOptions[1] * 10) + (j*12), currWindHeight / 2 + 15, 6, 6)
+    end
     love.graphics.setColor(1, 1, 1)
+    love.graphics.print(musicVolume*100, currWindWidth / 2 + (#menuOptionsOptions[1] * 10) + 250, currWindHeight / 2)
 end

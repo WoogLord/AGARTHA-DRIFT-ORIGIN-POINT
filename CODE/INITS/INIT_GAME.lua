@@ -23,7 +23,7 @@ playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - ti
 
 --==+==-- "floats" --==+==--
 turnChargeReduction = 0.05
-musicVolume = 0.3
+musicVolume = 0.2
 
 --==+==-- strings --==+==--
 CurrentState = "MainMenu"
