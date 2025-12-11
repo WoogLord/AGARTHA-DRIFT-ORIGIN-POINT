@@ -213,6 +213,13 @@ end
 function drawInventory()
     drawPlayer(2)
     inventoryUI()
+    -- drawHeldItem
+    if heldItem then
+        local mx, my = love.mouse.getPosition()
+        if heldItem.equipmentType == "gloves" then
+            love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[heldItem.equipmentID][9], mx, my, 0, graphicsScale, graphicsScale)
+        end
+    end
 end
 
 function drawOptionsMenu()

@@ -41,6 +41,26 @@ function getEquipStatsFromInventory(_inventorySpotToCheck)
     end
 end
 
-function pickUpItem()
-
+-- function called in INPUTS.lua
+function pickUpItem(_x, _y, _buttonPressed)
+    for i=1, #buttonsInventory, 1 do
+        if isMouseOverButton(buttonsInventory[i]) then
+            if _buttonPressed == 1 then
+                if heldItem then
+                    heldItemBuffer = inventoryArray[i]
+                    inventoryArray[i] = heldItem
+                    heldItem = heldItemBuffer
+                else
+                    heldItemBuffer = inventoryArray[i]
+                    heldItem = heldItemBuffer
+                    inventoryArray[i] = {
+                        equipmentType = ""
+                        , equipmentID = 0
+                        , equipmentIndex = 0
+                        , itemXp = 0
+                    }
+                end
+            end
+        end
+    end
 end

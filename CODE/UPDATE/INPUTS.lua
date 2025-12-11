@@ -96,6 +96,12 @@ function isMouseOverButton(button)
     return mx > button.x and mx < button.x + button.w and my > button.y and my < button.y + button.h
 end
 
+function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
+    if isInInventory == true then
+        pickUpItem(_x, _y, _buttonPressed)
+    end
+end
+
 -- handle inputs - keyboard
 function love.keypressed(key)
     if key == INPUTS_ARR.fullscreen then isFullScreen = not isFullScreen
