@@ -217,7 +217,8 @@ function drawInventory()
     if heldItem then
         local mx, my = love.mouse.getPosition()
         if heldItem.equipmentType == "gloves" then
-            love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[heldItem.equipmentID][9], mx, my, 0, graphicsScale, graphicsScale)
+            love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[heldItem.equipmentID][9]
+                , mx - (tileWH * graphicsScale * 0.5), my - (tileWH * graphicsScale * 0.5), 0, graphicsScale, graphicsScale)
         end
     end
 end

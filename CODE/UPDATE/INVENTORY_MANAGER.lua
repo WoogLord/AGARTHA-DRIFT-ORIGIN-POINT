@@ -63,4 +63,19 @@ function pickUpItem(_x, _y, _buttonPressed)
             end
         end
     end
+    if _buttonPressed == 1 then
+        if isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then
+            if helditem then
+                if helditem.equipmentType == "gloves" then
+                    heldItemBuffer = player.pilot.equipment.gloves
+                    player.pilot.equipment.gloves = heldItem.equipmentID
+                    heldItem = heldItemBuffer
+                    print(buttonsEquipmentInventoryPilot.gloves.x)
+                end
+            else
+                helditem = player.pilot.equipment.gloves
+                player.pilot.equipment.gloves = 1
+            end
+        end
+    end
 end

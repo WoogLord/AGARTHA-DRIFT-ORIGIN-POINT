@@ -128,10 +128,10 @@ function inventoryUI()
         -- draw inventory icons
         -- ssEquipmentIcons
         if inventoryArray[i].equipmentIndex == 0 or inventoryArray[i].equipmentID == 0 then
-            print("Error?!, no id or equipmentIndex to be rendered")
+            -- print("Error?!, no id or equipmentIndex to be rendered")
         else
-            print(inventoryArray[i].equipmentIndex)
-            print(inventoryArray[i].equipmentID) 
+            -- print(inventoryArray[i].equipmentIndex)
+            -- print(inventoryArray[i].equipmentID) 
             love.graphics.draw(ssEquipmentIcons
                 , equipmentIconQuads[inventoryArray[i].equipmentID][inventoryArray[i].equipmentIndex]
             , buttonsInventory[i].x, buttonsInventory[i].y, 0, graphicsScale, graphicsScale)
