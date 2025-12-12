@@ -19,6 +19,13 @@ function AllyClass:new(
         , _pilotEquipmentGloves, _pilotEquipmentPants
         , _pilotEquipmentRLeg, _pilotEquipmentLLeg
         , _pilotEquipmentBoots
+        , _pilotEquipmentHeadXP, _pilotEquipmentBackXP
+        , _pilotEquipmentShouldersXP, _pilotEquipmentChestXP
+        , _pilotEquipmentRArmXP, _pilotEquipmentLArmXP
+        , _pilotEquipmentRWeaponXP, _pilotEquipmentLWeaponXP
+        , _pilotEquipmentGlovesXP, _pilotEquipmentPantsXP
+        , _pilotEquipmentRLegXP, _pilotEquipmentLLegXP
+        , _pilotEquipmentBootsXP
 
         , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
         , _mechAttack
@@ -32,6 +39,13 @@ function AllyClass:new(
         , _mechEquipmentRWeapon, _mechEquipmentLWeapon
         , _mechEquipmentRLeg, _mechEquipmentLLeg
         , _mechEquipmentAuxillary, _mechEquipmentThrusters
+        , _mechEquipmentHeadXP, _mechEquipmentBackXP
+        , _mechEquipmentRShoulderXP, _mechEquipmentLShoulderXP
+        , _mechEquipmentChassisXP
+        , _mechEquipmentRArmXP, _mechEquipmentLArmXP
+        , _mechEquipmentRWeaponXP, _mechEquipmentLWeaponXP
+        , _mechEquipmentRLegXP, _mechEquipmentLLegXP
+        , _mechEquipmentAuxillaryXP, _mechEquipmentThrustersXP
     )
     local tAC = {} -- tAC = tempAllyClass
     setmetatable(tAC, AllyClass)
@@ -49,13 +63,19 @@ function AllyClass:new(
             , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
         }
         , equipment = {
-              head = _pilotEquipmentHead, back = _pilotEquipmentBack
-            , shoulders = _pilotEquipmentShoulders, chest = _pilotEquipmentChest
-            , rightArm = _pilotEquipmentRArm, leftArm = _pilotEquipmentLArm
-            , rightWeapon = _pilotEquipmentRWeapon, leftWeapon = _pilotEquipmentLWeapon
-            , gloves = _pilotEquipmentGloves, pants = _pilotEquipmentPants
-            , rightLeg = _pilotEquipmentRLeg, leftLeg = _pilotEquipmentLLeg
-            , boots = _pilotEquipmentBoots
+              head = {equipmentID = _pilotEquipmentHead, itemXp = _pilotEquipmentHeadXP}
+            , back = {equipmentID = _pilotEquipmentBack, itemXp = _pilotEquipmentBackXP} 
+            , shoulders = {equipmentID = _pilotEquipmentShoulders, itemXp = _pilotEquipmentShouldersXP}
+            , chest = {equipmentID = _pilotEquipmentChest, itemXp = _pilotEquipmentChestXP}
+            , rightArm = {equipmentID = _pilotEquipmentRArm, itemXp = _pilotEquipmentRArmXP}
+            , leftArm = {equipmentID = _pilotEquipmentLArm, itemXp = _pilotEquipmentLArmXP}
+            , rightWeapon = {equipmentID = _pilotEquipmentRWeapon, itemXp = _pilotEquipmentRWeaponXP}
+            , leftWeapon = {equipmentID = _pilotEquipmentLWeapon, itemXp = _pilotEquipmentLWeaponXP}
+            , gloves = {equipmentID = _pilotEquipmentGloves, itemXp = _pilotEquipmentGlovesXP}
+            , pants = {equipmentID = _pilotEquipmentPants, itemXp = _pilotEquipmentPantsXP}
+            , rightLeg = {equipmentID = _pilotEquipmentRLeg, itemXp = _pilotEquipmentRLegXP}
+            , leftLeg = {equipmentID = _pilotEquipmentLLeg, itemXp = _pilotEquipmentLLegXP}
+            , boots = {equipmentID = _pilotEquipmentBoots, itemXp = _pilotEquipmentBootsXP}
         }
     }
     tAC.mech = {
@@ -67,13 +87,19 @@ function AllyClass:new(
             , ability_05 = _mechAbility_05, ability_06 = _mechAbility_06, ability_07 = _mechAbility_07, ability_08 = _mechAbility_08
         }
         , equipment = {
-              head = _mechEquipmentHead, back = _mechEquipmentBack
-            , rightShoulder = _mechEquipmentRShoulder, leftShoulder = _mechEquipmentLShoulder
-            , chassis = _mechEquipmentChassis
-            , rightarm = _mechEquipmentRArm, leftarm = _mechEquipmentLArm
-            , rightWeapon = _mechEquipmentRWeapon, leftWeapon = _mechEquipmentLWeapon
-            , rightLeg = _mechEquipmentRLeg, leftLeg = _mechEquipmentLLeg
-            , auxillary = _mechEquipmentAuxillary, thrusters = _mechEquipmentThrusters
+              head = {equipmentID = _mechEquipmentHead, itemXp = _mechEquipmentHeadXP}
+            , back = {equipmentID = _mechEquipmentBack, itemXp = _mechEquipmentBackXP}
+            , rightShoulder = {equipmentID = _mechEquipmentRShoulder, itemXp = _mechEquipmentRShoulderXP}
+            , leftShoulder = {equipmentID = _mechEquipmentLShoulder, itemXp = _mechEquipmentLShoulderXP}
+            , chassis = {equipmentID = _mechEquipmentChassis, itemXp = _mechEquipmentChassisXP}
+            , rightArm = {equipmentID = _mechEquipmentRArm, itemXp = _mechEquipmentRArmXP}
+            , leftArm = {equipmentID = _mechEquipmentLArm, itemXp = _mechEquipmentLArmXP}
+            , rightWeapon = {equipmentID = _mechEquipmentRWeapon, itemXp = _mechEquipmentRWeaponXP}
+            , leftWeapon = {equipmentID = _mechEquipmentLWeapon, itemXp = _mechEquipmentLWeaponXP}
+            , rightLeg = {equipmentID = _mechEquipmentRLeg, itemXp = _mechEquipmentRLegXP}
+            , leftLeg = {equipmentID = _mechEquipmentLLeg, itemXp = _mechEquipmentLLegXP}
+            , auxillary = {equipmentID = _mechEquipmentAuxillary, itemXp = _mechEquipmentAuxillaryXP}
+            , thrusters = {equipmentID = _mechEquipmentThrusters, itemXp = _mechEquipmentThrustersXP}
         }
     }
     return tAC
@@ -96,13 +122,13 @@ function AllyClass:PrintData()
         .."\nability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06
         .."\nability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08
         .."\n\n-- Pilot Equipment --"
-        .."\nhead: "..self.pilot.equipment.head.."\nback: "..self.pilot.equipment.back
-        .."\nshoulders: "..self.pilot.equipment.shoulders.."\nchest: "..self.pilot.equipment.chest
-        .."\nrightarm: "..self.pilot.equipment.rightArm.."\nleftarm: "..self.pilot.equipment.leftArm
-        .."\nrightWeapon: "..self.pilot.equipment.rightWeapon.."\nleftWeapon: "..self.pilot.equipment.leftWeapon
-        .."\ngloves: "..self.pilot.equipment.gloves.."\npants: "..self.pilot.equipment.pants
-        .."\nrightLeg: "..self.pilot.equipment.rightLeg.."\nleftLeg: "..self.pilot.equipment.leftLeg
-        .."\nboots: "..self.pilot.equipment.boots
+        .."\nhead: "..self.pilot.equipment.head.equipmentID.."\nback: "..self.pilot.equipment.back.equipmentID
+        .."\nshoulders: "..self.pilot.equipment.shoulders.equipmentID.."\nchest: "..self.pilot.equipment.chest.equipmentID
+        .."\nrightarm: "..self.pilot.equipment.rightArm.equipmentID.."\nleftarm: "..self.pilot.equipment.leftArm.equipmentID
+        .."\nrightWeapon: "..self.pilot.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.pilot.equipment.leftWeapon.equipmentID
+        .."\ngloves: "..self.pilot.equipment.gloves.equipmentID.."\npants: "..self.pilot.equipment.pants.equipmentID
+        .."\nrightLeg: "..self.pilot.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.pilot.equipment.leftLeg.equipmentID
+        .."\nboots: "..self.pilot.equipment.boots.equipmentID
         .."\n\n--== Mech ==--"
         .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
         .."\nattack: "..self.mech.attack
@@ -114,13 +140,13 @@ function AllyClass:PrintData()
         .."\nability_05: "..self.mech.abilities.ability_05.."\nability_06: "..self.mech.abilities.ability_06
         .."\nability_07: "..self.mech.abilities.ability_07.."\nability_08: "..self.mech.abilities.ability_08
         .."\n\n-- Mech Equipment --"
-        .."\nhead: "..self.mech.equipment.head.."\nback: "..self.mech.equipment.back
-        .."\nrightShoulder: "..self.mech.equipment.rightShoulder.."\nleftShoulder: "..self.mech.equipment.leftShoulder
-        .."\nchassis: "..self.mech.equipment.chassis
-        .."\nrightarm: "..self.mech.equipment.rightarm.."\nleftarm: "..self.mech.equipment.leftarm
-        .."\nrightWeapon: "..self.mech.equipment.rightWeapon.."\nleftWeapon: "..self.mech.equipment.leftWeapon
-        .."\nrightLeg: "..self.mech.equipment.rightLeg.."\nleftLeg: "..self.mech.equipment.leftLeg
-        .."\nauxillary: "..self.mech.equipment.auxillary.."\nthrusters: "..self.mech.equipment.thrusters
+        .."\nhead: "..self.mech.equipment.head.equipmentID.."\nback: "..self.mech.equipment.back.equipmentID
+        .."\nrightShoulder: "..self.mech.equipment.rightShoulder.equipmentID.."\nleftShoulder: "..self.mech.equipment.leftShoulder.equipmentID
+        .."\nchassis: "..self.mech.equipment.chassis.equipmentID
+        .."\nrightarm: "..self.mech.equipment.rightArm.equipmentID.."\nleftarm: "..self.mech.equipment.leftArm.equipmentID
+        .."\nrightWeapon: "..self.mech.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.mech.equipment.leftWeapon.equipmentID
+        .."\nrightLeg: "..self.mech.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.mech.equipment.leftLeg.equipmentID
+        .."\nauxillary: "..self.mech.equipment.auxillary.equipmentID.."\nthrusters: "..self.mech.equipment.thrusters.equipmentID
         .."\n"
     )
 end
@@ -150,8 +176,12 @@ local testAllyClass = AllyClass:new(
     , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
     -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
     , 1, 1, 1, 1
-    -- , _pilotEquipmentGloves_pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+    -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
     , 1, 1, 1, 1, 1
+    -- xp
+    , 0, 0, 0, 0
+    , 0, 0, 0, 0
+    , 0, 0, 0, 0, 0
 
     --== Mech Stats ==--
     -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
@@ -172,6 +202,10 @@ local testAllyClass = AllyClass:new(
     , 1, 1, 1, 1, 1
     -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
     , 1, 1, 1, 1
+    -- xp
+    , 0, 0, 0, 0
+    , 0, 0, 0, 0, 0
+    , 0, 0, 0, 0
 )
 testAllyClass:PrintData()
 
@@ -204,6 +238,10 @@ function initParty()
         , 1, 1, 1, 1
         -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
         , 2, 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 150, 0, 0, 0, 0
 
         --== Mech Stats ==--
         -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
@@ -224,6 +262,10 @@ function initParty()
         , 1, 1, 1, 1, 1
         -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
         , 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+        , 0, 0, 0, 0
     )
     
     -- Marc = {

@@ -156,31 +156,31 @@ function inventoryUI()
     -- draw equipment icons
     -- ssEquipmentIcons
 
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.head][1]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.head.equipmentID][1]
         , buttonsEquipmentInventoryPilot.head.x, buttonsEquipmentInventoryPilot.head.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.back][2]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.back.equipmentID][2]
         , buttonsEquipmentInventoryPilot.back.x, buttonsEquipmentInventoryPilot.back.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.shoulders][3]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.shoulders.equipmentID][3]
         , buttonsEquipmentInventoryPilot.shoulders.x, buttonsEquipmentInventoryPilot.shoulders.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.chest][4]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.chest.equipmentID][4]
         , buttonsEquipmentInventoryPilot.chest.x, buttonsEquipmentInventoryPilot.chest.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightArm][5]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightArm.equipmentID][5]
         , buttonsEquipmentInventoryPilot.rightArm.x, buttonsEquipmentInventoryPilot.rightArm.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftArm][6]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftArm.equipmentID][6]
         , buttonsEquipmentInventoryPilot.leftArm.x, buttonsEquipmentInventoryPilot.leftArm.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightWeapon][7]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightWeapon.equipmentID][7]
         , buttonsEquipmentInventoryPilot.rightWeapon.x, buttonsEquipmentInventoryPilot.rightWeapon.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftWeapon][8]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftWeapon.equipmentID][8]
         , buttonsEquipmentInventoryPilot.leftWeapon.x, buttonsEquipmentInventoryPilot.leftWeapon.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.gloves][9]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.gloves.equipmentID][9]
         , buttonsEquipmentInventoryPilot.gloves.x, buttonsEquipmentInventoryPilot.gloves.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.pants][10]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.pants.equipmentID][10]
         , buttonsEquipmentInventoryPilot.pants.x, buttonsEquipmentInventoryPilot.pants.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightLeg][11]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.rightLeg.equipmentID][11]
         , buttonsEquipmentInventoryPilot.rightLeg.x, buttonsEquipmentInventoryPilot.rightLeg.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftLeg][12]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.leftLeg.equipmentID][12]
         , buttonsEquipmentInventoryPilot.leftLeg.x, buttonsEquipmentInventoryPilot.leftLeg.y, 0, graphicsScale, graphicsScale)
-    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.boots][13]
+    love.graphics.draw(ssEquipmentIcons, equipmentIconQuads[pPE.boots.equipmentID][13]
         , buttonsEquipmentInventoryPilot.boots.x, buttonsEquipmentInventoryPilot.boots.y, 0, graphicsScale, graphicsScale)
 
     -- draw current stats
@@ -209,43 +209,43 @@ function inventoryUI()
     end
 
     if isMouseOverButton(buttonsEquipmentInventoryPilot.head) then
-        love.graphics.printf(tostring(mainEquipmentPilotHeadArray.description[pPE.head])
+        love.graphics.printf(tostring(mainEquipmentPilotHeadArray.description[pPE.head.equipmentID])
             , buttonsEquipmentInventoryPilot.head.x+tileWH, buttonsEquipmentInventoryPilot.head.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.back) then
-        love.graphics.printf(tostring(mainEquipmentPilotBackArray.description[pPE.back])
+        love.graphics.printf(tostring(mainEquipmentPilotBackArray.description[pPE.back.equipmentID])
             , buttonsEquipmentInventoryPilot.back.x+tileWH, buttonsEquipmentInventoryPilot.back.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.shoulders) then
-        love.graphics.printf(tostring(mainEquipmentPilotShouldersArray.description[pPE.shoulders])
+        love.graphics.printf(tostring(mainEquipmentPilotShouldersArray.description[pPE.shoulders.equipmentID])
             , buttonsEquipmentInventoryPilot.shoulders.x+tileWH, buttonsEquipmentInventoryPilot.shoulders.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.chest) then
-        love.graphics.printf(tostring(mainEquipmentPilotChestArray.description[pPE.chest])
+        love.graphics.printf(tostring(mainEquipmentPilotChestArray.description[pPE.chest.equipmentID])
             , buttonsEquipmentInventoryPilot.chest.x+tileWH, buttonsEquipmentInventoryPilot.chest.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.rightArm) then
-        love.graphics.printf(tostring(mainEquipmentPilotRArmArray.description[pPE.rightArm])
+        love.graphics.printf(tostring(mainEquipmentPilotRArmArray.description[pPE.rightArm.equipmentID])
             , buttonsEquipmentInventoryPilot.rightArm.x+tileWH, buttonsEquipmentInventoryPilot.rightArm.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.leftArm) then
-        love.graphics.printf(tostring(mainEquipmentPilotLArmArray.description[pPE.leftArm])
+        love.graphics.printf(tostring(mainEquipmentPilotLArmArray.description[pPE.leftArm.equipmentID])
             , buttonsEquipmentInventoryPilot.leftArm.x+tileWH, buttonsEquipmentInventoryPilot.leftArm.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.rightWeapon) then
-        love.graphics.printf(tostring(mainEquipmentPilotRWeaponArray.description[pPE.rightWeapon])
+        love.graphics.printf(tostring(mainEquipmentPilotRWeaponArray.description[pPE.rightWeapon.equipmentID])
             , buttonsEquipmentInventoryPilot.rightWeapon.x+tileWH, buttonsEquipmentInventoryPilot.rightWeapon.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.leftWeapon) then
-        love.graphics.printf(tostring(mainEquipmentPilotLWeaponArray.description[pPE.leftWeapon])
+        love.graphics.printf(tostring(mainEquipmentPilotLWeaponArray.description[pPE.leftWeapon.equipmentID])
             , buttonsEquipmentInventoryPilot.leftWeapon.x+tileWH, buttonsEquipmentInventoryPilot.leftWeapon.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then
-        love.graphics.printf(tostring(mainEquipmentPilotGlovesArray.description[pPE.gloves])
+        love.graphics.printf(tostring(mainEquipmentPilotGlovesArray.description[pPE.gloves.equipmentID])
             , buttonsEquipmentInventoryPilot.gloves.x+tileWH, buttonsEquipmentInventoryPilot.gloves.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.pants) then
-        love.graphics.printf(tostring(mainEquipmentPilotPantsArray.description[pPE.pants])
+        love.graphics.printf(tostring(mainEquipmentPilotPantsArray.description[pPE.pants.equipmentID])
             , buttonsEquipmentInventoryPilot.pants.x+tileWH, buttonsEquipmentInventoryPilot.pants.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.rightLeg) then
-        love.graphics.printf(tostring(mainEquipmentPilotRLegArray.description[pPE.rightLeg])
+        love.graphics.printf(tostring(mainEquipmentPilotRLegArray.description[pPE.rightLeg.equipmentID])
             , buttonsEquipmentInventoryPilot.rightLeg.x+tileWH, buttonsEquipmentInventoryPilot.rightLeg.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.leftLeg) then
-        love.graphics.printf(tostring(mainEquipmentPilotLLegArray.description[pPE.leftLeg])
+        love.graphics.printf(tostring(mainEquipmentPilotLLegArray.description[pPE.leftLeg.equipmentID])
             , buttonsEquipmentInventoryPilot.leftLeg.x+tileWH, buttonsEquipmentInventoryPilot.leftLeg.y+tileWH, 200, "left")
     elseif isMouseOverButton(buttonsEquipmentInventoryPilot.boots) then
-        love.graphics.printf(tostring(mainEquipmentPilotBootsArray.description[pPE.boots])
+        love.graphics.printf(tostring(mainEquipmentPilotBootsArray.description[pPE.boots.equipmentID])
             , buttonsEquipmentInventoryPilot.boots.x+tileWH, buttonsEquipmentInventoryPilot.boots.y+tileWH, 200, "left")
     end
 end

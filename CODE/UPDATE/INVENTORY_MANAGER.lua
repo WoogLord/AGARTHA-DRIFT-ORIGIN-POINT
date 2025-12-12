@@ -11,12 +11,23 @@ for i=1, 36, 1 do
 end
 
 inventoryArray[1] = {
-        equipmentType = "gloves"
-        , equipmentID = 2
-        , equipmentIndex = 9
-        , itemXp = 0
-    }
-
+    equipmentType = "gloves"
+    , equipmentID = 2
+    , equipmentIndex = 9
+    , itemXp = 0
+}
+heldItem = {
+    equipmentType = ""
+    , equipmentID = 1
+    , equipmentIndex = 0
+    , itemXp = 0
+}
+heldItemBuffer = {
+    equipmentType = ""
+    , equipmentID = 1
+    , equipmentIndex = 0
+    , itemXp = 0
+}
 function getEquipStatsFromInventory(_inventorySpotToCheck)
     if inventoryArray[_inventorySpotToCheck].equipmentType == "" then
         return ""
@@ -64,18 +75,82 @@ function pickUpItem(_x, _y, _buttonPressed)
         end
     end
     if _buttonPressed == 1 then
-        if isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then
-            if helditem then
-                if helditem.equipmentType == "gloves" then
-                    heldItemBuffer = player.pilot.equipment.gloves
-                    player.pilot.equipment.gloves = heldItem.equipmentID
-                    heldItem = heldItemBuffer
-                    print(buttonsEquipmentInventoryPilot.gloves.x)
+        print("heldItem: "..heldItem.equipmentType..","..heldItem.equipmentID..","..heldItem.equipmentIndex..","..heldItem.itemXp)
+        print("heldItemBuffer: "..heldItemBuffer.equipmentType..","..heldItemBuffer.equipmentID..","..heldItemBuffer.equipmentIndex..","..heldItemBuffer.itemXp)
+        if heldItem.equipmentType == "" then 
+            -- do stuff if heldItem is nil
+            if isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then -- 9
+                if player.pilot.equipment.gloves.equipmentID == 1 then
+                else
+                    heldItem = {
+                        equipmentType = "gloves"
+                        , equipmentID = player.pilot.equipment.gloves.equipmentID
+                        , equipmentIndex = 9
+                        , itemXp = player.pilot.equipment.gloves.itemXp
+                    }
+                    player.pilot.equipment.gloves.equipmentID = 1
+                    player.pilot.equipment.gloves.itemXp = 0
                 end
-            else
-                helditem = player.pilot.equipment.gloves
-                player.pilot.equipment.gloves = 1
+            end
+        else -- do stuff if heldItem exists
+            if isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then -- 9
+                if heldItem.equipmentType == "gloves" then
+                    if player.pilot.equipment.gloves.equipmentID == 1 then -- if no item equipped
+                        -- place heldItem
+                        player.pilot.equipment.gloves.equipmentID = heldItem.equipmentID
+                        player.pilot.equipment.gloves.itemXp = heldItem.itemXp
+                        heldItem = {
+                            equipmentType = ""
+                            , equipmentID = 1
+                            , equipmentIndex = 0
+                            , itemXp = 0
+                        }                    
+                    else
+                        heldItemBuffer = {
+                            equipmentType = "gloves"
+                            , equipmentID = player.pilot.equipment.gloves.equipmentID
+                            , equipmentIndex = 9
+                            , itemXp = player.pilot.equipment.gloves.itemXp
+                        }
+                        player.pilot.equipment.gloves.equipmentID = heldItemBuffer.equipmentID
+                        player.pilot.equipment.gloves.itemXp = heldItemBuffer.itemXp
+                        heldItem = heldItemBuffer
+                        
+                    end
+                end
             end
         end
+        -- if isMouseOverButton(buttonsEquipmentInventoryPilot.gloves) then
+        --     if helditem then -- if heldItem exists (not nil)
+        --         if helditem.equipmentType == "gloves" then
+        --             heldItemBuffer = {
+        --                 equipmentType = "gloves"
+        --                 , equipmentID = player.pilot.equipment.gloves.equipmentID
+        --                 , equipmentIndex = 9
+        --                 , itemXp = player.pilot.equipment.gloves.itemXp
+        --             }
+        --             player.pilot.equipment.gloves.equipmentID = heldItem.equipmentID
+        --             player.pilot.equipment.gloves.itemXp = heldItem.itemXp
+        --             heldItem = heldItemBuffer
+        --         end
+        --     else -- if heldItem is nil
+        --         -- heldItem = equipment
+        --         -- equipment = nil
+        --         --
+        --         heldItemBuffer = {
+        --             equipmentType = "gloves" -- not here
+        --             , equipmentID = player.pilot.equipment.gloves.equipmentID
+        --             , equipmentIndex = 9 -- not here
+        --             , itemXp = player.pilot.equipment.gloves.itemXp
+        --         }
+        --         print(heldItemBuffer.equipmentType.." "..heldItemBuffer.equipmentID.." "..heldItemBuffer.equipmentIndex.." "..heldItemBuffer.itemXp)
+        --         heldItem = heldItemBuffer
+        --         print(heldItem.equipmentType.." "..heldItem.equipmentID.." "..heldItem.equipmentIndex.." "..heldItem.itemXp)
+        --         player.pilot.equipment.gloves.equipmentID = 1
+        --         player.pilot.equipment.gloves.itemXp = 0
+        --         print(heldItem.equipmentType.." "..heldItem.equipmentID.." "..heldItem.equipmentIndex.." "..heldItem.itemXp)
+        --         -- heldItem = heldItemBuffer
+        --     end
+        -- end
     end
 end
