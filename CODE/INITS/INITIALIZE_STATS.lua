@@ -266,70 +266,7 @@ function initParty()
         , 0, 0, 0, 0
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
-    )
-    
-    -- Marc = {
-    --       x = WindWidth / 2 + tileWH
-    --     , y = WindHeight / 2 + tileWH
-    --     , mapTileX = 1
-    --     , mapTileY = 1
-    --     , inParty = true
-    --     , name = "Marc"
-    --     , pilot = {
-    --           hp = 10
-    --         , maxHP = 10
-    --         , stamina = 25
-    --         , maxStam = 25
-    --         , speed = 10
-    --         , startTurnCharge = 10
-    --         , currentTurnCharge = 0
-    --         , maxTurnCharge = 150
-    --         , abilities = {}
-    --     }
-    --     , isMechedUp = false
-    --     , mech = {
-    --           hp = 10
-    --         , maxHP = 10
-    --         , heat = 25
-    --         , maxHeat = 25
-    --         , speed = 10
-    --         , startTurnCharge = 30
-    --         , currentTurnCharge = 0
-    --         , maxTurnCharge = 100
-    --         , abilities = {}
-    --     }
-    --     , facingDirection = "Down"
-    --     , currentAnimState = "Idle"
-    --     , currentAnimArrIndex = 3 -- Facing Down
-    --     , inBattle = false
-    --     , animationArray = {
-    --           VanityNames = {
-    --             "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
-    --             , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
-    --         }
-    --         , Frames = {
-    --             4,4,4,4
-    --             ,4,4,4,4
-    --         }
-    --         , Direction = {
-    --             "Up", "Left", "Down", "Right"
-    --             , "Up", "Left", "Down", "Right"
-    --         }
-    --         , State = {
-    --             "Idle", "Idle", "Idle", "Idle"
-    --             , "Walk", "Walk", "Walk", "Walk"
-    --         }
-    --         , SpriteSheetRow = {
-    --             0, 1, 2, 3
-    --             ,4,5,6,7
-    --         }
-    --         , Animations = { -- loop this later
-    --             {}, {}, {}, {}
-    --             ,{}, {}, {}, {}
-    --         }
-    --     }
-    -- }
-    
+    )   
 
     Anthony = {
           x = WindWidth / 2 + tileWH
@@ -443,26 +380,9 @@ function initParty()
         }
     }
 
-    -- this isnt a clone, just a reference...
-    -- Anthony = player
-    -- Anthony.name = "Anthony"
-    -- Alfred = player
-    -- Alfred.name = "Alfred"
-
     player = Marc
     player.mapTileX, player.mapTileY = 1, 1
-    -- player.Animations = {{},{},{},{},{},{},{},{}}
 
-    alphaDecay = 1
-    -- for i = 1, #player.animationArray.VanityNames, 1 do
-    --     for j = 1, player.animationArray.Frames[i], 1 do
-    --         player.animationArray.Animations[i][j] = love.graphics.newQuad(
-    --             tileWH*(j-1), player.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
-    --         )
-    --     end
-    -- end
-    
-    -- BELOW DOESNT DO ANYTHING?!?
     player.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
     for i = 1, #Anthony.animationArray.VanityNames, 1 do
         for j = 1, Anthony.animationArray.Frames[i], 1 do

@@ -24,6 +24,7 @@ playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - ti
 --==+==-- "floats" --==+==--
 turnChargeReduction = 0.05
 musicVolume = 0.2
+alphaDecay = 1
 
 --==+==-- strings --==+==--
 CurrentState = "MainMenu"
@@ -34,6 +35,7 @@ PriorStatePaused = "MainMenu"
 isFullScreen = true
 isDebug = false
 isInInventory = false
+playerTurn = false
 
 --==+== AUDIO ==+==--
 -- SFX

@@ -14,7 +14,10 @@ function battleManager()
             elseif combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
                 takeTurn(combatants[i])
             else
-                turnCharger()
+                if playerTurn == true then
+                else
+                    turnCharger()
+                end
             end
         end
     end
@@ -67,12 +70,15 @@ end
 
 function takeTurn(_turnTaker)
     if _turnTaker == player then
+        playerTurn = true
         print("Player's turn")
         if _turnTaker.isMechedUp then
             -- some ability here
             _turnTaker.mech.currentTurnCharge = 0
+            -- playerTurn = false
         else
             _turnTaker.pilot.currentTurnCharge = 0
+            -- playerTurn = false
         end
     else
         print(_turnTaker.name.."'s turn")

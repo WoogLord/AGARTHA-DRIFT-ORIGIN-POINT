@@ -56,7 +56,9 @@ function love.update(dt)
         -- player.x, player.y = 250,250 
         playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - tileWH/2
         player.x, player.y = playerInventX, playerInventY
-    else 
+    elseif player.inBattle then
+        player.x, player.y = currWindWidth / 4, currWindHeight / 2
+    else
         player.x, player.y = (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH) 
     end
     speedManager(dt)
