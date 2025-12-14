@@ -14,6 +14,7 @@ function battleManager()
             elseif combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
                 takeTurn(combatants[i])
             else
+                -- if turnStall == true then -- USE THIS TO HANDLE CASES WHERE ANIMATIONS PLAY?!?
                 if playerTurn == true then
                 else
                     turnCharger()
