@@ -1,92 +1,122 @@
 -- TODO: marc, make this do the turn based logic and load everything
-function battleManager()
-    -- 1. spawn players and enemies, make turn timer
-    
-    combatants = {player, ally1, ally2, enemy_01}
-    -- 2. initial attacks
-    if turnCounter == 0 then
-        initiativeAndStats()
-        initialAttacks()
-    else
-        for i=1, #combatants, 1 do
-            if combatants[i].mech.currentTurnCharge == combatants[i].mech.maxTurnCharge then
-                takeTurn(combatants[i])
-            elseif combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
-                takeTurn(combatants[i])
-            else
-                -- if turnStall == true then -- USE THIS TO HANDLE CASES WHERE ANIMATIONS PLAY?!?
-                if playerTurn == true then
-                else
-                    turnCharger()
-                end
-            end
-        end
-    end
-    -- 3. assign turn order values
 
-    -- WHAT WE NEED:
-    -- DONE: In combat, all players need a max charge value
-    -- TODO: And their speed stat charges up to said max value
+battleState_ARR = {
+    init = "init"
+    , innates = "innates"
+    , charging = "charging"
+    , playerTurnMenu = "playerTurnMenu"
+    , nonPlayerAction = "nonPlayerAction"
+    , animating = "animating"
+    , resolve = "resolve"
+}
+battleState = battleState_ARR.init
+activeUnit = nil
+
+function battleManager(dt)  
+    if battleState == battleState_ARR.init then
+        combatants = {player, ally1, ally2, enemy_01}        
+        turnCounter = 0
+        initiativeAndStats()
+    elseif battleState == battleState_ARR.innates then
+        initialAttacks()
+    elseif battleState == battleState_ARR.charging then
+        turnCharger()
+    elseif battleState == battleState_ARR.playerTurnMenu then
+        -- Handled in UI and INPUT
+    elseif battleState == battleState_ARR.nonPlayerAction then
+        startNonPlayerTurn(activeUnit)
+    elseif battleState == battleState_ARR.animating then
+        updateBattleAnims(dt)
+    elseif battleState == battleState_ARR.resolve then
+        resolveTurn(activeUnit)
+    end
 end
 
 function initiativeAndStats()
     for i=1, #combatants, 1 do
-        if combatants[i].isMechedUp then
-            combatants[i].mech.currentTurnCharge = combatants[i].mech.startTurnCharge
-            print(combatants[i].name.." is in Mech, speed: "..combatants[i].mech.speed..", currentTurnCharge: "..combatants[i].mech.currentTurnCharge)
+        local unit = combatants[i]
+        local stats = unit.isMechedUp and unit.mech or unit.pilot 
+        stats.currentTurnCharge = stats.startTurnCharge
+        if unit.isMechedUp then
+            print(unit.name.." is in Mech, speed: "..stats.speed..", currentTurnCharge: "..stats.currentTurnCharge)
         else
-            combatants[i].pilot.currentTurnCharge = combatants[i].pilot.startTurnCharge
-            print(combatants[i].name.." not in Mech, speed: "..combatants[i].pilot.speed..", currentTurnCharge: "..combatants[i].pilot.currentTurnCharge)
+            print(unit.name.." is a Pilot, speed: "..stats.speed..", currentTurnCharge: "..stats.currentTurnCharge)
         end
     end 
-    return
+    battleState = battleState_ARR.innates
 end
 
 function initialAttacks()
     -- put initial attacks here, based off highest speed stat
     turnCounter = 1
+    battleState = battleState_ARR.charging
 end
 
 function turnCharger()
-    for i=1, #combatants, 1 do
-        if combatants[i].isMechedUp then
-            if combatants[i].mech.currentTurnCharge == combatants[i].mech.maxTurnCharge then
-                takeTurn(combatants[i])
-            else
-                combatants[i].mech.currentTurnCharge = 
-                    math.min(combatants[i].mech.currentTurnCharge + (combatants[i].mech.speed * turnChargeReduction)
-                        , combatants[i].mech.maxTurnCharge)
-            end
-        else
-            if combatants[i].pilot.currentTurnCharge == combatants[i].pilot.maxTurnCharge then
-                takeTurn(combatants[i])
-            else
-                combatants[i].pilot.currentTurnCharge = 
-                    math.min(combatants[i].pilot.currentTurnCharge + (combatants[i].pilot.speed * turnChargeReduction)
-                        , combatants[i].pilot.maxTurnCharge)
-            end
+    for i=1, #combatants do
+        local unit = combatants[i]
+        local stats = unit.isMechedUp and unit.mech or unit.pilot
+
+        if stats.currentTurnCharge >= stats.maxTurnCharge then
+            beginTurn(unit)
+            return -- stops charging during turn
         end
+
+        stats.currentTurnCharge = math.min(stats.currentTurnCharge + (stats.speed * turnChargeReduction), stats.maxTurnCharge)
     end
 end
 
-function takeTurn(_turnTaker)
+function beginTurn(_turnTaker)
+    activeUnit = _turnTaker
+
     if _turnTaker == player then
-        playerTurn = true
         print("Player's turn")
-        if _turnTaker.isMechedUp then
-            -- some ability here
-            _turnTaker.mech.currentTurnCharge = 0
-            -- playerTurn = false
-        else
-            _turnTaker.pilot.currentTurnCharge = 0
-            -- playerTurn = false
-        end
+        battleState = battleState_ARR.playerTurnMenu
     else
         print(_turnTaker.name.."'s turn")
-        if _turnTaker.isMechedUp then
-            _turnTaker.mech.currentTurnCharge = 0
-        else
-            _turnTaker.pilot.currentTurnCharge = 0
-        end
+        battleState = battleState_ARR.nonPlayerAction
     end
+end
+
+function startNonPlayerTurn(_turnTaker)
+    _turnTaker.selectedAction = chooseNonPlayerAction(_turnTaker)
+    startBattleAnim(_turnTaker, _turnTaker.selectedAction)
+    battleState = battleState_ARR.animating
+end
+
+function chooseNonPlayerAction(_unit)
+    return "basicAttack"
+end
+
+function playerConfirmAction(_action)
+    activeUnit.selectedAction = _action
+    startBattleAnim(activeUnit, _action)
+    battleState = battleState_ARR.animating
+end
+
+function startBattleAnim(_unit, _action)
+    battleAnim = {
+        unit = _unit
+        , action = _action
+        , timer = 0
+        , duration = 0.75 -- arbitrary, pull from unit array or something
+    }
+end
+
+function updateBattleAnims(_dt)
+    battleAnim.timer = battleAnim.timer + _dt
+    if battleAnim.timer >= battleAnim.duration then
+        battleAnim = nil
+        battleState = battleState_ARR.resolve
+    end
+end
+
+function resolveTurn(_turnTaker)
+    local stats = _turnTaker.isMechedUp and _turnTaker.mech or _turnTaker.pilot
+    print(_turnTaker.name.." resolves action: ".._turnTaker.selectedAction)
+    stats.currentTurnCharge = 0
+    _turnTaker.selectedAction = nil
+    activeUnit = nil
+
+    battleState = battleState_ARR.charging
 end

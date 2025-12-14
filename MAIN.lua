@@ -48,7 +48,7 @@ function love.update(dt)
     
     updownFloating = math.sin(love.timer.getTime()) * 10
 
-    if player.inBattle then battleManager()
+    if player.inBattle then battleManager(dt)
     else overworldManager() end
 
     if isInInventory then 
