@@ -256,6 +256,50 @@ function initEquipment()
     )
 end
 
+local AbilityClass = {}
+AbilityClass.__index = AbilityClass
+
+function AbilityClass:new(
+        _vanityNames, _description, _abilityID
+        , _maxLevel
+        , _focusCostBase, _focusCostPer
+        , _hpCostBase, _hpCostPer
+    )
+    local tAC = {} -- tAC = tempAbilityClass
+    setmetatable(tAC, AbilityClass)
+
+    tAC.vanityNames, tAC.description, tAC.abilityID = _vanityNames, _description, _abilityID
+    tAC.stats = {
+        maxLevel = _maxLevel
+        , focusCostBase = _focusCostBase, focusCostPer = _focusCostPer
+        , hpCostBase = _hpCostBase, hpCostPer = _hpCostPer
+    }
+    return tAC
+end
+
+bigAbilityArray = {
+      vanityNames = {"", "Quick Strike", "Suppresion"
+    }
+    , description = {"", "", ""
+    }
+    , abilityID = {1, 2, 3
+    }
+    , stats = {
+          maxLevel = {1, 1, 1
+        }
+        , focusCostBase = {0, 0, 15
+        }
+        , focusCostPer = {0, 0, 0
+        }
+        , hpCostBase = {0, 0, 0
+        }
+        , hpCostPer = {0, 0, 0
+        }
+        , element = {"", "None", "None"
+        }
+    }
+}
+
 -- THIS COULD BE EPIC BUT NOOOOOOOOOOOOOOO LUA MADE THIS NOT ACTUALLY RETURN TABLE REFS  (see INVENTORY_MANAGER -> getEquipStatsFromInventory for why my rant matters lol)
 equipKey = {
     pilot = {"head", "back", "shoulders", "chest", "rightArm", "leftArm", "rightWeapon", "leftWeapon", "gloves", "pants", "rightLeg", "leftLeg", "boots"}

@@ -2,12 +2,18 @@
 local AllyClass = {}
 AllyClass.__index = AllyClass
 
+-- TODO: change to baseClass
+-- attempt to have function for PLAYER extension and another function for ENEMY extension
+-- this way i dont have to recreate this array and can split out fields...
+
+-- Also, add abilities array elsewhere to handle all that
+
 function AllyClass:new(
           _name, _x, _y
         , _inParty, _inBattle, _isMechedUp
         , _facingDirection, _currentAnimState, _currentAnimArrIndex
 
-        , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+        , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
         , _pilotAttack
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
@@ -27,7 +33,7 @@ function AllyClass:new(
         , _pilotEquipmentRLegXP, _pilotEquipmentLLegXP
         , _pilotEquipmentBootsXP
 
-        , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
+        , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
         , _mechAttack
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
@@ -55,7 +61,7 @@ function AllyClass:new(
     tAC.facingDirection, tAC.currentAnimState, tAC.currentAnimArrIndex = _facingDirection, _currentAnimState, _currentAnimArrIndex
 
     tAC.pilot = {
-        hp = _pilotHP, maxHP = _pilotMaxHP, stamina = _pilotStamina, maxStam =  _pilotMaxStam
+        hp = _pilotHP, maxHP = _pilotMaxHP, focus = _pilotFocus, maxFocus =  _pilotMaxFocus
         , attack = _pilotAttack
         , speed = _pilotSpeed, startTurnCharge = _pilotStartTurnChg, currentTurnCharge = _pilotCurrTurnChg, maxTurnCharge = _pilotMaxTurnChg
         , abilities = {
@@ -79,7 +85,7 @@ function AllyClass:new(
         }
     }
     tAC.mech = {
-        hp = _mechHP, maxHP = _mechMaxHP, heat = _mechHeat, maxHeat = _mechMaxHeat
+        hp = _mechHP, maxHP = _mechMaxHP, focus = _mechFocus, maxFocus = _mechMaxFocus
         , attack = _mechAttack
         , speed = _mechSpeed, startTurnCharge = _mechStartTurnChg, currentTurnCharge = _mechCurrTurnChg, maxTurnCharge = _mechMaxTurnChg
         , abilities = {
@@ -112,7 +118,7 @@ function AllyClass:PrintData()
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
         .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
         .."\n\n--== Pilot ==--"
-        .."\nHP: "..self.pilot.hp.."\nmaxHP: "..self.pilot.maxHP.."\nstamina: "..self.pilot.stamina.."\nmaxStam: "..self.pilot.maxStam
+        .."\nHP: "..self.pilot.hp.."\nmaxHP: "..self.pilot.maxHP.."\nfocus: "..self.pilot.focus.."\nmaxFocus: "..self.pilot.maxFocus
         .."\nattack: "..self.pilot.attack
         .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
         .."\ncurrentTurnChg: "..self.pilot.currentTurnCharge.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
@@ -130,7 +136,7 @@ function AllyClass:PrintData()
         .."\nrightLeg: "..self.pilot.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.pilot.equipment.leftLeg.equipmentID
         .."\nboots: "..self.pilot.equipment.boots.equipmentID
         .."\n\n--== Mech ==--"
-        .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nheat: "..self.mech.heat.."\nmaxHeat: "..self.mech.maxHeat
+        .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nfocus: "..self.mech.focus.."\nmaxFocus: "..self.mech.maxFocus
         .."\nattack: "..self.mech.attack
         .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
         .."\ncurrentTurnChg: "..self.mech.currentTurnCharge.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
@@ -151,6 +157,7 @@ function AllyClass:PrintData()
     )
 end
 
+--#region testClass
 local testAllyClass = AllyClass:new(
     --   _name, _x, _y
     "Test", 128, 128
@@ -160,7 +167,7 @@ local testAllyClass = AllyClass:new(
     , "Down", "Idle", 3 -- 3 is IdleDown
 
     --== Pilot Stats ==--
-    -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+    -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
     , 10, 10, 25, 25
     -- , _pilotAttack
     , 1
@@ -184,7 +191,7 @@ local testAllyClass = AllyClass:new(
     , 0, 0, 0, 0, 0
 
     --== Mech Stats ==--
-    -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
+    -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
     , 15, 15, 25, 25
     -- , _mechAttack
     , 1
@@ -208,9 +215,11 @@ local testAllyClass = AllyClass:new(
     , 0, 0, 0, 0
 )
 testAllyClass:PrintData()
+--#endregion test
 
 function initParty()
     --==+==--
+    --#region Marc
     Marc = AllyClass:new(
         --   _name, _x, _y
         "Marc", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
@@ -220,7 +229,7 @@ function initParty()
         , "Down", "Idle", 3 -- 3 is IdleDown
 
         --== Pilot Stats ==--
-        -- , _pilotHP, _pilotMaxHP, _pilotStamina, _pilotMaxStam
+        -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
         , 10, 10, 25, 25
         -- , _pilotAttack
         , 1
@@ -244,7 +253,7 @@ function initParty()
         , 150, 0, 0, 0, 0
 
         --== Mech Stats ==--
-        -- , _mechHP, _mechMaxHP, _mechHeat, _mechMaxHeat
+        -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
         , 15, 15, 25, 25
         -- , _mechAttack
         , 1
@@ -267,7 +276,8 @@ function initParty()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
-
+    --#endregion Marc  
+    --#region Anthony
     Anthony = {
           x = WindWidth / 2 + tileWH
         , y = WindHeight / 2 + tileWH
@@ -278,8 +288,8 @@ function initParty()
         , pilot = {
               hp = 15
             , maxHP = 15
-            , stamina = 25
-            , maxStam = 25
+            , focus = 25
+            , maxFocus = 25
             , speed = 10
             , startTurnCharge = 0
             , currentTurnCharge = 0
@@ -290,8 +300,8 @@ function initParty()
         , mech = {
               hp = 35
             , maxHP = 35
-            , heat = 15
-            , maxHeat = 15
+            , focus = 15
+            , maxFocus = 15
             , speed = 15
             , startTurnCharge = 50
             , currentTurnCharge = 0
@@ -323,7 +333,8 @@ function initParty()
             }
         }
     }
-
+    --#endregion Anthony
+    --#region Alfred
     Alfred = {
           x = WindWidth / 2 + tileWH
         , y = WindHeight / 2 + tileWH
@@ -334,8 +345,8 @@ function initParty()
         , pilot = {
               hp = 10
             , maxHP = 10
-            , stamina = 35
-            , maxStam = 35
+            , focus = 35
+            , maxFocus = 35
             , speed = 11
             , startTurnCharge = 0
             , currentTurnCharge = 0
@@ -346,8 +357,8 @@ function initParty()
         , mech = {
               hp = 17
             , maxHP = 17
-            , heat = 30
-            , maxHeat = 30
+            , focus = 30
+            , maxFocus = 30
             , speed = 9
             , startTurnCharge = 0
             , currentTurnCharge = 0
@@ -379,11 +390,13 @@ function initParty()
             }
         }
     }
+    --#endregion Alfred
+
+    Marc.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
 
     player = Marc
     player.mapTileX, player.mapTileY = 1, 1
 
-    player.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
     for i = 1, #Anthony.animationArray.VanityNames, 1 do
         for j = 1, Anthony.animationArray.Frames[i], 1 do
             Anthony.animationArray.Animations[i][j] = love.graphics.newQuad(
@@ -419,8 +432,8 @@ function initEnemies()
         , pilot = {
               hp = 5
             , maxHP = 5
-            , stamina = 15
-            , maxStam = 15
+            , focus = 15
+            , maxFocus = 15
             , speed = 5
             , startTurnCharge = 70
             , currentTurnCharge = 0
@@ -433,8 +446,8 @@ function initEnemies()
         , mech = {
               hp = 8
             , maxHP = 8
-            , heat = 20
-            , maxHeat = 20
+            , focus = 20
+            , maxFocus = 20
             , speed = 5
             , startTurnCharge = 45
             , currentTurnCharge = 0

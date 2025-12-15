@@ -5,7 +5,7 @@ battleState_ARR = {
     , innates = "innates"
     , charging = "charging"
     , playerTurnMenu = "playerTurnMenu"
-    , nonPlayerAction = "nonPlayerAction"
+    , nonPlayerAbility = "nonPlayerAbility"
     , animating = "animating"
     , resolve = "resolve"
 }
@@ -23,7 +23,7 @@ function battleManager(dt)
         turnCharger()
     elseif battleState == battleState_ARR.playerTurnMenu then
         -- Handled in UI and INPUT
-    elseif battleState == battleState_ARR.nonPlayerAction then
+    elseif battleState == battleState_ARR.nonPlayerAbility then
         startNonPlayerTurn(activeUnit)
     elseif battleState == battleState_ARR.animating then
         updateBattleAnims(dt)
@@ -74,30 +74,30 @@ function beginTurn(_turnTaker)
         battleState = battleState_ARR.playerTurnMenu
     else
         print(_turnTaker.name.."'s turn")
-        battleState = battleState_ARR.nonPlayerAction
+        battleState = battleState_ARR.nonPlayerAbility
     end
 end
 
 function startNonPlayerTurn(_turnTaker)
-    _turnTaker.selectedAction = chooseNonPlayerAction(_turnTaker)
-    startBattleAnim(_turnTaker, _turnTaker.selectedAction)
+    _turnTaker.selectedAbility = chooseNonPlayerAbility(_turnTaker)
+    startBattleAnim(_turnTaker, _turnTaker.selectedAbility)
     battleState = battleState_ARR.animating
 end
 
-function chooseNonPlayerAction(_unit)
-    return "basicAttack"
+function chooseNonPlayerAbility(_unit)
+    return "quickStrike"
 end
 
-function playerConfirmAction(_action)
-    activeUnit.selectedAction = _action
-    startBattleAnim(activeUnit, _action)
+function playerConfirmAbility(_ability)
+    activeUnit.selectedAbility = _ability
+    startBattleAnim(activeUnit, _ability)
     battleState = battleState_ARR.animating
 end
 
-function startBattleAnim(_unit, _action)
+function startBattleAnim(_unit, _ability)
     battleAnim = {
         unit = _unit
-        , action = _action
+        , ability = _ability
         , timer = 0
         , duration = 0.75 -- arbitrary, pull from unit array or something
     }
@@ -113,9 +113,9 @@ end
 
 function resolveTurn(_turnTaker)
     local stats = _turnTaker.isMechedUp and _turnTaker.mech or _turnTaker.pilot
-    print(_turnTaker.name.." resolves action: ".._turnTaker.selectedAction)
+    print(_turnTaker.name.." resolves ability: ".._turnTaker.selectedAbility)
     stats.currentTurnCharge = 0
-    _turnTaker.selectedAction = nil
+    _turnTaker.selectedAbility = nil
     activeUnit = nil
 
     battleState = battleState_ARR.charging
