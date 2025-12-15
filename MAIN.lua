@@ -81,8 +81,10 @@ function love.draw()
     drawPaused()
     
     -- Debug stuff
+    if isDebug then drawDebug() end
+
+    -- VERSIONING
     love.graphics.setColor(1,1,1)
     love.graphics.setFont(Font)
-    love.graphics.print(TestString, 5, currWindHeight-25-Font:getHeight(VersionInfoString))
     love.graphics.print(VersionInfoString, 5, currWindHeight-5-Font:getHeight(VersionInfoString))
 end

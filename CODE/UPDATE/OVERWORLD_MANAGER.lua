@@ -16,15 +16,15 @@ end
 
 function newEncounter(_enemies, _background)
     -- include background variable so scenes/environments are dynamic
-    if          player.mapTrueX > overworldEnemies[enemyTestIndex].x 
-            and player.mapTrueX < overworldEnemies[enemyTestIndex].x + tileWH
-            -- and player.y < overworldEnemies[2].y 
-            -- and player.y > overworldEnemies[2].y + tileWH 
+    -- for i=1, #overworldEnemies do
+    if          player.mapTileX > (overworldEnemies[enemyTestIndex].mapTileX)
+            and player.mapTileX < (overworldEnemies[enemyTestIndex].mapTileX + 1)
+            and player.mapTileY < (overworldEnemies[enemyTestIndex].mapTileY + 1)
+            and player.mapTileY > (overworldEnemies[enemyTestIndex].mapTileY)
             then
         -- play cutscene
         -- Have an anim where player current world position slides to fighting one
         -- For now, we hardset player values
-        player.x, player.y = currWindWidth / 4, currWindHeight / 2
         ally1.x, ally1.y = currWindWidth / 5, currWindHeight / 3
         ally2.x, ally2.y = currWindWidth / 5, currWindHeight / 1.5
         turnCounter = 0

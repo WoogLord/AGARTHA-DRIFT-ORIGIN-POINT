@@ -146,22 +146,17 @@ function drawOverworld()
         -- camera needed here maybe
         -- so player now has mapX and mapY, we can just use player
         -- so we need an offset based off the center and scale of the tile set
-    local mapOffsetX = tileWH * (-1 * player.mapTileX * graphicsScale)
-    local mapOffsetY = tileWH * (-1 * player.mapTileY * graphicsScale)
+    -- local mapX, mapY = tilemapGround_01:getDimensions()
+    local mapOffsetX = tileWH * graphicsScale * (-1 * player.mapTileX)
+    local mapOffsetY = tileWH * graphicsScale * (-1 * player.mapTileY)
 
     
-    love.graphics.draw(tilemapSubGround_01
-        ,mapOffsetX,mapOffsetY
-        ,0,3,3)
-    love.graphics.draw(tilemapGround_01
-        ,mapOffsetX,mapOffsetY
-        ,0,3,3)
+    love.graphics.draw(tilemapSubGround_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
+    love.graphics.draw(tilemapGround_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
     -- playerInitX, playerInitY
     -- draw colliders
     -- draw enemy
-    love.graphics.draw(tilemapEnemies_01
-        ,mapOffsetX,mapOffsetY
-        ,0,3,3)
+    love.graphics.draw(tilemapEnemies_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
     
     ghostParticles = {}
 
@@ -235,4 +230,14 @@ function drawOptionsMenu()
     end
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(musicVolume*100, currWindWidth / 2 + (#menuOptionsOptions[1] * 10) + 250, currWindHeight / 2)
+end
+
+function drawDebug()
+    love.graphics.setColor(1,1,1)
+    love.graphics.setFont(Font)
+    love.graphics.print(TestString, 5, currWindHeight-25-Font:getHeight(VersionInfoString))
+    love.graphics.print("Player.x,.y: "..player.x..", "..player.y, 5, currWindHeight-45-Font:getHeight(VersionInfoString))
+    love.graphics.print("Player.mapTileX,.mapTileY: "..player.mapTileX..", "..player.mapTileY, 5, currWindHeight-65-Font:getHeight(VersionInfoString))
+    love.graphics.print("overworldEnemies[4].x,.y: "..overworldEnemies[enemyTestIndex].x..", "..overworldEnemies[enemyTestIndex].y, 5, currWindHeight-85-Font:getHeight(VersionInfoString))
+    love.graphics.print("overworldEnemies[4].mapTileX,.mapTileY: "..overworldEnemies[enemyTestIndex].mapTileX..", "..overworldEnemies[enemyTestIndex].mapTileY, 5, currWindHeight-105-Font:getHeight(VersionInfoString))
 end

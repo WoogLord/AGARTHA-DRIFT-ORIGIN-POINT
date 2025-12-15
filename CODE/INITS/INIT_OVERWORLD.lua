@@ -6,7 +6,9 @@ function spawnEnemies()
         for tY = 0, tilesY - 1 do
             local eX, eY, uID = tX * tileWH, tY * tileWH, 01
             if tileChecker(eX, eY, tilemapEnemies_01_ImageData, tilemapEnemies_01_ImageData) then
-                table.insert(overworldEnemies, {x = eX, y = eY, unitID = uID})
+                table.insert(overworldEnemies, {x = eX, y = eY
+                    , mapTileX = tX, mapTileY = tY
+                    , unitID = uID})
                 print("Overworld enemy of ID "..uID.." spawned at: "..eX..", "..eY)
             end
         end

@@ -1,7 +1,7 @@
 -- INPUTS
 
 INPUTS_ARR = {
-    fullscreen = "f", debug = "F1", pause = "escape"
+    fullscreen = "f", debug = "f3", pause = "escape"
     , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
     , select = {"return", "z"}, cancel = "x"
     , inventory = {"i"}
@@ -109,7 +109,7 @@ function love.keypressed(key)
     end
 
     if key == INPUTS_ARR.debug then -- DEBUGGING
-        if CurrentState == "Play" then isDebug = not isDebug end
+        isDebug = not isDebug
     end
 
     if CurrentState == "MainMenu" then
