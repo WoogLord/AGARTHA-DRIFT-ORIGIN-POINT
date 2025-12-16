@@ -287,7 +287,7 @@ bigAbilityArray = {
     , stats = {
           maxLevel = {1, 1, 1, 1
         }
-        , cooldown = {1, 1, 1, 5
+        , cooldown = {0, 0, 1, 5
         }
         , focusCostBase = {0, 0, 100, 0
         }
@@ -300,6 +300,8 @@ bigAbilityArray = {
         , animation = {"None", "Strike", "Strike", "Cast"
         }
         , abilityType = {"None", "Attack", "Attack", "Buff"
+        }
+        , targets = {"None", "Enemies", "Enemies", "Self"
         }
         , buffElement = {"None", "None", "None", "Physical"
         }

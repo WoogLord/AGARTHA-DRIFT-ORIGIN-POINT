@@ -68,11 +68,12 @@ buttonsEquipmentInventoryPilot = {
 }
 
 function drawButton(button)
-    if button.r then 
+    if button.r then
         love.graphics.setColor(button.r,button.b,button.g)
     else 
         love.graphics.setColor(0.5,0.5,0.5)
     end
+    if button.invis then love.graphics.setColor(0,0,0,0) end
     love.graphics.rectangle("fill",button.x, button.y, button.w, button.h)
     love.graphics.setColor(1,1,1)
     love.graphics.printf(button.label, button.x, button.y + button.h /3, button.w, "center")
@@ -99,6 +100,22 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
         -- mana
         if unit.isMechedUp then love.graphics.setColor(1, 0.7, 0) else love.graphics.setColor(0.5, 0.5, 1) end
         love.graphics.printf(tFocusName..":"..stats.focus.."/"..stats.maxFocus, 50, 25 + yOff, 400, "right")     
+    end
+
+    -- draw buttons for all combatants
+    targetButtons = {}
+    for i=1, #combatants do
+        -- dont use tileWH here, use the collision hitbox when i make that
+        love.graphics.setColor(1.0,0,0,0.25)
+        love.graphics.rectangle("fill", combatants[i].x, combatants[i].y, tileWH * graphicsScale, tileWH * graphicsScale)
+        targetButtons[i] = {x = combatants[i].x, y = combatants[i].y, w = tileWH * graphicsScale, h = tileWH * graphicsScale, label = "", invis = true}
+        drawButton(targetButtons[i])
+        if isMouseOverButton(targetButtons[i]) then
+            -- draw descriptions
+            love.graphics.printf(tostring(combatants[i].name), targetButtons[i].x
+                , targetButtons[i].y + (((tileWH * graphicsScale) - Font:getHeight(tostring(combatants[i].name))) * 0.5)
+                , tileWH * graphicsScale, "center")
+        end
     end
 end
 

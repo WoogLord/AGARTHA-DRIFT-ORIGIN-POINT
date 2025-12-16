@@ -26,8 +26,9 @@ function AnimClass:PrintData()
 end
 
 function AnimClass:BuildAnimations(_spriteSheet)
-    local retArr = {{},{},{},{},{},{},{},{}}
+    local retArr = {}
     for i = 1, #self.vanityNames, 1 do
+        retArr[i] = {}
         for j = 1, self.frames[i], 1  do
             self.animations[i][j] = love.graphics.newQuad(
                 tileWH*(j-1), (i-1) * tileWH, tileWH, tileWH, _spriteSheet:getDimensions()

@@ -4,8 +4,8 @@ battleState_ARR = {
     init = "init"
     , innates = "innates"
     , charging = "charging"
-    , playerTurnMenu = "playerTurnMenu"
-    , nonPlayerAbility = "nonPlayerAbility"
+    , allyTurnMenu = "allyTurnMenu"
+    , enemyAbility = "enemyAbility"
     , animating = "animating"
     , resolve = "resolve"
 }
@@ -21,10 +21,10 @@ function battleManager(dt)
         initialAttacks()
     elseif battleState == battleState_ARR.charging then
         turnCharger()
-    elseif battleState == battleState_ARR.playerTurnMenu then
+    elseif battleState == battleState_ARR.allyTurnMenu then
         -- Handled in UI and INPUT
-    elseif battleState == battleState_ARR.nonPlayerAbility then
-        startNonPlayerTurn(activeUnit)
+    elseif battleState == battleState_ARR.enemyAbility then
+        startEnemyTurn(activeUnit)
     elseif battleState == battleState_ARR.animating then
         updateBattleAnims(dt)
     elseif battleState == battleState_ARR.resolve then
@@ -69,26 +69,30 @@ end
 function beginTurn(_turnTaker)
     activeUnit = _turnTaker
 
-    if _turnTaker == player then
-        print("Player's turn")
-        battleState = battleState_ARR.playerTurnMenu
+    if _turnTaker == player or _turnTaker == ally1 or _turnTaker == ally2 then
+        print("Ally's turn")
+        battleState = battleState_ARR.allyTurnMenu
     else
         print(_turnTaker.name.."'s turn")
-        battleState = battleState_ARR.nonPlayerAbility
+        battleState = battleState_ARR.enemyAbility
     end
 end
 
-function startNonPlayerTurn(_turnTaker)
-    _turnTaker.selectedAbility = chooseNonPlayerAbility(_turnTaker)
+function startEnemyTurn(_turnTaker)
+    _turnTaker.selectedAbility = chooseEnemyAbility(_turnTaker)
     startBattleAnim(_turnTaker, _turnTaker.selectedAbility)
     battleState = battleState_ARR.animating
 end
 
-function chooseNonPlayerAbility(_unit)
-    return "quickStrike"
+function chooseEnemyAbility(_unit)
+    return bigAbilityArray.abilityID[2] -- "quickStrike"
 end
 
-function playerConfirmAbility(_ability)
+function getBattleTarget(_x, _y, _buttonPressed) 
+    currentTarget = 
+end
+
+function allyConfirmAbility(_ability)
     activeUnit.selectedAbility = _ability
     startBattleAnim(activeUnit, _ability)
     battleState = battleState_ARR.animating

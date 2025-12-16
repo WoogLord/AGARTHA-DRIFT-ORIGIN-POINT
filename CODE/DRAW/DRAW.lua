@@ -149,14 +149,15 @@ function drawOverworld()
     -- local mapX, mapY = tilemapGround_01:getDimensions()
     local mapOffsetX = tileWH * graphicsScale * (-1 * player.mapTileX)
     local mapOffsetY = tileWH * graphicsScale * (-1 * player.mapTileY)
-
+    local drawnMapOffsetX = mapOffsetX + player.x
+    local drawnMapOffsetY = mapOffsetY + player.y
     
-    love.graphics.draw(tilemapSubGround_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
-    love.graphics.draw(tilemapGround_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
+    love.graphics.draw(tilemapSubGround_01, drawnMapOffsetX, drawnMapOffsetY, 0 , graphicsScale, graphicsScale)
+    love.graphics.draw(tilemapGround_01, drawnMapOffsetX, drawnMapOffsetY, 0 , graphicsScale, graphicsScale)
     -- playerInitX, playerInitY
     -- draw colliders
     -- draw enemy
-    love.graphics.draw(tilemapEnemies_01, mapOffsetX, mapOffsetY, 0 , graphicsScale, graphicsScale)
+    love.graphics.draw(tilemapEnemies_01, drawnMapOffsetX, drawnMapOffsetY, 0 , graphicsScale, graphicsScale)
     
     ghostParticles = {}
 
@@ -176,7 +177,7 @@ function drawBattle()
     drawPlayer()
     if ally1.inParty then drawAlly1() end
     if ally2.inParty then drawAlly2() end
-    battleUI(ally1, player, ally2)
+    battleUI(ally1, player, ally2, enemy_01)
 end
 
 function drawEnemies()

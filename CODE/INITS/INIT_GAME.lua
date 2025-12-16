@@ -37,6 +37,9 @@ isDebug = false
 isInInventory = false
 playerTurn = false
 
+--==+==-- needed arrays --==+==--
+combatants = {}
+
 --==+== AUDIO ==+==--
 -- SFX
 sfxTitleLogoVocal = love.audio.newSource("ASSETS/SFX/stupidSFXforMenu.mp3", "static")
@@ -69,13 +72,22 @@ function initSpriteSheets()
     -- spritesheetAlfred
 
     ssEquipmentIcons = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/EQUIPMENT_ICONS.png")
-    equipmentIconQuads = {{}, {}}
-    iconX, iconY = ssEquipmentIcons:getDimensions()
-    for i=1, (iconX / tileWH), 1 do
-        for j=1, (iconY / tileWH), 1 do
-            -- print(j)
-            -- print(i)
+    equipmentIconQuads = {}
+    eIconX, eIconY = ssEquipmentIcons:getDimensions()
+    for i=1, (eIconX / tileWH), 1 do
+        equipmentIconQuads[i] = {}
+        for j=1, (eIconY / tileWH), 1 do
             equipmentIconQuads[i][j] = love.graphics.newQuad((i-1)*tileWH ,(j-1)*tileWH, tileWH, tileWH, ssEquipmentIcons:getDimensions())
+        end
+    end
+
+    ssAbilityIcons = love.graphics.newImage("ASSETS/ART/SPRITESHEETS/ABILITY_ICONS.png")
+    abilityIconQuads = {}
+    aIconX, aIconY = ssAbilityIcons:getDimensions()
+    for k=1, (aIconX / tileWH), 1 do
+        abilityIconQuads[k] = {}
+        for l=1, (aIconY / tileWH), 1 do
+            abilityIconQuads[k][l] = love.graphics.newQuad((k-1)*tileWH ,(l-1)*tileWH, tileWH, tileWH, ssAbilityIcons:getDimensions())
         end
     end
 
