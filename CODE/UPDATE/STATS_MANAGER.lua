@@ -278,24 +278,94 @@ function AbilityClass:new(
 end
 
 bigAbilityArray = {
-      vanityNames = {"", "Quick Strike", "Suppresion"
+      vanityNames = {"", "Leading Strike", "Destroy", "Suppression"
     }
-    , description = {"", "", ""
+    , description = {"", "", "", ""
     }
-    , abilityID = {1, 2, 3
+    , abilityID = {1, 2, 3, 4
     }
     , stats = {
-          maxLevel = {1, 1, 1
+          maxLevel = {1, 1, 1, 1
         }
-        , focusCostBase = {0, 0, 15
+        , cooldown = {1, 1, 1, 5
         }
-        , focusCostPer = {0, 0, 0
+        , focusCostBase = {0, 0, 100, 0
         }
-        , hpCostBase = {0, 0, 0
+        , focusCostPer = {0, 0, 0, 0
         }
-        , hpCostPer = {0, 0, 0
+        , hpCostBase = {0, 0, 0, 0
         }
-        , element = {"", "None", "None"
+        , hpCostPer = {0, 0, 0, 0
+        }
+        , animation = {"None", "Strike", "Strike", "Cast"
+        }
+        , abilityType = {"None", "Attack", "Attack", "Buff"
+        }
+        , buffElement = {"None", "None", "None", "Physical"
+        }
+        , attackElement = {"None", "Physical", "Physical", "None"
+        }
+        , dispelAmount = {0, 0, 0, 0
+        }
+        , dispelElement = {"None", "None", "None", "None"
+        }
+        , dispelBuffOrDebuff = {"None", "None", "None", "None"
+        }
+        , dispelChance = {0, 0, 0, 0
+        }
+        , dispelResist = {0, 0, 0, 0
+        }
+        , vitalityScale = {0, 0, 0, 0
+        }
+        , strengthScale = {0, 1.7, 4.2, 0
+        }
+        , instinctScale = {0, 0, 0, 0
+        }
+        , speedScale = {0, 0, 0, 0
+        }
+        , additionalBase = {0, 0, 0, 0
+        }
+        , critChanceMod = {1, 1, 1, 1
+        }
+        , vitalityScaleDoT = {0, 0, 0, 0
+        }
+        , strengthScaleDoT = {0, 0, 0, 0
+        }
+        , instinctScaleDoT = {0, 0, 0, 0
+        }
+        , speedScaleDoT = {0, 0, 0, 0
+        }
+        , additionalBaseDoT = {0, 0, 0, 0
+        }
+        , vitalityScaleBarrier = {0, 0, 0, 0
+        }
+        , strengthScaleBarrier = {0, 0, 0, 0
+        }
+        , instinctScaleBarrier = {0, 0, 0, 0
+        }
+        , speedScaleBarrier = {0, 0, 0, 0
+        }
+        , additionalBaseBarrier = {0, 0, 0, 0
+        }
+        , stunTurns = {0, 0, 0, 0
+        }
+        , buffTurns = {0, 0, 0, 3
+        }
+        , selfBuffChance = {0, 0, 0, 0
+        }
+        , debuffTurns = {0, 0, 0, 0
+        }
+        , damageReductionFlat = {0, 0, 0, 0
+        }
+        , damageReductionPct = {0, 0, 0, 0.7
+        }
+        , damageReductionElement ={"None", "None", "None", "None"
+        }
+        , damagePenetrationFlat = {0, 0, 0, 0
+        }
+        , damagePenetrationPct = {0, 0, 0, 0
+        }
+        , damagePenetrationElement ={"None", "None", "None", "None"
         }
     }
 }
