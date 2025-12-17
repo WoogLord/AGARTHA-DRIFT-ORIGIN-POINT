@@ -179,11 +179,7 @@ function love.keypressed(key)
     end
 
     if CurrentState == "Play" then
-        if key == INPUTS_ARR.inventory[1] then 
-            isInInventory = not isInInventory
-        end
-        if isInInventory then
-            
-        end
+        if key == INPUTS_ARR.inventory[1] and player.inBattle == false then isInInventory = not isInInventory end
+        if isInInventory then end -- redundant
     end
 end

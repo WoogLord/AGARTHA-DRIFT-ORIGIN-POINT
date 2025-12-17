@@ -280,7 +280,7 @@ end
 bigAbilityArray = {
       vanityNames = {"", "Leading Strike", "Destroy", "Suppression"
     }
-    , description = {"", "", "", ""
+    , description = {"", "Deal 170% of your strength as damage", "Deal 420% of your strength as damage", "Reduce damage taken by 70% for 3 turns"
     }
     , abilityID = {1, 2, 3, 4
     }

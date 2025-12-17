@@ -17,5 +17,9 @@ function musicManager()
             musTitleLoadCutscene:stop()
             musPlayGameDefault:play()
         end
+        if player.inBattle then 
+            musPlayGameDefault:stop()
+            musBattle:play()
+        end
     end
 end

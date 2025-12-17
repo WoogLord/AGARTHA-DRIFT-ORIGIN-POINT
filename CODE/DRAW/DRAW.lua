@@ -245,4 +245,7 @@ function drawDebug()
     love.graphics.print("Player.mapTileX,.mapTileY: "..player.mapTileX..", "..player.mapTileY, 5, currWindHeight-65-Font:getHeight(VersionInfoString))
     love.graphics.print("overworldEnemies[4].x,.y: "..overworldEnemies[enemyTestIndex].x..", "..overworldEnemies[enemyTestIndex].y, 5, currWindHeight-85-Font:getHeight(VersionInfoString))
     love.graphics.print("overworldEnemies[4].mapTileX,.mapTileY: "..overworldEnemies[enemyTestIndex].mapTileX..", "..overworldEnemies[enemyTestIndex].mapTileY, 5, currWindHeight-105-Font:getHeight(VersionInfoString))
+    local debugTarget = ""
+    if currentTarget == nil then debugTarget = "" else debugTarget = currentTarget.name end
+    love.graphics.print("currentTarget: "..debugTarget, 5, currWindHeight-125-Font:getHeight(VersionInfoString))
 end

@@ -95,7 +95,7 @@ function getBattleTargetAndAbility(_x, _y, _buttonPressed)
         end
     end
     for j=1, #abilityButtons do
-        if _buttonPressed == 1 and isMouseOverButton(abilityButtons[j]) then
+        if _buttonPressed == 1 and isMouseOverButton(abilityButtons[j]) and abilityButtons[j].isAbilityActive then
             allyConfirmAbility(tonumber(abilityButtons[j].label))
         end
     end
@@ -127,9 +127,14 @@ end
 function resolveTurn(_turnTaker)
     local stats = _turnTaker.isMechedUp and _turnTaker.mech or _turnTaker.pilot
     print(_turnTaker.name.." resolves ability: ".._turnTaker.selectedAbility)
+
+    -- stuff
+
+    -- resets
     stats.currentTurnCharge = 0
     _turnTaker.selectedAbility = nil
     activeUnit = nil
+    currentTarget = nil
 
     battleState = battleState_ARR.charging
 end

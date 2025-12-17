@@ -48,6 +48,7 @@ sfxTitleLogoVocal = love.audio.newSource("ASSETS/SFX/stupidSFXforMenu.mp3", "sta
 musTitleLoadCutscene = love.audio.newSource("ASSETS/MUSIC/erm.mp3", "stream")
 musTitleScreen = love.audio.newSource("ASSETS/MUSIC/marcs 1trillionth game.mp3", "stream")
 musPlayGameDefault = love.audio.newSource("ASSETS/MUSIC/scaccus.mp3", "stream")
+musBattle = love.audio.newSource("ASSETS/MUSIC/ASCEND.mp3", "stream")
 
 musPlayGameDefault:setVolume(musicVolume) -- motherflipper, this only applies to that music source...
 

@@ -12,12 +12,15 @@ function AllyClass:new(
           _name, _x, _y
         , _inParty, _inBattle, _isMechedUp
         , _facingDirection, _currentAnimState, _currentAnimArrIndex
-
+    
+        , _pilotLevel, _pilotXP
         , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
-        , _pilotAttack
+        , _pilotVitality, _pilotStrength, _pilotInstinct
         , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , _pilotAbility_01Level, _pilotAbility_02Level, _pilotAbility_03Level, _pilotAbility_04Level
+        , _pilotAbility_05Level, _pilotAbility_06Level, _pilotAbility_07Level, _pilotAbility_08Level
         , _pilotEquipmentHead, _pilotEquipmentBack
         , _pilotEquipmentShoulders, _pilotEquipmentChest
         , _pilotEquipmentRArm, _pilotEquipmentLArm
@@ -33,11 +36,14 @@ function AllyClass:new(
         , _pilotEquipmentRLegXP, _pilotEquipmentLLegXP
         , _pilotEquipmentBootsXP
 
+        , _mechLevel, _mechXP
         , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
-        , _mechAttack
+        , _mechVitality, _mechStrength, _mechInstinct
         , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , _mechAbility_01Level, _mechAbility_02Level, _mechAbility_03Level, _mechAbility_04Level
+        , _mechAbility_05Level, _mechAbility_06Level, _mechAbility_07Level, _mechAbility_08Level
         , _mechEquipmentHead, _mechEquipmentBack
         , _mechEquipmentRShoulder, _mechEquipmentLShoulder
         , _mechEquipmentChassis
@@ -61,12 +67,19 @@ function AllyClass:new(
     tAC.facingDirection, tAC.currentAnimState, tAC.currentAnimArrIndex = _facingDirection, _currentAnimState, _currentAnimArrIndex
 
     tAC.pilot = {
-        hp = _pilotHP, maxHP = _pilotMaxHP, focus = _pilotFocus, maxFocus =  _pilotMaxFocus
-        , attack = _pilotAttack
+        level = _pilotLevel, xp = _pilotXP
+        , hp = _pilotHP, maxHP = _pilotMaxHP, focus = _pilotFocus, maxFocus =  _pilotMaxFocus
+        , vitality = _pilotVitality, strength = _pilotStrength, instinct = _pilotInstinct
         , speed = _pilotSpeed, startTurnCharge = _pilotStartTurnChg, currentTurnCharge = _pilotCurrTurnChg, maxTurnCharge = _pilotMaxTurnChg
         , abilities = {
-              ability_01 = _pilotAbility_01, ability_02 = _pilotAbility_02, ability_03 = _pilotAbility_03, ability_04 = _pilotAbility_04
-            , ability_05 = _pilotAbility_05, ability_06 = _pilotAbility_06, ability_07 = _pilotAbility_07, ability_08 = _pilotAbility_08
+              {abilityID = _pilotAbility_01, abilityLevel = _pilotAbility_01Level}
+            , {abilityID = _pilotAbility_02, abilityLevel = _pilotAbility_02Level}
+            , {abilityID = _pilotAbility_03, abilityLevel = _pilotAbility_03Level}
+            , {abilityID = _pilotAbility_04, abilityLevel = _pilotAbility_04Level}
+            , {abilityID = _pilotAbility_05, abilityLevel = _pilotAbility_05Level}
+            , {abilityID = _pilotAbility_06, abilityLevel = _pilotAbility_06Level}
+            , {abilityID = _pilotAbility_07, abilityLevel = _pilotAbility_07Level}
+            , {abilityID = _pilotAbility_08, abilityLevel = _pilotAbility_08Level}
         }
         , equipment = {
               head = {equipmentID = _pilotEquipmentHead, itemXp = _pilotEquipmentHeadXP}
@@ -85,12 +98,19 @@ function AllyClass:new(
         }
     }
     tAC.mech = {
-        hp = _mechHP, maxHP = _mechMaxHP, focus = _mechFocus, maxFocus = _mechMaxFocus
-        , attack = _mechAttack
+        level = _mechLevel, xp = _mechXP
+        , hp = _mechHP, maxHP = _mechMaxHP, focus = _mechFocus, maxFocus = _mechMaxFocus
+        , vitality = _mechVitality, strength = _mechStrength, instinct = _mechInstinct
         , speed = _mechSpeed, startTurnCharge = _mechStartTurnChg, currentTurnCharge = _mechCurrTurnChg, maxTurnCharge = _mechMaxTurnChg
         , abilities = {
-              ability_01 = _mechAbility_01, ability_02 = _mechAbility_02, ability_03 = _mechAbility_03, ability_04 = _mechAbility_04
-            , ability_05 = _mechAbility_05, ability_06 = _mechAbility_06, ability_07 = _mechAbility_07, ability_08 = _mechAbility_08
+              {abilityID = _mechAbility_01, abilityLevel = _mechAbility_01Level}
+            , {abilityID = _mechAbility_02, abilityLevel = _mechAbility_02Level}
+            , {abilityID = _mechAbility_03, abilityLevel = _mechAbility_03Level}
+            , {abilityID = _mechAbility_04, abilityLevel = _mechAbility_04Level}
+            , {abilityID = _mechAbility_05, abilityLevel = _mechAbility_05Level}
+            , {abilityID = _mechAbility_06, abilityLevel = _mechAbility_06Level}
+            , {abilityID = _mechAbility_07, abilityLevel = _mechAbility_07Level}
+            , {abilityID = _mechAbility_08, abilityLevel = _mechAbility_08Level}
         }
         , equipment = {
               head = {equipmentID = _mechEquipmentHead, itemXp = _mechEquipmentHeadXP}
@@ -118,15 +138,20 @@ function AllyClass:PrintData()
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
         .."\ncurrentAnimArrIndex: "..self.currentAnimArrIndex
         .."\n\n--== Pilot ==--"
+        .."\nlevel: "..self.pilot.level.."\nxp: "..self.pilot.xp
         .."\nHP: "..self.pilot.hp.."\nmaxHP: "..self.pilot.maxHP.."\nfocus: "..self.pilot.focus.."\nmaxFocus: "..self.pilot.maxFocus
-        .."\nattack: "..self.pilot.attack
+        .."\nvitality: "..self.pilot.vitality.."\nstrength: "..self.pilot.strength.."\ninstinct: "..self.pilot.instinct
         .."\nspeed: "..self.pilot.speed.."\nstartTurnCharge: "..self.pilot.startTurnCharge
         .."\ncurrentTurnChg: "..self.pilot.currentTurnCharge.."\nmaxTurnCharge: "..self.pilot.maxTurnCharge
         .."\n\n-- Pilot Abilities --"
-        .."\nability_01: "..self.pilot.abilities.ability_01.."\nability_02: "..self.pilot.abilities.ability_02
-        .."\nability_03: "..self.pilot.abilities.ability_03.."\nability_04: "..self.pilot.abilities.ability_04
-        .."\nability_05: "..self.pilot.abilities.ability_05.."\nability_06: "..self.pilot.abilities.ability_06
-        .."\nability_07: "..self.pilot.abilities.ability_07.."\nability_08: "..self.pilot.abilities.ability_08
+        .."\nability_01: "..self.pilot.abilities[1].abilityID.."\nability_02: "..self.pilot.abilities[2].abilityID
+        .."\nability_03: "..self.pilot.abilities[3].abilityID.."\nability_04: "..self.pilot.abilities[4].abilityID
+        .."\nability_05: "..self.pilot.abilities[5].abilityID.."\nability_06: "..self.pilot.abilities[6].abilityID
+        .."\nability_07: "..self.pilot.abilities[7].abilityID.."\nability_08: "..self.pilot.abilities[8].abilityID
+        .."\nability_01Level: "..self.pilot.abilities[1].abilityLevel.."\nability_02Level: "..self.pilot.abilities[2].abilityLevel
+        .."\nability_03Level: "..self.pilot.abilities[3].abilityLevel.."\nability_04Level: "..self.pilot.abilities[4].abilityLevel
+        .."\nability_05Level: "..self.pilot.abilities[5].abilityLevel.."\nability_06Level: "..self.pilot.abilities[6].abilityLevel
+        .."\nability_07Level: "..self.pilot.abilities[7].abilityLevel.."\nability_08Level: "..self.pilot.abilities[8].abilityLevel
         .."\n\n-- Pilot Equipment --"
         .."\nhead: "..self.pilot.equipment.head.equipmentID.."\nback: "..self.pilot.equipment.back.equipmentID
         .."\nshoulders: "..self.pilot.equipment.shoulders.equipmentID.."\nchest: "..self.pilot.equipment.chest.equipmentID
@@ -136,23 +161,28 @@ function AllyClass:PrintData()
         .."\nrightLeg: "..self.pilot.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.pilot.equipment.leftLeg.equipmentID
         .."\nboots: "..self.pilot.equipment.boots.equipmentID
         .."\n\n--== Mech ==--"
+        .."\nlevel: "..self.mech.level.."\nxp: "..self.mech.xp
         .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nfocus: "..self.mech.focus.."\nmaxFocus: "..self.mech.maxFocus
-        .."\nattack: "..self.mech.attack
+        .."\nvitality: "..self.mech.vitality.."\nstrength: "..self.mech.strength.."\ninstinct: "..self.mech.instinct
         .."\nspeed: "..self.mech.speed.."\nstartTurnCharge: "..self.mech.startTurnCharge
         .."\ncurrentTurnChg: "..self.mech.currentTurnCharge.."\nmaxTurnCharge: "..self.mech.maxTurnCharge
         .."\n\n-- Mech Abilities --"
-        .."\nability_01: "..self.mech.abilities.ability_01.."\nability_02: "..self.mech.abilities.ability_02
-        .."\nability_03: "..self.mech.abilities.ability_03.."\nability_04: "..self.mech.abilities.ability_04
-        .."\nability_05: "..self.mech.abilities.ability_05.."\nability_06: "..self.mech.abilities.ability_06
-        .."\nability_07: "..self.mech.abilities.ability_07.."\nability_08: "..self.mech.abilities.ability_08
+        .."\nability_01: "..self.mech.abilities[1].abilityID.."\nability_02: "..self.mech.abilities[2].abilityID
+        .."\nability_03: "..self.mech.abilities[3].abilityID.."\nability_04: "..self.mech.abilities[4].abilityID
+        .."\nability_05: "..self.mech.abilities[5].abilityID.."\nability_06: "..self.mech.abilities[6].abilityID
+        .."\nability_07: "..self.mech.abilities[7].abilityID.."\nability_08: "..self.mech.abilities[8].abilityID
+        .."\nability_01Level: "..self.mech.abilities[1].abilityLevel.."\nability_02Level: "..self.mech.abilities[2].abilityLevel
+        .."\nability_03Level: "..self.mech.abilities[3].abilityLevel.."\nability_04Level: "..self.mech.abilities[4].abilityLevel
+        .."\nability_05Level: "..self.mech.abilities[5].abilityLevel.."\nability_06Level: "..self.mech.abilities[6].abilityLevel
+        .."\nability_07Level: "..self.mech.abilities[7].abilityLevel.."\nability_08Level: "..self.mech.abilities[8].abilityLevel
         .."\n\n-- Mech Equipment --"
-        .."\nhead: "..self.mech.equipment.head.equipmentID.."\nback: "..self.mech.equipment.back.equipmentID
-        .."\nrightShoulder: "..self.mech.equipment.rightShoulder.equipmentID.."\nleftShoulder: "..self.mech.equipment.leftShoulder.equipmentID
-        .."\nchassis: "..self.mech.equipment.chassis.equipmentID
-        .."\nrightarm: "..self.mech.equipment.rightArm.equipmentID.."\nleftarm: "..self.mech.equipment.leftArm.equipmentID
-        .."\nrightWeapon: "..self.mech.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.mech.equipment.leftWeapon.equipmentID
-        .."\nrightLeg: "..self.mech.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.mech.equipment.leftLeg.equipmentID
-        .."\nauxillary: "..self.mech.equipment.auxillary.equipmentID.."\nthrusters: "..self.mech.equipment.thrusters.equipmentID
+        -- .."\nhead: "..self.mech.equipment.head.equipmentID.."\nback: "..self.mech.equipment.back.equipmentID
+        -- .."\nrightShoulder: "..self.mech.equipment.rightShoulder.equipmentID.."\nleftShoulder: "..self.mech.equipment.leftShoulder.equipmentID
+        -- .."\nchassis: "..self.mech.equipment.chassis.equipmentID
+        -- .."\nrightarm: "..self.mech.equipment.rightArm.equipmentID.."\nleftarm: "..self.mech.equipment.leftArm.equipmentID
+        -- .."\nrightWeapon: "..self.mech.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.mech.equipment.leftWeapon.equipmentID
+        -- .."\nrightLeg: "..self.mech.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.mech.equipment.leftLeg.equipmentID
+        -- .."\nauxillary: "..self.mech.equipment.auxillary.equipmentID.."\nthrusters: "..self.mech.equipment.thrusters.equipmentID
         .."\n"
     )
 end
@@ -229,15 +259,21 @@ function initParty()
         , "Down", "Idle", 3 -- 3 is IdleDown
 
         --== Pilot Stats ==--
+        -- , _pilotLevel, _pilotXP
+        , 1, 0
         -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
         , 10, 10, 25, 25
-        -- , _pilotAttack
-        , 1
+        -- , _pilotVitality, _pilotStrength, _pilotInstinct
+        , 5, 5, 5
         -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
         , 10, 10, 0, 150
         -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
         -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
         , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _pilotAbility_01Level, _pilotAbility_02Level, _pilotAbility_03Level, _pilotAbility_04Level
+        -- , _pilotAbility_05Level, _pilotAbility_06Level, _pilotAbility_07Level, _pilotAbility_08Level
+        , 1, 1, 1, 1
         , 1, 1, 1, 1
 
         --== Pilot Equipment ==--
@@ -253,15 +289,21 @@ function initParty()
         , 150, 0, 0, 0, 0
 
         --== Mech Stats ==--
+        -- , _mechLevel, _mechXP
+        , 1, 0
         -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
         , 15, 15, 25, 25
-        -- , _mechAttack
-        , 1
+        -- , _mechVitality, _mechStrength, _mechInstinct
+        , 5, 5, 5
         -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
         , 10, 30, 0, 100
         -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
         -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
         , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _mechAbility_01Level, _mechAbility_02Level, _mechAbility_03Level, _mechAbility_04Level
+        -- , _mechAbility_05Level, _mechAbility_06Level, _mechAbility_07Level, _mechAbility_08Level
+        , 1, 1, 1, 1
         , 1, 1, 1, 1
 
         --== Mech Equipment ==--
