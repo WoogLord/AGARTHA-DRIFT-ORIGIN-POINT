@@ -110,15 +110,17 @@ end
 function startBattleAnim(_unit, _ability)
     battleAnim = {
         unit = _unit
+        , target = currentTarget
         , ability = _ability
         , timer = 0
-        , duration = 0.75 -- arbitrary, pull from unit array or something
+        , frames = mainAnimationArray.frames[returnIndexGivenArrayValue(mainAnimationArray.state, bigAbilityArray.stats.animation[_ability])]
     }
 end
 
 function updateBattleAnims(_dt)
     battleAnim.timer = battleAnim.timer + _dt
-    if battleAnim.timer >= battleAnim.duration then
+    local duration = battleAnim.frames * animStall / 60
+    if battleAnim.timer >= duration then
         battleAnim = nil
         battleState = battleState_ARR.resolve
     end

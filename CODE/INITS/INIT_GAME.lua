@@ -20,6 +20,7 @@ graphicsScale = 3
 tileWH = 32
 moveSpeedDampener = 0.40
 playerInventX, playerInventY = (WindWidth / 3) - tileWH/2, (WindHeight / 2) - tileWH/2
+animStall = 4
 
 --==+==-- "floats" --==+==--
 turnChargeReduction = 0.05

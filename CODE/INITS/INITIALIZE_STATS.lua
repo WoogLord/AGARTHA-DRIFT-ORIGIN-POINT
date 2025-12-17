@@ -132,7 +132,7 @@ function AllyClass:new(
 end
 
 function AllyClass:PrintData()
-    print("\n--==+==-- AllyClass --==+==--"
+    local print1 = "\n--==+==-- AllyClass --==+==--"
         .."\nname: "..self.name.."\nx: "..self.x.."\ny: "..self.y
         .."\ninParty: "..tostring(self.inParty).."\ninBattle: "..tostring(self.inBattle).."\nisMechedUp: "..tostring(self.isMechedUp)
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
@@ -160,7 +160,14 @@ function AllyClass:PrintData()
         .."\ngloves: "..self.pilot.equipment.gloves.equipmentID.."\npants: "..self.pilot.equipment.pants.equipmentID
         .."\nrightLeg: "..self.pilot.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.pilot.equipment.leftLeg.equipmentID
         .."\nboots: "..self.pilot.equipment.boots.equipmentID
-        .."\n\n--== Mech ==--"
+        .."\nheadXP: "..self.pilot.equipment.head.itemXp.."\nbackXP: "..self.pilot.equipment.back.itemXp
+        .."\nshouldersXP: "..self.pilot.equipment.shoulders.itemXp.."\nchestXP: "..self.pilot.equipment.chest.itemXp
+        .."\nrightarmXP: "..self.pilot.equipment.rightArm.itemXp.."\nleftarmXP: "..self.pilot.equipment.leftArm.itemXp
+        .."\nrightWeaponXP: "..self.pilot.equipment.rightWeapon.itemXp.."\nleftWeaponXP: "..self.pilot.equipment.leftWeapon.itemXp
+        .."\nglovesXP: "..self.pilot.equipment.gloves.itemXp.."\npantsXP: "..self.pilot.equipment.pants.itemXp
+        .."\nrightLegXP: "..self.pilot.equipment.rightLeg.itemXp.."\nleftLegXP: "..self.pilot.equipment.leftLeg.itemXp
+        .."\nbootsXP: "..self.pilot.equipment.boots.itemXp
+    local print2 = "\n\n--== Mech ==--"
         .."\nlevel: "..self.mech.level.."\nxp: "..self.mech.xp
         .."\nHP: "..self.mech.hp.."\nmaxHP: "..self.mech.maxHP.."\nfocus: "..self.mech.focus.."\nmaxFocus: "..self.mech.maxFocus
         .."\nvitality: "..self.mech.vitality.."\nstrength: "..self.mech.strength.."\ninstinct: "..self.mech.instinct
@@ -176,76 +183,24 @@ function AllyClass:PrintData()
         .."\nability_05Level: "..self.mech.abilities[5].abilityLevel.."\nability_06Level: "..self.mech.abilities[6].abilityLevel
         .."\nability_07Level: "..self.mech.abilities[7].abilityLevel.."\nability_08Level: "..self.mech.abilities[8].abilityLevel
         .."\n\n-- Mech Equipment --"
-        -- .."\nhead: "..self.mech.equipment.head.equipmentID.."\nback: "..self.mech.equipment.back.equipmentID
-        -- .."\nrightShoulder: "..self.mech.equipment.rightShoulder.equipmentID.."\nleftShoulder: "..self.mech.equipment.leftShoulder.equipmentID
-        -- .."\nchassis: "..self.mech.equipment.chassis.equipmentID
-        -- .."\nrightarm: "..self.mech.equipment.rightArm.equipmentID.."\nleftarm: "..self.mech.equipment.leftArm.equipmentID
-        -- .."\nrightWeapon: "..self.mech.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.mech.equipment.leftWeapon.equipmentID
-        -- .."\nrightLeg: "..self.mech.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.mech.equipment.leftLeg.equipmentID
-        -- .."\nauxillary: "..self.mech.equipment.auxillary.equipmentID.."\nthrusters: "..self.mech.equipment.thrusters.equipmentID
+        .."\nhead: "..self.mech.equipment.head.equipmentID.."\nback: "..self.mech.equipment.back.equipmentID
+        .."\nrightShoulder: "..self.mech.equipment.rightShoulder.equipmentID.."\nleftShoulder: "..self.mech.equipment.leftShoulder.equipmentID
+        .."\nchassis: "..self.mech.equipment.chassis.equipmentID
+        .."\nrightarm: "..self.mech.equipment.rightArm.equipmentID.."\nleftarm: "..self.mech.equipment.leftArm.equipmentID
+        .."\nrightWeapon: "..self.mech.equipment.rightWeapon.equipmentID.."\nleftWeapon: "..self.mech.equipment.leftWeapon.equipmentID
+        .."\nrightLeg: "..self.mech.equipment.rightLeg.equipmentID.."\nleftLeg: "..self.mech.equipment.leftLeg.equipmentID
+        .."\nauxillary: "..self.mech.equipment.auxillary.equipmentID.."\nthrusters: "..self.mech.equipment.thrusters.equipmentID
+        .."\nheadXP: "..self.mech.equipment.head.itemXp.."\nbackXP: "..self.mech.equipment.back.itemXp
+        .."\nrightShoulderXP: "..self.mech.equipment.rightShoulder.itemXp.."\nleftShoulderXP: "..self.mech.equipment.leftShoulder.itemXp
+        .."\nchassisXP: "..self.mech.equipment.chassis.itemXp
+        .."\nrightarmXP: "..self.mech.equipment.rightArm.itemXp.."\nleftarmXP: "..self.mech.equipment.leftArm.itemXp
+        .."\nrightWeaponXP: "..self.mech.equipment.rightWeapon.itemXp.."\nleftWeaponXP: "..self.mech.equipment.leftWeapon.itemXp
+        .."\nrightLegXP: "..self.mech.equipment.rightLeg.itemXp.."\nleftLegXP: "..self.mech.equipment.leftLeg.itemXp
+        .."\nauxillaryXP: "..self.mech.equipment.auxillary.itemXp.."\nthrustersXP: "..self.mech.equipment.thrusters.itemXp
         .."\n"
+    print(print1..print2
     )
 end
-
---#region testClass
-local testAllyClass = AllyClass:new(
-    --   _name, _x, _y
-    "Test", 128, 128
-    -- , _inParty, _inBattle, _isMechedUp
-    , true, false, false
-    -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
-    , "Down", "Idle", 3 -- 3 is IdleDown
-
-    --== Pilot Stats ==--
-    -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
-    , 10, 10, 25, 25
-    -- , _pilotAttack
-    , 1
-    -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
-    , 10, 10, 0, 150
-    -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
-    -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
-    , 2, 3, 1, 1
-    , 1, 1, 1, 1
-
-    --== Pilot Equipment ==--
-    -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
-    , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
-    -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
-    , 1, 1, 1, 1
-    -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
-    , 1, 1, 1, 1, 1
-    -- xp
-    , 0, 0, 0, 0
-    , 0, 0, 0, 0
-    , 0, 0, 0, 0, 0
-
-    --== Mech Stats ==--
-    -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
-    , 15, 15, 25, 25
-    -- , _mechAttack
-    , 1
-    -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
-    , 10, 30, 0, 100
-    -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
-    -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
-    , 2, 3, 1, 1
-    , 1, 1, 1, 1
-
-    --== Mech Equipment ==--
-    -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
-    , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
-    -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
-    , 1, 1, 1, 1, 1
-    -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
-    , 1, 1, 1, 1
-    -- xp
-    , 0, 0, 0, 0
-    , 0, 0, 0, 0, 0
-    , 0, 0, 0, 0
-)
-testAllyClass:PrintData()
---#endregion test
 
 function initParty()
     --==+==--
@@ -318,141 +273,157 @@ function initParty()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
+    Marc:PrintData()
     --#endregion Marc  
     --#region BISHOP
-    BISHOP = {
-          x = WindWidth / 2 + tileWH
-        , y = WindHeight / 2 + tileWH
-        , mapTileX = 8
-        , mapTileY = 8
-        , inParty = true
-        , name = "BISHOP"
-        , pilot = {
-              hp = 15
-            , maxHP = 15
-            , focus = 25
-            , maxFocus = 25
-            , speed = 10
-            , startTurnCharge = 0
-            , currentTurnCharge = 0
-            , maxTurnCharge = 100
-            , abilities = {2,3,1,1,1,1,1,1}
-        }
-        , isMechedUp = true
-        , mech = {
-              hp = 35
-            , maxHP = 35
-            , focus = 15
-            , maxFocus = 15
-            , speed = 15
-            , startTurnCharge = 50
-            , currentTurnCharge = 0
-            , maxTurnCharge = 100
-            , abilities = {2,3,1,1,1,1,1,1}
-        }
-        , facingDirection = "Down"
-        , currentAnimState = "Idle"
-        , currentAnimArrIndex = 3 -- Facing Down
-        , inBattle = false
-        , animationArray = {
-              VanityNames = {
-                "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
-            }
-            , Frames = {
-                4,4,4,4
-            }
-            , Direction = {
-                "Up", "Left", "Down", "Right"
-            }
-            , State = {
-                "Idle", "Idle", "Idle", "Idle"
-            }
-            , SpriteSheetRow = {
-                0, 1, 2, 3
-            }
-            , Animations = { -- loop this later
-                {}, {}, {}, {}
-            }
-        }
-    }
+    BISHOP = AllyClass:new(
+        --   _name, _x, _y
+        "BISHOP", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
+        -- , _inParty, _inBattle, _isMechedUp
+        , true, false, false
+        -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
+        , "Down", "Idle", 3 -- 3 is IdleDown
+
+        --== Pilot Stats ==--
+        -- , _pilotLevel, _pilotXP
+        , 1, 0
+        -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
+        , 10, 10, 25, 25
+        -- , _pilotVitality, _pilotStrength, _pilotInstinct
+        , 5, 10, 0
+        -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
+        , 5, 0, 0, 150
+        -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
+        -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _pilotAbility_01Level, _pilotAbility_02Level, _pilotAbility_03Level, _pilotAbility_04Level
+        -- , _pilotAbility_05Level, _pilotAbility_06Level, _pilotAbility_07Level, _pilotAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Pilot Equipment ==--
+        -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
+        , 1, 1, 1, 2 -- Magic numbers?  could be "Nothing"
+        -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+        , 1, 1, 1, 1
+        -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+        , 1, 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+
+        --== Mech Stats ==--
+        -- , _mechLevel, _mechXP
+        , 1, 0
+        -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
+        , 15, 15, 25, 25
+        -- , _mechVitality, _mechStrength, _mechInstinct
+        , 5, 15, 0
+        -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
+        , 5, 30, 0, 100
+        -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
+        -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _mechAbility_01Level, _mechAbility_02Level, _mechAbility_03Level, _mechAbility_04Level
+        -- , _mechAbility_05Level, _mechAbility_06Level, _mechAbility_07Level, _mechAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Mech Equipment ==--
+        -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
+        -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
+        , 1, 1, 1, 1, 1
+        -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
+        , 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+        , 0, 0, 0, 0
+    )   
+    BISHOP:PrintData()
     --#endregion BISHOP
     --#region Alfred
-    Alfred = {
-          x = WindWidth / 2 + tileWH
-        , y = WindHeight / 2 + tileWH
-        , mapTileX = 8
-        , mapTileY = 8
-        , inParty = true
-        , name = "Alfred"
-        , pilot = {
-              hp = 10
-            , maxHP = 10
-            , focus = 35
-            , maxFocus = 35
-            , speed = 11
-            , startTurnCharge = 0
-            , currentTurnCharge = 0
-            , maxTurnCharge = 100
-            , abilities = {2,3,1,1,1,1,1,1}
-        }
-        , isMechedUp = false
-        , mech = {
-              hp = 17
-            , maxHP = 17
-            , focus = 30
-            , maxFocus = 30
-            , speed = 9
-            , startTurnCharge = 0
-            , currentTurnCharge = 0
-            , maxTurnCharge = 100
-            , abilities = {2,3,1,1,1,1,1,1}
-        }
-        , facingDirection = "Down"
-        , currentAnimState = "Idle"
-        , currentAnimArrIndex = 3 -- Facing Down
-        , inBattle = false
-        , animationArray = {
-              VanityNames = {
-                "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
-            }
-            , Frames = {
-                4,4,4,4
-            }
-            , Direction = {
-                "Up", "Left", "Down", "Right"
-            }
-            , State = {
-                "Idle", "Idle", "Idle", "Idle"
-            }
-            , SpriteSheetRow = {
-                0, 1, 2, 3
-            }
-            , Animations = { -- loop this later
-                {}, {}, {}, {}
-            }
-        }
-    }
+    Alfred = AllyClass:new(
+        --   _name, _x, _y
+        "Alfred", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
+        -- , _inParty, _inBattle, _isMechedUp
+        , true, false, false
+        -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
+        , "Down", "Idle", 3 -- 3 is IdleDown
+
+        --== Pilot Stats ==--
+        -- , _pilotLevel, _pilotXP
+        , 1, 0
+        -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
+        , 10, 10, 50, 50
+        -- , _pilotVitality, _pilotStrength, _pilotInstinct
+        , 5, 0, 10
+        -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
+        , 15, 0, 0, 75
+        -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
+        -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _pilotAbility_01Level, _pilotAbility_02Level, _pilotAbility_03Level, _pilotAbility_04Level
+        -- , _pilotAbility_05Level, _pilotAbility_06Level, _pilotAbility_07Level, _pilotAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Pilot Equipment ==--
+        -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
+        -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+        , 1, 1, 1, 1
+        -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+        , 1, 1, 1, 1, 2
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+
+        --== Mech Stats ==--
+        -- , _mechLevel, _mechXP
+        , 1, 0
+        -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
+        , 10, 10, 50, 50
+        -- , _mechVitality, _mechStrength, _mechInstinct
+        , 5, 0, 25
+        -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
+        , 10, 25, 0, 50
+        -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
+        -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _mechAbility_01Level, _mechAbility_02Level, _mechAbility_03Level, _mechAbility_04Level
+        -- , _mechAbility_05Level, _mechAbility_06Level, _mechAbility_07Level, _mechAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Mech Equipment ==--
+        -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
+        -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
+        , 1, 1, 1, 1, 1
+        -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
+        , 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+        , 0, 0, 0, 0
+    )   
+    Alfred:PrintData()
     --#endregion Alfred
 
     Marc.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    BISHOP.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    Alfred.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
 
     player = Marc
     player.mapTileX, player.mapTileY = 1, 1
-
-    for i = 1, #BISHOP.animationArray.VanityNames, 1 do
-        for j = 1, BISHOP.animationArray.Frames[i], 1 do
-            BISHOP.animationArray.Animations[i][j] = love.graphics.newQuad(
-                tileWH*(j-1), BISHOP.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
-            )
-        end
-    end
-    for i = 1, #Alfred.animationArray.VanityNames, 1 do
-        for j = 1, Alfred.animationArray.Frames[i], 1 do
-            Alfred.animationArray.Animations[i][j] = love.graphics.newQuad(
-                tileWH*(j-1), Alfred.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
-            )
-        end
-    end
 
     player.playerInitX, player.playerInitY = player.x, player.y
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)

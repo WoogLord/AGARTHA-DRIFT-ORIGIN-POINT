@@ -115,46 +115,45 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
                     local abilX = (tileWH * 0.5) + currentTarget.x + (math.cos(math.rad(a * 365 / 8)) * (tileWH + 2) * graphicsScale)
                     local abilY = (tileWH * 0.5) + currentTarget.y - (math.sin(math.rad(a * 365 / 8)) * (tileWH + 2) * graphicsScale)
                     local abilScale = 2
-                    local abilityDescriptionString = tostring(bigAbilityArray.vanityNames[stats.abilities[a]]).." (CD: "..tostring(bigAbilityArray.stats.cooldown[stats.abilities[a]])..")"
-                        .."\nFocus Cost:"..tostring(bigAbilityArray.stats.focusCostBase[stats.abilities[a]])
-                        
+                    local abilityDescriptionString = tostring(bigAbilityArray.vanityNames[stats.abilities[a].abilityID]).." (CD: "..tostring(bigAbilityArray.stats.cooldown[stats.abilities[a].abilityID])..")"
+                        .."\nFocus Cost:"..tostring(bigAbilityArray.stats.focusCostBase[stats.abilities[a].abilityID])
+                        .."\n"..tostring(bigAbilityArray.description[stats.abilities[a].abilityID])
                     local tIsAbilityActive = true
                     love.graphics.setColor(0.5,0.5,0.5,0.25) 
                     love.graphics.rectangle("fill", abilX, abilY, (tileWH+2) * abilScale, (tileWH+2) * abilScale)
 
                     -- currentTarget checks
                     -- enemies
-                    if (currentTarget == enemy_01 or currentTarget == enemy_02 or currentTarget == enemy_03) and bigAbilityArray.stats.targets[stats.abilities[a]] == "Enemies" then
+                    if (currentTarget == enemy_01 or currentTarget == enemy_02 or currentTarget == enemy_03) and bigAbilityArray.stats.targets[stats.abilities[a].abilityID] == "Enemies" then
                     -- allies
-                    elseif (currentTarget == player or currentTarget == ally1 or currentTarget == ally2) and bigAbilityArray.stats.targets[stats.abilities[a]] == "Allies" then
+                    elseif (currentTarget == player or currentTarget == ally1 or currentTarget == ally2) and bigAbilityArray.stats.targets[stats.abilities[a].abilityID] == "Allies" then
                     -- self
-                    elseif currentTarget == activeUnit and bigAbilityArray.stats.targets[stats.abilities[a]] == "Self" then
+                    elseif currentTarget == activeUnit and bigAbilityArray.stats.targets[stats.abilities[a].abilityID] == "Self" then
                     else tIsAbilityActive = false end
 
                     if tIsAbilityActive then 
                         love.graphics.setColor(1,1,1)
-                        abilityDescriptionString = abilityDescriptionString.."\n"..tostring(bigAbilityArray.description[stats.abilities[a]])
                     else 
                         love.graphics.setColor(0.1,0.1,0.1) 
                         abilityDescriptionString = abilityDescriptionString.."\n".."NOT APPLICABLE TARGET" -- dont know how i feel about this
                     end
 
                     -- Check for no ability assigned
-                    if stats.abilities[a] == 1 then
+                    if stats.abilities[a].abilityID == 1 then
                         -- don't draw an icon
                     else
-                        love.graphics.draw(ssAbilityIcons, abilityIconQuads[stats.abilities[a] % 10][math.floor(stats.abilities[a] / 10) + 1]
+                        love.graphics.draw(ssAbilityIcons, abilityIconQuads[stats.abilities[a].abilityID % 10][math.floor(stats.abilities[a].abilityID / 10) + 1]
                             , abilX, abilY, 0, 2, 2
                         )
                     end
 
-                    abilityButtons[a] = {x = abilX, y = abilY, w = tileWH * abilScale, h = tileWH * abilScale, label = stats.abilities[a], invis = true, isAbilityActive = tIsAbilityActive}
+                    abilityButtons[a] = {x = abilX, y = abilY, w = tileWH * abilScale, h = tileWH * abilScale, label = stats.abilities[a].abilityID, invis = true, isAbilityActive = tIsAbilityActive}
                     drawButton(abilityButtons[a])
                     if isMouseOverButton(abilityButtons[a]) then
                         -- draw descriptions
                         love.graphics.printf(abilityDescriptionString
                             , abilityButtons[a].x
-                            , abilityButtons[a].y + (((tileWH * abilScale) - Font:getHeight(tostring(bigAbilityArray.vanityNames[stats.abilities[a]]))) * 0.5)
+                            , abilityButtons[a].y + (((tileWH * abilScale) - Font:getHeight(tostring(bigAbilityArray.vanityNames[stats.abilities[a].abilityID]))) * 0.5)
                             , 200, "left")
                     end
                 end
@@ -167,7 +166,7 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
             drawButton(targetButtons[i])
             if isMouseOverButton(targetButtons[i]) then
                 -- draw descriptions
-                love.graphics.printf(tostring(combatants[i].name), targetButtons[i].x
+                love.graphics.printf(tostring(combatants[i].name).."\nLv: "..tostring(combatants[i].pilot.level), targetButtons[i].x
                     , targetButtons[i].y + (((tileWH * graphicsScale) - Font:getHeight(tostring(combatants[i].name))) * 0.5)
                     , tileWH * graphicsScale, "center")
             end

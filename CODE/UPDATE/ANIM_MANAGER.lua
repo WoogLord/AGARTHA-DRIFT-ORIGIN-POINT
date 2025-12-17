@@ -45,27 +45,33 @@ mainAnimationArray = AnimClass:new(
     { -- _vanityNames
         "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
         , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
+        , "Strike", "Cast"
     }
     , { -- _state
         "Idle", "Idle", "Idle", "Idle"
         , "Walk", "Walk", "Walk", "Walk"
+        , "Strike", "Cast"
     }
     , { -- _direction
         "Up", "Left", "Down", "Right"
         , "Up", "Left", "Down", "Right"
+        , "Right", "Right"
     }
     , { -- _spriteSheetRow -- needed?
         0, 1, 2, 3
         , 4, 5, 6, 7
+        , 8, 9
     }
     , { -- _frames
         4, 4, 4, 4
         , 4, 4, 4, 4
+        , 4, 4
     }
     , { -- _animations
         -- loop this later
         {}, {}, {}, {}
         , {}, {}, {}, {}
+        , {}, {}
     }
 )
 mainAnimationArray:PrintData()
