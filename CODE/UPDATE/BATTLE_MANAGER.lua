@@ -88,8 +88,17 @@ function chooseEnemyAbility(_unit)
     return bigAbilityArray.abilityID[2] -- "quickStrike"
 end
 
-function getBattleTarget(_x, _y, _buttonPressed) 
-    currentTarget = 
+function getBattleTargetAndAbility(_x, _y, _buttonPressed) 
+    for i=1, #targetButtons do
+        if _buttonPressed == 1 and isMouseOverButton(targetButtons[i]) then
+            currentTarget = combatants[i]
+        end
+    end
+    for j=1, #abilityButtons do
+        if _buttonPressed == 1 and isMouseOverButton(abilityButtons[j]) then
+            allyConfirmAbility(tonumber(abilityButtons[j].label))
+        end
+    end
 end
 
 function allyConfirmAbility(_ability)

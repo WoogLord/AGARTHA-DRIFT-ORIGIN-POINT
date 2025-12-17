@@ -277,14 +277,14 @@ function initParty()
         , 0, 0, 0, 0
     )   
     --#endregion Marc  
-    --#region Anthony
-    Anthony = {
+    --#region BISHOP
+    BISHOP = {
           x = WindWidth / 2 + tileWH
         , y = WindHeight / 2 + tileWH
         , mapTileX = 8
         , mapTileY = 8
         , inParty = true
-        , name = "Anthony"
+        , name = "BISHOP"
         , pilot = {
               hp = 15
             , maxHP = 15
@@ -294,7 +294,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
-            , abilities = {}
+            , abilities = {2,3,1,1,1,1,1,1}
         }
         , isMechedUp = true
         , mech = {
@@ -306,7 +306,7 @@ function initParty()
             , startTurnCharge = 50
             , currentTurnCharge = 0
             , maxTurnCharge = 100
-            , abilities = {}
+            , abilities = {2,3,1,1,1,1,1,1}
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -333,7 +333,7 @@ function initParty()
             }
         }
     }
-    --#endregion Anthony
+    --#endregion BISHOP
     --#region Alfred
     Alfred = {
           x = WindWidth / 2 + tileWH
@@ -351,7 +351,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
-            , abilities = {}
+            , abilities = {2,3,1,1,1,1,1,1}
         }
         , isMechedUp = false
         , mech = {
@@ -363,7 +363,7 @@ function initParty()
             , startTurnCharge = 0
             , currentTurnCharge = 0
             , maxTurnCharge = 100
-            , abilities = {}
+            , abilities = {2,3,1,1,1,1,1,1}
         }
         , facingDirection = "Down"
         , currentAnimState = "Idle"
@@ -397,10 +397,10 @@ function initParty()
     player = Marc
     player.mapTileX, player.mapTileY = 1, 1
 
-    for i = 1, #Anthony.animationArray.VanityNames, 1 do
-        for j = 1, Anthony.animationArray.Frames[i], 1 do
-            Anthony.animationArray.Animations[i][j] = love.graphics.newQuad(
-                tileWH*(j-1), Anthony.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
+    for i = 1, #BISHOP.animationArray.VanityNames, 1 do
+        for j = 1, BISHOP.animationArray.Frames[i], 1 do
+            BISHOP.animationArray.Animations[i][j] = love.graphics.newQuad(
+                tileWH*(j-1), BISHOP.animationArray.SpriteSheetRow[i] * tileWH, tileWH, tileWH, spritesheetPlayer:getDimensions()
             )
         end
     end
@@ -415,7 +415,7 @@ function initParty()
     player.playerInitX, player.playerInitY = player.x, player.y
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
 
-    ally1 = Anthony
+    ally1 = BISHOP
     ally2 = Alfred
 end
 

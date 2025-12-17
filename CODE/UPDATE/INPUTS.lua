@@ -101,7 +101,7 @@ function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
         pickUpItem(_x, _y, _buttonPressed)
     end
     if battleState == battleState_ARR.allyTurnMenu then
-        getBattleTarget(_x, _y, _buttonPressed) 
+        getBattleTargetAndAbility(_x, _y, _buttonPressed) 
     end
 end
 

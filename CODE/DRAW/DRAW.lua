@@ -173,6 +173,10 @@ function drawOverworld()
 end
 
 function drawBattle()
+    -- draw far bg
+    -- draw all parallaxables below here (including 2nd bg)
+
+    -- ALSO SCALE PLAYERS/ENEMIES LINEARLY BY SCREEN POSITIONING FOR DEPTH
     drawEnemies()
     drawPlayer()
     if ally1.inParty then drawAlly1() end

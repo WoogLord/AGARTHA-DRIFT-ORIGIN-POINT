@@ -104,17 +104,48 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
 
     -- draw buttons for all combatants
     targetButtons = {}
-    for i=1, #combatants do
-        -- dont use tileWH here, use the collision hitbox when i make that
-        love.graphics.setColor(1.0,0,0,0.25)
-        love.graphics.rectangle("fill", combatants[i].x, combatants[i].y, tileWH * graphicsScale, tileWH * graphicsScale)
-        targetButtons[i] = {x = combatants[i].x, y = combatants[i].y, w = tileWH * graphicsScale, h = tileWH * graphicsScale, label = "", invis = true}
-        drawButton(targetButtons[i])
-        if isMouseOverButton(targetButtons[i]) then
-            -- draw descriptions
-            love.graphics.printf(tostring(combatants[i].name), targetButtons[i].x
-                , targetButtons[i].y + (((tileWH * graphicsScale) - Font:getHeight(tostring(combatants[i].name))) * 0.5)
-                , tileWH * graphicsScale, "center")
+    abilityButtons = {}
+    if battleState == battleState_ARR.allyTurnMenu then
+        for i=1, #combatants do
+            -- dont use tileWH here, use the collision hitbox when i make that
+            if combatants[i] == currentTarget then
+                -- draw abilities
+                local stats = activeUnit.isMechedUp and activeUnit.mech or activeUnit.pilot
+                for a=1, #stats.abilities do
+                    local abilX = (tileWH * 0.5) + currentTarget.x + (math.cos(math.rad(a * 365 / 8)) * (tileWH + 1) * graphicsScale)
+                    local abilY = (tileWH * 0.5) + currentTarget.y - (math.sin(math.rad(a * 365 / 8)) * (tileWH + 1) * graphicsScale)
+                    love.graphics.setColor(0.5,0.5,0.5,0.25) 
+                    love.graphics.rectangle("fill", abilX, abilY, (tileWH+2) * 2, (tileWH+2) * 2)
+                    love.graphics.setColor(1,1,1)
+                    if stats.abilities[a] == 1 then
+                        -- don't draw an icon
+                    else
+                        love.graphics.draw(ssAbilityIcons, abilityIconQuads[stats.abilities[a] % 10][math.floor(stats.abilities[a] / 10) + 1]
+                            , abilX, abilY, 0, 2, 2
+                        )
+                    end
+                    abilityButtons[a] = {x = abilX, y = abilY, w = tileWH * graphicsScale, h = tileWH * graphicsScale, label = stats.abilities[a], invis = true}
+                    drawButton(abilityButtons[a])
+                    if isMouseOverButton(abilityButtons[a]) then
+                        -- draw descriptions
+                        love.graphics.printf(tostring(bigAbilityArray.vanityNames[stats.abilities[a]]), abilityButtons[a].x
+                            , abilityButtons[a].y + (((tileWH * graphicsScale) - Font:getHeight(tostring(bigAbilityArray.vanityNames[stats.abilities[a]]))) * 0.5)
+                            , tileWH * graphicsScale, "center")
+                    end
+                end
+                love.graphics.setColor(0,0,1.0,0.25)    
+            else
+                love.graphics.setColor(1.0,0,0,0.25)
+            end
+            love.graphics.rectangle("fill", combatants[i].x, combatants[i].y, tileWH * graphicsScale, tileWH * graphicsScale)
+            targetButtons[i] = {x = combatants[i].x, y = combatants[i].y, w = tileWH * graphicsScale, h = tileWH * graphicsScale, label = "", invis = true}
+            drawButton(targetButtons[i])
+            if isMouseOverButton(targetButtons[i]) then
+                -- draw descriptions
+                love.graphics.printf(tostring(combatants[i].name), targetButtons[i].x
+                    , targetButtons[i].y + (((tileWH * graphicsScale) - Font:getHeight(tostring(combatants[i].name))) * 0.5)
+                    , tileWH * graphicsScale, "center")
+            end
         end
     end
 end
