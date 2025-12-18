@@ -419,6 +419,23 @@ function initParty()
     --#endregion Alfred
 
     Marc.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+
+    -- Look gamer, I know this SEEMS complicated, by imagine the sheer POWER achieved by this
+    -- if i can make this loopable..., imagine the customization!
+    -- Marc.Animations.Pilot.Head = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.back = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.shoulders = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.chest = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.rightArm = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.leftArm = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.rightWeapon = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.leftWeapon = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.gloves = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.pants = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.rightLeg = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.leftLeg = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+    -- Marc.Animations.Pilot.boots = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
+
     BISHOP.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
     Alfred.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
 

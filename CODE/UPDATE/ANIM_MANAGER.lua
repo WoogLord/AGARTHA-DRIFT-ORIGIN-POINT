@@ -2,13 +2,16 @@ local AnimClass = {}
 AnimClass.__index = AnimClass
 
 function AnimClass:new(
-          _vanityNames, _state, _direction, _spriteSheetRow, _frames, _animations
+          _vanityNames, _state, _direction, _spriteSheetRow, _frames
+          , _windUpFrames, _preCritFrames, _postCritFrames, _resetFrames
+          , _animations
     )
     local tAC = {} -- tAC = tempAnimClass
     setmetatable(tAC, AnimClass)
 
     tAC.vanityNames, tAC.state, tAC.direction = _vanityNames, _state, _direction
     tAC.spriteSheetRow, tAC.frames, tAC.animations = _spriteSheetRow, _frames, _animations
+    tAC.windUpFrames, tAC.preCritFrames, tAC.postCritFrames, tAC.resetFrames = _windUpFrames, _preCritFrames, _postCritFrames, _resetFrames
 
     return tAC
 end
@@ -19,7 +22,10 @@ function AnimClass:PrintData()
     for i = 1, #self.vanityNames, 1 do 
         print("\n-- "..i.." --"
             .."\nvanityNames: "..self.vanityNames[i].."\nstate: "..self.state[i].."\ndirection: "..self.direction[i]
-            .."\nspriteSheetRow: "..self.spriteSheetRow[i].."\nframes: "..self.frames[i].."\nanimations: "..tostring(self.animations[i])
+            .."\nspriteSheetRow: "..self.spriteSheetRow[i].."\nframes: "..self.frames[i]
+            .."\nwindUpFrames: "..self.windUpFrames[i].."\npreCritFrames: "..self.preCritFrames[i]
+            .."\npostCritFrames: "..self.postCritFrames[i].."\nresetFrames: "..self.resetFrames[i]
+            .."\nanimations: "..tostring(self.animations[i])
             .."\n"
         )
     end
@@ -62,9 +68,29 @@ mainAnimationArray = AnimClass:new(
         , 4, 5, 6, 7
         , 8, 9
     }
-    , { -- _frames
+    , { -- _frames -- total, or rather, looping frames
         4, 4, 4, 4
         , 4, 4, 4, 4
+        , 0, 0
+    }
+    , { -- _windUpFrames
+        0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 4, 4
+    }
+    , { -- _preCritFrames
+        0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 4, 4
+    }
+    , { -- _postCritFrames
+        0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 4, 4
+    }
+    , { -- _resetFrames
+        0, 0, 0, 0
+        , 0, 0, 0, 0
         , 4, 4
     }
     , { -- _animations
@@ -106,4 +132,9 @@ function animStateMachine() -- PROBLEM, this is just for the player...
             end
         end
     end
+end
+
+--==+==-- JUICE SECTION --==+==--
+function playTargetLockAnim()
+
 end

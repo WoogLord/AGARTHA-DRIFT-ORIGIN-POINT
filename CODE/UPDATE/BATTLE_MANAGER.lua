@@ -68,7 +68,7 @@ end
 
 function beginTurn(_turnTaker)
     activeUnit = _turnTaker
-
+    -- shockwave anim
     if _turnTaker == player or _turnTaker == ally1 or _turnTaker == ally2 then
         print("Ally's turn")
         battleState = battleState_ARR.allyTurnMenu
@@ -80,7 +80,7 @@ end
 
 function startEnemyTurn(_turnTaker)
     _turnTaker.selectedAbility = chooseEnemyAbility(_turnTaker)
-    startBattleAnim(_turnTaker, _turnTaker.selectedAbility)
+    startAbilityPreCritAnim(_turnTaker, _turnTaker.selectedAbility)
     battleState = battleState_ARR.animating
 end
 
@@ -92,6 +92,7 @@ function getBattleTargetAndAbility(_x, _y, _buttonPressed)
     for i=1, #targetButtons do
         if _buttonPressed == 1 and isMouseOverButton(targetButtons[i]) then
             currentTarget = combatants[i]
+            -- target lock anim on enemy
         end
     end
     for j=1, #abilityButtons do
@@ -103,23 +104,23 @@ end
 
 function allyConfirmAbility(_ability)
     activeUnit.selectedAbility = _ability
-    startBattleAnim(activeUnit, _ability)
+    startAbilityPreCritAnim(activeUnit, _ability)
     battleState = battleState_ARR.animating
 end
 
-function startBattleAnim(_unit, _ability)
+function startAbilityPreCritAnim(_unit, _ability)
     battleAnim = {
         unit = _unit
         , target = currentTarget
         , ability = _ability
         , timer = 0
-        , frames = mainAnimationArray.frames[returnIndexGivenArrayValue(mainAnimationArray.state, bigAbilityArray.stats.animation[_ability])]
+        , windUpFrames = mainAnimationArray.windUpFrames[returnIndexGivenArrayValue(mainAnimationArray.state, bigAbilityArray.stats.animation[_ability])]
     }
 end
 
 function updateBattleAnims(_dt)
     battleAnim.timer = battleAnim.timer + _dt
-    local duration = battleAnim.frames * animStall / 60
+    local duration = battleAnim.windUpFrames * animStall / 60
     if battleAnim.timer >= duration then
         battleAnim = nil
         battleState = battleState_ARR.resolve
