@@ -7,7 +7,6 @@ for i=1, 36, 1 do
         , equipmentIndex = 0
         , itemXp = 0
     }
-    print(inventoryArray[i].equipmentType)
 end
 
 inventoryArray[1] = {

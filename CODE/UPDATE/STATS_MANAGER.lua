@@ -217,7 +217,6 @@ function initEquipment()
             0, 3
         }
     )
-    print(mainEquipmentPilotGlovesArray.description[2])
     
     --== WEAPONS ==--
     mainEquipmentPilotRWeaponArray = EquipmentClass:new(

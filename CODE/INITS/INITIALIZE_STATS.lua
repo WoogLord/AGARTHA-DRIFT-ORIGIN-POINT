@@ -273,7 +273,7 @@ function initParty()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
-    Marc:PrintData()
+    -- Marc:PrintData()
     --#endregion Marc  
     --#region BISHOP
     BISHOP = BaseClass:new(
@@ -344,7 +344,7 @@ function initParty()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
-    BISHOP:PrintData()
+    -- BISHOP:PrintData()
     --#endregion BISHOP
     --#region Alfred
     Alfred = BaseClass:new(
@@ -415,7 +415,7 @@ function initParty()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
-    Alfred:PrintData()
+    -- Alfred:PrintData()
     --#endregion Alfred
 
     Marc.Animations = mainAnimationArray:BuildAnimations(ssPilot_ALL_Nothing)
@@ -529,7 +529,7 @@ function initEnemies()
         , 0, 0, 0, 0, 0
         , 0, 0, 0, 0
     )   
-    Rat:PrintData()
+    -- Rat:PrintData()
 
     --#endregion
     Rat.xpValue = 5

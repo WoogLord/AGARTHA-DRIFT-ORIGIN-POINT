@@ -73,7 +73,6 @@ function playerControls()
                     player.currentAnimState = "Walk"
                     player.mapTileX = player.mapTileX + (graphicsScale * moveSpeed / tileWH)
                 end
-                -- print("mapTileX/Y: "..player.mapTileX..", "..player.mapTileY..", mapTrueX/Y: "..player.mapTrueX..", "..player.mapTrueY)
                 player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
             end
         end

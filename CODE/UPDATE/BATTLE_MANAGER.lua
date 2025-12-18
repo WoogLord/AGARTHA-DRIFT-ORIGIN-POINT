@@ -140,7 +140,6 @@ function resolveTurn(_turnTaker)
     print(_turnTaker.name.." resolves ability: "..abil)
 
     local isCrit = (math.random() <= (0.1 * bigAbilityArray.stats.critChanceMod[abil]))
-    print("isCrit: "..tostring(isCrit))
     local critMod = isCrit and (2 * bigAbilityArray.stats.critDamageMod[abil]) or 1
 
     -- stuff
