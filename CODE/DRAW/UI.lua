@@ -171,12 +171,18 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
                     elseif currentTarget == activeUnit and bigAbilityArray.stats.targets[stats.abilities[a].abilityID] == "Self" then
                     else tIsAbilityActive = false end
 
-                    if tIsAbilityActive then 
+                    if (bigAbilityArray.stats.focusCostBase[stats.abilities[a].abilityID] 
+                        + (bigAbilityArray.stats.focusCostPer[stats.abilities[a].abilityID] * stats.abilities[a].abilityLevel)) > stats.focus then
+                        abilityDescriptionString = abilityDescriptionString.."\n".."NOT ENOUGH FOCUS" -- dont know how i feel about this
+                        tIsAbilityActive = false
+                        love.graphics.setColor(0.1,0.1,0.1)
+                    elseif tIsAbilityActive then 
                         love.graphics.setColor(1,1,1)
-                    else 
+                    else
                         love.graphics.setColor(0.1,0.1,0.1) 
                         abilityDescriptionString = abilityDescriptionString.."\n".."NOT APPLICABLE TARGET" -- dont know how i feel about this
                     end
+
 
                     -- Check for no ability assigned
                     if stats.abilities[a].abilityID == 1 then

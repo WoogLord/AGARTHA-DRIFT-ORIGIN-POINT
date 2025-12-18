@@ -86,10 +86,11 @@ end
 
 function chooseEnemyAbility(_unit)
     currentTarget = partyBattleArr[math.random(1, #partyBattleArr)]
-    return bigAbilityArray.abilityID[2] -- "quickStrike"
+    return bigAbilityArray.abilityID[3] -- "quickStrike"
 end
 
 function getBattleTargetAndAbility(_x, _y, _buttonPressed) 
+    local stats = activeUnit.isMechedUp and activeUnit.mech or activeUnit.pilot
     for i=1, #targetButtons do
         if _buttonPressed == 1 and isMouseOverButton(targetButtons[i]) then
             currentTarget = combatants[i]
@@ -97,7 +98,11 @@ function getBattleTargetAndAbility(_x, _y, _buttonPressed)
         end
     end
     for j=1, #abilityButtons do
-        if _buttonPressed == 1 and isMouseOverButton(abilityButtons[j]) and abilityButtons[j].isAbilityActive then
+        if _buttonPressed == 1 and isMouseOverButton(abilityButtons[j]) and abilityButtons[j].isAbilityActive 
+        --     ((bigAbilityArray.stats.focusCostBase[stats.abilities[abilityButtons[j].label].abilityID] 
+        --         + (bigAbilityArray.stats.focusCostPer[stats.abilities[abilityButtons[j].label].abilityID] 
+        --         * stats.abilities[abilityButtons[j].label].abilityLevel)) <= stats.focus)
+        then
             allyConfirmAbility(tonumber(abilityButtons[j].label))
         end
     end
@@ -134,8 +139,9 @@ function resolveTurn(_turnTaker)
     local abil = _turnTaker.selectedAbility
     print(_turnTaker.name.." resolves ability: "..abil)
 
-    local isCrit = math.random() > (0.1 * bigAbilityArray.stats.critChanceMod[abil])
-    local critMod = isCrit and 1 or (2 * bigAbilityArray.stats.critDamageMod[abil])
+    local isCrit = (math.random() <= (0.1 * bigAbilityArray.stats.critChanceMod[abil]))
+    print("isCrit: "..tostring(isCrit))
+    local critMod = isCrit and (2 * bigAbilityArray.stats.critDamageMod[abil]) or 1
 
     -- stuff
     local rawDamageDealt = bigAbilityArray.stats.additionalBase[abil]
@@ -145,13 +151,18 @@ function resolveTurn(_turnTaker)
         + (bigAbilityArray.stats.speedScale[abil] * uStats.speed)
 
     rawDamageDealt = rawDamageDealt * critMod
-    
+
     local rawDamageReduction = 0
     local finalDamageCalc = math.floor(rawDamageDealt - rawDamageReduction)
 
     -- make this elemental, with healing always green, physical damage is red
-    addFloater(finalDamageCalc, currentTarget, 1, 0, 0)
+    if isCrit then addFloater(finalDamageCalc, currentTarget, 0.75, 0.75, 0)
+    else addFloater(finalDamageCalc, currentTarget, 1, 0, 0) end
+
     tStats.hp = tStats.hp - finalDamageCalc
+
+    uStats.focus = uStats.focus - (bigAbilityArray.stats.focusCostBase[abil] 
+                + (bigAbilityArray.stats.focusCostPer[abil] * uStats.abilities[abil].abilityLevel))
 
     -- if dead
     if tStats.hp < tStats.maxHP then
