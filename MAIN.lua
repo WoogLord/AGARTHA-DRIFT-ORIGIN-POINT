@@ -62,9 +62,10 @@ function love.update(dt)
         player.x, player.y = (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH) 
     end
     speedManager(dt)
-    statsManager(player)
+    -- statsManager(player)
     musicManager()
-    animStateMachine()
+    animStateMachine(player)
+    doFloaters()
 end
 
 function love.draw()
@@ -78,6 +79,12 @@ function love.draw()
         elseif isInInventory then drawInventory()
         else drawOverworld() end
     end
+
+    for i, f in ipairs(floater) do
+        love.graphics.setColor(f.r, f.g, f.b)
+        love.graphics.print(f.text, f.x, f.y, 0, graphicsScale, graphicsScale)
+    end
+
     drawPaused()
     
     -- Debug stuff

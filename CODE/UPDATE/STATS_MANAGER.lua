@@ -3,14 +3,14 @@ EquipmentClass.__index = EquipmentClass
 
 function EquipmentClass:new(
         _vanityNames, _description
-        , _baseHP, _baseAttack, _baseSpeed
+        , _baseVitality, _baseStrength, _baseSpeed
     )
     local tEC = {} -- tEC = tempEquipmentClass
     setmetatable(tEC, EquipmentClass)
 
     tEC.vanityNames, tEC.description = _vanityNames, _description
     tEC.stats = {
-        baseHP = _baseHP, baseAttack = _baseAttack, baseSpeed = _baseSpeed
+        baseVitality = _baseVitality, baseStrength = _baseStrength, baseSpeed = _baseSpeed
     }
     return tEC
 end
@@ -33,10 +33,10 @@ function initEquipment()
             "BALD BALD BALD BALD BALD" -- NOTHING
             , "Covers my Norwood 8" -- RECRUIT
         }
-        , { -- baseHP
+        , { -- baseVitality
             0, 3
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0, 2
         }
         , { -- baseSpeed
@@ -50,10 +50,10 @@ function initEquipment()
         , { -- description
             "...heh... epic..." -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -67,10 +67,10 @@ function initEquipment()
         , { -- description
             "...that's a weight off my... you know..." -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -85,10 +85,10 @@ function initEquipment()
             "N- Nice tits, y- you grow 'em yourself?" -- NOTHING
             , "FINALLY, my slight gyno is covered." -- RECRUIT
         }
-        , { -- baseHP
+        , { -- baseVitality
             0, 3
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0, 2
         }
         , { -- baseSpeed
@@ -102,10 +102,10 @@ function initEquipment()
         , { -- description
             "EXODIA, RIGHT ARM OF THE CHOSEN ONE" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -119,10 +119,10 @@ function initEquipment()
         , { -- description
             "EXODIA, RI- *makes fingers L's* L- LEFT ARM OF THE CHOSEN ONE" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -137,10 +137,10 @@ function initEquipment()
             "You are not wearing anything..." -- NOTHING
             , "Standard issue, warmth and grip are reserved for higher ranks apparently." -- RECRUIT
         }
-        , { -- baseHP
+        , { -- baseVitality
             0, 3
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0, 2
         }
         , { -- baseSpeed
@@ -155,10 +155,10 @@ function initEquipment()
             "...Is there a breeze in here?" -- NOTHING
             , "not assless, I checked." -- RECRUIT
         }
-        , { -- baseHP
+        , { -- baseVitality
             0, 3
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0, 2
         }
         , { -- baseSpeed
@@ -172,10 +172,10 @@ function initEquipment()
         , { -- description
             "EXODIA, RIGHT LEG OF THE CHOSEN ONE" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -189,10 +189,10 @@ function initEquipment()
         , { -- description
             "EXODIA, LEFT LEG OF THE CHOSEN ONE" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -207,10 +207,10 @@ function initEquipment()
             "PUT THOSE GRIPPERS AWAY" -- NOTHING
             , "Tactical, 7 inch zipper, matte black, I have a big abscess in between my toes its really starting to squi-" -- RECRUIT
         }
-        , { -- baseHP
+        , { -- baseVitality
             0, 3
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0, 2
         }
         , { -- baseSpeed
@@ -227,10 +227,10 @@ function initEquipment()
         , { -- description
             "Why I oughtta!" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -244,10 +244,10 @@ function initEquipment()
         , { -- description
             "Let me at 'em!" -- NOTHING
         }
-        , { -- baseHP
+        , { -- baseVitality
             0
         }
-        , { -- baseAttack
+        , { -- baseStrength
             0
         }
         , { -- baseSpeed
@@ -328,6 +328,8 @@ bigAbilityArray = {
         , additionalBase = {0, 0, 0, 0
         }
         , critChanceMod = {1, 1, 1, 1
+        }
+        , critDamageMod = {1, 1, 1, 1
         }
         , vitalityScaleDoT = {0, 0, 0, 0
         }
@@ -413,13 +415,9 @@ function statsManager(_target)
     local pRWeaponStats = mainEquipmentPilotRWeaponArray.stats
     local pLWeaponStats = mainEquipmentPilotLWeaponArray.stats
 
-    if _target.isMechedUp then
-        tStats = _target.mech
-        tEquip = _target.mech.equipment
-    else
-        tStats = _target.pilot
-        tEquip = _target.pilot.equipment
-    end
+    local tStats = _target.isMechedUp and _target.mech or _target.pilot 
+    local tEquip = _target.isMechedUp and _target.mech.equipment or _target.pilot.equipment 
+    
     --   head = _pilotEquipmentHead, back = _pilotEquipmentBack
     -- , shoulders = _pilotEquipmentShoulders, chest = _pilotEquipmentChest
     -- , rightArm = _pilotEquipmentRArm, leftArm = _pilotEquipmentLArm
@@ -429,39 +427,39 @@ function statsManager(_target)
     -- , boots = _pilotEquipmentBoots
 
     --==-- Aggregates / Base Values --==--
-    --== Health ==--
-    tStats.maxHP = 10 
-        + pHeadStats.baseHP[tEquip.head.equipmentID]
-        + pBackStats.baseHP[tEquip.back.equipmentID]
-        + pShouldersStats.baseHP[tEquip.shoulders.equipmentID]
-        + pChestStats.baseHP[tEquip.chest.equipmentID]
-        + pRArmStats.baseHP[tEquip.rightArm.equipmentID]
-        + pLArmStats.baseHP[tEquip.leftArm.equipmentID]
-        + pGlovesStats.baseHP[tEquip.gloves.equipmentID]
-        + pPantsStats.baseHP[tEquip.pants.equipmentID]
-        + pRLegStats.baseHP[tEquip.rightLeg.equipmentID]
-        + pLLegStats.baseHP[tEquip.leftLeg.equipmentID]
-        + pBootsStats.baseHP[tEquip.boots.equipmentID]
+    --== Vitality ==--
+    tStats.vitality = 5
+        + pHeadStats.baseVitality[tEquip.head.equipmentID]
+        + pBackStats.baseVitality[tEquip.back.equipmentID]
+        + pShouldersStats.baseVitality[tEquip.shoulders.equipmentID]
+        + pChestStats.baseVitality[tEquip.chest.equipmentID]
+        + pRArmStats.baseVitality[tEquip.rightArm.equipmentID]
+        + pLArmStats.baseVitality[tEquip.leftArm.equipmentID]
+        + pGlovesStats.baseVitality[tEquip.gloves.equipmentID]
+        + pPantsStats.baseVitality[tEquip.pants.equipmentID]
+        + pRLegStats.baseVitality[tEquip.rightLeg.equipmentID]
+        + pLLegStats.baseVitality[tEquip.leftLeg.equipmentID]
+        + pBootsStats.baseVitality[tEquip.boots.equipmentID]
 
-        + pRWeaponStats.baseHP[tEquip.rightWeapon.equipmentID]
-        + pLWeaponStats.baseHP[tEquip.leftWeapon.equipmentID]
+        + pRWeaponStats.baseVitality[tEquip.rightWeapon.equipmentID]
+        + pLWeaponStats.baseVitality[tEquip.leftWeapon.equipmentID]
 
-    --== Attack ==--
-    tStats.attack = 1 
-        + pHeadStats.baseAttack[tEquip.head.equipmentID]
-        + pBackStats.baseAttack[tEquip.back.equipmentID]
-        + pShouldersStats.baseAttack[tEquip.shoulders.equipmentID]
-        + pChestStats.baseAttack[tEquip.chest.equipmentID]
-        + pRArmStats.baseAttack[tEquip.rightArm.equipmentID]
-        + pLArmStats.baseAttack[tEquip.leftArm.equipmentID]
-        + pGlovesStats.baseAttack[tEquip.gloves.equipmentID]
-        + pPantsStats.baseAttack[tEquip.pants.equipmentID]
-        + pRLegStats.baseAttack[tEquip.rightLeg.equipmentID]
-        + pLLegStats.baseAttack[tEquip.leftLeg.equipmentID]
-        + pBootsStats.baseAttack[tEquip.boots.equipmentID]
+    --== Strength ==--
+    tStats.strength = 0
+        + pHeadStats.baseStrength[tEquip.head.equipmentID]
+        + pBackStats.baseStrength[tEquip.back.equipmentID]
+        + pShouldersStats.baseStrength[tEquip.shoulders.equipmentID]
+        + pChestStats.baseStrength[tEquip.chest.equipmentID]
+        + pRArmStats.baseStrength[tEquip.rightArm.equipmentID]
+        + pLArmStats.baseStrength[tEquip.leftArm.equipmentID]
+        + pGlovesStats.baseStrength[tEquip.gloves.equipmentID]
+        + pPantsStats.baseStrength[tEquip.pants.equipmentID]
+        + pRLegStats.baseStrength[tEquip.rightLeg.equipmentID]
+        + pLLegStats.baseStrength[tEquip.leftLeg.equipmentID]
+        + pBootsStats.baseStrength[tEquip.boots.equipmentID]
 
-        + pRWeaponStats.baseAttack[tEquip.rightWeapon.equipmentID]
-        + pLWeaponStats.baseAttack[tEquip.leftWeapon.equipmentID]
+        + pRWeaponStats.baseStrength[tEquip.rightWeapon.equipmentID]
+        + pLWeaponStats.baseStrength[tEquip.leftWeapon.equipmentID]
 
     --== Speed ==--
     tStats.speed = 10 
@@ -480,6 +478,12 @@ function statsManager(_target)
         + pRWeaponStats.baseSpeed[tEquip.rightWeapon.equipmentID]
         + pLWeaponStats.baseSpeed[tEquip.leftWeapon.equipmentID]
 
+    --== HP ==--
+    tStats.maxHP = tStats.vitality * 5
+    if tStats.hp > tStats.maxHP then
+        tStats.hp = tStats.maxHP        
+    end
+
     if _target.isMechedUp then
         -- Mech specific formulas
     else
@@ -495,4 +499,11 @@ function speedManager(_dt)
     else
         moveSpeed = (100 + player.pilot.speed) * _dt * moveSpeedDampener
     end
+end
+
+function healToFull(_target)
+    _target.pilot.hp = _target.pilot.maxHP
+    _target.pilot.focus = _target.pilot.maxFocus
+    _target.mech.hp = _target.mech.maxHP
+    _target.mech.focus = _target.mech.maxFocus
 end

@@ -85,6 +85,7 @@ function startEnemyTurn(_turnTaker)
 end
 
 function chooseEnemyAbility(_unit)
+    currentTarget = partyBattleArr[math.random(1, #partyBattleArr)]
     return bigAbilityArray.abilityID[2] -- "quickStrike"
 end
 
@@ -128,13 +129,37 @@ function updateBattleAnims(_dt)
 end
 
 function resolveTurn(_turnTaker)
-    local stats = _turnTaker.isMechedUp and _turnTaker.mech or _turnTaker.pilot
-    print(_turnTaker.name.." resolves ability: ".._turnTaker.selectedAbility)
+    local uStats = _turnTaker.isMechedUp and _turnTaker.mech or _turnTaker.pilot
+    local tStats = currentTarget.isMechedUp and currentTarget.mech or currentTarget.pilot
+    local abil = _turnTaker.selectedAbility
+    print(_turnTaker.name.." resolves ability: "..abil)
+
+    local isCrit = math.random() > (0.1 * bigAbilityArray.stats.critChanceMod[abil])
+    local critMod = isCrit and 1 or (2 * bigAbilityArray.stats.critDamageMod[abil])
 
     -- stuff
+    local rawDamageDealt = bigAbilityArray.stats.additionalBase[abil]
+        + (bigAbilityArray.stats.vitalityScale[abil] * uStats.vitality)
+        + (bigAbilityArray.stats.strengthScale[abil] * uStats.strength)
+        + (bigAbilityArray.stats.instinctScale[abil] * uStats.instinct)
+        + (bigAbilityArray.stats.speedScale[abil] * uStats.speed)
+
+    rawDamageDealt = rawDamageDealt * critMod
+    
+    local rawDamageReduction = 0
+    local finalDamageCalc = math.floor(rawDamageDealt - rawDamageReduction)
+
+    -- make this elemental, with healing always green, physical damage is red
+    addFloater(finalDamageCalc, currentTarget, 1, 0, 0)
+    tStats.hp = tStats.hp - finalDamageCalc
+
+    -- if dead
+    if tStats.hp < tStats.maxHP then
+        tStats.currentAnimState = "Dead"
+    end
 
     -- resets
-    stats.currentTurnCharge = 0
+    uStats.currentTurnCharge = 0
     _turnTaker.selectedAbility = nil
     activeUnit = nil
     currentTarget = nil

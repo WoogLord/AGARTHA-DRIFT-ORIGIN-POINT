@@ -1,6 +1,6 @@
 -- Stat initialization
-local AllyClass = {}
-AllyClass.__index = AllyClass
+local BaseClass = {}
+BaseClass.__index = BaseClass
 
 -- TODO: change to baseClass
 -- attempt to have function for PLAYER extension and another function for ENEMY extension
@@ -8,7 +8,7 @@ AllyClass.__index = AllyClass
 
 -- Also, add abilities array elsewhere to handle all that
 
-function AllyClass:new(
+function BaseClass:new(
           _name, _x, _y
         , _inParty, _inBattle, _isMechedUp
         , _facingDirection, _currentAnimState, _currentAnimArrIndex
@@ -59,8 +59,8 @@ function AllyClass:new(
         , _mechEquipmentRLegXP, _mechEquipmentLLegXP
         , _mechEquipmentAuxillaryXP, _mechEquipmentThrustersXP
     )
-    local tAC = {} -- tAC = tempAllyClass
-    setmetatable(tAC, AllyClass)
+    local tAC = {} -- tAC = tempBaseClass
+    setmetatable(tAC, BaseClass)
 
     tAC.name, tAC.x, tAC.y = _name, _x, _y
     tAC.inParty, tAC.inBattle, tAC.isMechedUp = _inParty, _inBattle, _isMechedUp
@@ -131,8 +131,8 @@ function AllyClass:new(
     return tAC
 end
 
-function AllyClass:PrintData()
-    local print1 = "\n--==+==-- AllyClass --==+==--"
+function BaseClass:PrintData()
+    local print1 = "\n--==+==-- BaseClass --==+==--"
         .."\nname: "..self.name.."\nx: "..self.x.."\ny: "..self.y
         .."\ninParty: "..tostring(self.inParty).."\ninBattle: "..tostring(self.inBattle).."\nisMechedUp: "..tostring(self.isMechedUp)
         .."\nfacingDirection: "..self.facingDirection.."\ncurrentAnimState: "..self.currentAnimState
@@ -205,7 +205,7 @@ end
 function initParty()
     --==+==--
     --#region Marc
-    Marc = AllyClass:new(
+    Marc = BaseClass:new(
         --   _name, _x, _y
         "Marc", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
         -- , _inParty, _inBattle, _isMechedUp
@@ -276,7 +276,7 @@ function initParty()
     Marc:PrintData()
     --#endregion Marc  
     --#region BISHOP
-    BISHOP = AllyClass:new(
+    BISHOP = BaseClass:new(
         --   _name, _x, _y
         "BISHOP", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
         -- , _inParty, _inBattle, _isMechedUp
@@ -347,7 +347,7 @@ function initParty()
     BISHOP:PrintData()
     --#endregion BISHOP
     --#region Alfred
-    Alfred = AllyClass:new(
+    Alfred = BaseClass:new(
         --   _name, _x, _y
         "Alfred", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
         -- , _inParty, _inBattle, _isMechedUp
@@ -447,70 +447,93 @@ function initParty()
 
     ally1 = BISHOP
     ally2 = Alfred
+
+    statsManager(player)
+    statsManager(ally1)
+    statsManager(ally2)
+    healToFull(player)
+    healToFull(ally1)
+    healToFull(ally2)
 end
 
 function initEnemies()
     currentBattleEnemies = {
         "Rat"
     }
+    --#region Rat
+    Rat = BaseClass:new(
+        --   _name, _x, _y
+        "Rattimus", (WindWidth / 2 + tileWH), (WindHeight / 2 + tileWH)
+        -- , _inParty, _inBattle, _isMechedUp
+        , false, false, false
+        -- , _facingDirection, _currentAnimState, _currentAnimArrIndex
+        , "Left", "Idle", 3 -- 3 is IdleDown
 
-    Rat = {
-          x = WindWidth / 2 + tileWH
-        , y = WindHeight / 2 + tileWH
-        , name = "Rattimus"
-        , unitID = 01
-        , pilot = {
-              hp = 5
-            , maxHP = 5
-            , focus = 15
-            , maxFocus = 15
-            , speed = 5
-            , startTurnCharge = 70
-            , currentTurnCharge = 0
-            , maxTurnCharge = 75
-            , abilities = {}
-            , xpValue = 5
-            , aiScript = function () end
-        }
-        , isMechedUp = false
-        , mech = {
-              hp = 8
-            , maxHP = 8
-            , focus = 20
-            , maxFocus = 20
-            , speed = 5
-            , startTurnCharge = 45
-            , currentTurnCharge = 0
-            , maxTurnCharge = 50
-            , abilities = {}
-            , xpValue = 15
-            , aiScript = function () end
-        }
-        , facingDirection = "Left"
-        , currentAnimState = "Idle"
-        , currentAnimArrIndex = 2 -- Facing Down
-        , inBattle = false
-        , animationArray = {
-              VanityNames = {
-                "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
-            }
-            , Frames = {
-                4,4,4,4
-            }
-            , Direction = {
-                "Up", "Left", "Down", "Right"
-            }
-            , State = {
-                "Idle", "Idle", "Idle", "Idle"
-            }
-            , SpriteSheetRow = {
-                0, 1, 2, 3
-            }
-            , Animations = { -- loop this later
-                {}, {}, {}, {}
-            }
-        }
-    }
+        --== Pilot Stats ==--
+        -- , _pilotLevel, _pilotXP
+        , 1, 0
+        -- , _pilotHP, _pilotMaxHP, _pilotFocus, _pilotMaxFocus
+        , 5, 5, 15, 15
+        -- , _pilotVitality, _pilotStrength, _pilotInstinct
+        , 5, 5, 5
+        -- , _pilotSpeed, _pilotStartTurnChg, _pilotCurrTurnChg, _pilotMaxTurnChg
+        , 25, 70, 0, 75
+        -- , _pilotAbility_01, _pilotAbility_02, _pilotAbility_03, _pilotAbility_04
+        -- , _pilotAbility_05, _pilotAbility_06, _pilotAbility_07, _pilotAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _pilotAbility_01Level, _pilotAbility_02Level, _pilotAbility_03Level, _pilotAbility_04Level
+        -- , _pilotAbility_05Level, _pilotAbility_06Level, _pilotAbility_07Level, _pilotAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Pilot Equipment ==--
+        -- , _pilotEquipmentHead, _pilotEquipmentBack, _pilotEquipmentShoulders, _pilotEquipmentChest
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
+        -- , _pilotEquipmentRArm, _pilotEquipmentLArm, _pilotEquipmentRWeapon, _pilotEquipmentLWeapon
+        , 1, 1, 1, 1
+        -- , _pilotEquipmentGloves, _pilotEquipmentPants, _pilotEquipmentRLeg, _pilotEquipmentLLeg, _pilotEquipmentBoots
+        , 1, 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+
+        --== Mech Stats ==--
+        -- , _mechLevel, _mechXP
+        , 1, 0
+        -- , _mechHP, _mechMaxHP, _mechFocus, _mechMaxFocus
+        , 10, 10, 50, 50
+        -- , _mechVitality, _mechStrength, _mechInstinct
+        , 5, 0, 25
+        -- , _mechSpeed, _mechStartTurnChg, _mechCurrTurnChg, _mechMaxTurnChg  
+        , 10, 25, 0, 50
+        -- , _mechAbility_01, _mechAbility_02, _mechAbility_03, _mechAbility_04
+        -- , _mechAbility_05, _mechAbility_06, _mechAbility_07, _mechAbility_08
+        , 2, 3, 1, 1
+        , 1, 1, 1, 1
+        -- , _mechAbility_01Level, _mechAbility_02Level, _mechAbility_03Level, _mechAbility_04Level
+        -- , _mechAbility_05Level, _mechAbility_06Level, _mechAbility_07Level, _mechAbility_08Level
+        , 1, 1, 1, 1
+        , 1, 1, 1, 1
+
+        --== Mech Equipment ==--
+        -- , _mechEquipmentHead, _mechEquipmentBack, _mechEquipmentRShoulder, _mechEquipmentLShoulder
+        , 1, 1, 1, 1 -- Magic numbers?  could be "Nothing"
+        -- , _mechEquipmentChassis, _mechEquipmentRArm, _mechEquipmentLArm, _mechEquipmentRWeapon, _mechEquipmentLWeapon
+        , 1, 1, 1, 1, 1
+        -- , _mechEquipmentRLeg, _mechEquipmentLLeg, _mechEquipmentAuxillary, _mechEquipmentThrusters
+        , 1, 1, 1, 1
+        -- xp
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0, 0
+        , 0, 0, 0, 0
+    )   
+    Rat:PrintData()
+
+    --#endregion
+    Rat.xpValue = 5
+    Rat.unitID = 01
     enemyIDArr = {
             ID = {01}
         , Arr = {Rat}

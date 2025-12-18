@@ -40,6 +40,7 @@ playerTurn = false
 
 --==+==-- needed arrays --==+==--
 combatants = {}
+floater = {}
 
 --==+== AUDIO ==+==--
 -- SFX

@@ -68,6 +68,9 @@ function pickUpItem(_x, _y, _buttonPressed)
         end
     end
     if _buttonPressed == 1 then
+        if isMouseOverButton(buttonHealToFullInventory) then
+            healToFull(activeAlly)
+        end
         print("heldItem: "..heldItem.equipmentType..","..heldItem.equipmentID..","..heldItem.equipmentIndex..","..heldItem.itemXp)
         print("heldItemBuffer: "..heldItemBuffer.equipmentType..","..heldItemBuffer.equipmentID..","..heldItemBuffer.equipmentIndex..","..heldItemBuffer.itemXp)
         if heldItem.equipmentType == "" then 
@@ -544,5 +547,6 @@ function pickUpItem(_x, _y, _buttonPressed)
                 end
             end
         end
+        statsManager(activeAlly)
     end
 end

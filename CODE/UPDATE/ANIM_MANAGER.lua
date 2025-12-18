@@ -51,84 +51,78 @@ mainAnimationArray = AnimClass:new(
     { -- _vanityNames
         "IdleUp", "IdleLeft", "IdleDown", "IdleRight"
         , "WalkUp", "WalkLeft", "WalkDown", "WalkRight"
-        , "Strike", "Cast"
+        , "Strike", "Cast", "Hit", "Dead"
     }
-    , { -- _state
+    , { -- _state -- not needed
         "Idle", "Idle", "Idle", "Idle"
         , "Walk", "Walk", "Walk", "Walk"
-        , "Strike", "Cast"
+        , "Strike", "Cast", "Hit", "Dead"
     }
-    , { -- _direction
+    , { -- _direction -- not needed
         "Up", "Left", "Down", "Right"
         , "Up", "Left", "Down", "Right"
-        , "Right", "Right"
+        , "Right", "Right", "Right", "Right"
     }
     , { -- _spriteSheetRow -- needed?
         0, 1, 2, 3
         , 4, 5, 6, 7
-        , 8, 9
+        , 8, 9, 10, 11
     }
     , { -- _frames -- total, or rather, looping frames
         4, 4, 4, 4
         , 4, 4, 4, 4
-        , 0, 0
+        , 0, 0, 1, 1
     }
     , { -- _windUpFrames
         0, 0, 0, 0
         , 0, 0, 0, 0
-        , 4, 4
+        , 4, 4, 0, 0
     }
     , { -- _preCritFrames
         0, 0, 0, 0
         , 0, 0, 0, 0
-        , 4, 4
+        , 4, 4, 0, 0
     }
     , { -- _postCritFrames
         0, 0, 0, 0
         , 0, 0, 0, 0
-        , 4, 4
+        , 4, 4, 0, 0
     }
     , { -- _resetFrames
         0, 0, 0, 0
         , 0, 0, 0, 0
-        , 4, 4
+        , 4, 4, 0, 0
     }
     , { -- _animations
         -- loop this later
         {}, {}, {}, {}
         , {}, {}, {}, {}
-        , {}, {}
+        , {}, {}, {}, {}
     }
 )
 mainAnimationArray:PrintData()
 
-function animStateMachine() -- PROBLEM, this is just for the player...
-    if player.inBattle then
-        if player.currentAnimState == "Idle" then
-            if player.facingDirection == "Right" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleRight")]
+function animStateMachine(_animTarget) -- PROBLEM, this is just for the player...
+    if _animTarget.inBattle then
+        if _animTarget.currentAnimState == "Idle" then
+            if _animTarget.facingDirection == "Right" 
+                then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleRight")]
             end
+        elseif _animTarget.currentAnimState == "Dead" then
+            _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "Dead")]
         end
-    else
-        if player.currentAnimState == "Idle" then
-                if player.facingDirection == "Up" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleUp")]
-            elseif player.facingDirection == "Left" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleLeft")]
-            elseif player.facingDirection == "Down" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleDown")]
-            elseif player.facingDirection == "Right" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleRight")]
+    else -- for overworld
+        if _animTarget.currentAnimState == "Idle" then
+                if _animTarget.facingDirection == "Up" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleUp")]
+            elseif _animTarget.facingDirection == "Left" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleLeft")]
+            elseif _animTarget.facingDirection == "Down" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleDown")]
+            elseif _animTarget.facingDirection == "Right" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "IdleRight")]
             end
-        elseif player.currentAnimState == "Walk" then
-                if player.facingDirection == "Up" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkUp")]
-            elseif player.facingDirection == "Left" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkLeft")]
-            elseif player.facingDirection == "Down" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkDown")]
-            elseif player.facingDirection == "Right" 
-                then player.CurrentAnimArray = player.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkRight")]
+        elseif _animTarget.currentAnimState == "Walk" then
+                if _animTarget.facingDirection == "Up" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkUp")]
+            elseif _animTarget.facingDirection == "Left" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkLeft")]
+            elseif _animTarget.facingDirection == "Down" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkDown")]
+            elseif _animTarget.facingDirection == "Right" then _animTarget.CurrentAnimArray = _animTarget.Animations[returnIndexGivenArrayValue(mainAnimationArray.vanityNames, "WalkRight")]
             end
         end
     end
@@ -136,5 +130,9 @@ end
 
 --==+==-- JUICE SECTION --==+==--
 function playTargetLockAnim()
+
+end
+
+function playImpactoFrameu()
 
 end

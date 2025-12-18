@@ -24,7 +24,7 @@ for i=1, 36, 1 do
         , label = ""
     }
 end
-
+buttonHealToFullInventory = {x = 100, y = 150, w = 200, h = 50, r = 0.1, b = 0.1, g = 0.1, label = "HEAL 2 FULL"}
 buttonsEquipmentInventoryPilot = {
       head = 
         {x = playerInventX + (tileWH * graphicsScale * 0.5), y = playerInventY - (tileWH * graphicsScale * 2.1)
@@ -67,16 +67,38 @@ buttonsEquipmentInventoryPilot = {
         , w = tileWH * graphicsScale, h = tileWH * graphicsScale, r = 0.1, b = 0.1, g = 0.1, label = ""}
 }
 
-function drawButton(button)
-    if button.r then
-        love.graphics.setColor(button.r,button.b,button.g)
+function drawButton(_button)
+    if _button.r then
+        love.graphics.setColor(_button.r,_button.b,_button.g)
     else 
         love.graphics.setColor(0.5,0.5,0.5)
     end
-    if button.invis then love.graphics.setColor(0,0,0,0) end
-    love.graphics.rectangle("fill",button.x, button.y, button.w, button.h)
+    if _button.invis then love.graphics.setColor(0,0,0,0) end
+    love.graphics.rectangle("fill",_button.x, _button.y, _button.w, _button.h)
     love.graphics.setColor(1,1,1)
-    if button.invis then else love.graphics.printf(button.label, button.x, button.y + button.h /3, button.w, "center") end
+    if _button.invis then else love.graphics.printf(_button.label, _button.x, _button.y + _button.h /3, _button.w, "center") end
+end
+
+function addFloater(_number, _target, _r, _g, _b)
+    local floaterX, floaterY = _target.x, _target.y
+    table.insert(floater, {
+          text = _number
+        , x = floaterX, y = floaterY
+        , r = _r, g = _g, b = _b
+        , targetY = floaterY - (10 * graphicsScale)
+        , time = 0
+    })
+    love.graphics.print(_number, floaterX, floaterY, 0, graphicsScale, graphicsScale)
+end
+
+function doFloaters()
+    for i, f in ipairs(floater) do
+        f.y = f.y + ((f.targetY-f.y) / (10 * graphicsScale))
+        f.time = f.time + 1
+        if f.time > 60 then
+            table.remove(floater, i)
+        end
+    end
 end
 
 function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
@@ -84,6 +106,7 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
     love.graphics.rectangle("fill", 0, 0, currWindWidth, 200)
     
     partyBattleArr = {_party1, _party2, _party3}
+    enemyBattleArr = {_enemy1, _enemy2, _enemy3}
     battleUIOffsetY = 50
 
     for i=1,#partyBattleArr, 1 do
@@ -91,15 +114,32 @@ function battleUI(_party1, _party2, _party3, _enemy1, _enemy2, _enemy3)
         local unit = partyBattleArr[i]
         local stats = (unit.inParty and unit.isMechedUp) and unit.mech or unit.pilot
         local tFocusName = unit.isMechedUp and "Heat" or "Stamina"
+        local tInMech = unit.isMechedUp and "M" or "P"
         -- name
         love.graphics.setColor(1, 1, 1)
-        love.graphics.printf("[M]-"..unit.name, 25, yOff, 400, "left")
+        love.graphics.printf("["..tInMech.."]-"..unit.name, 25, yOff, 400, "left")
         -- hp
         if unit.isMechedUp then love.graphics.setColor(0.7, 1, 0.7) else love.graphics.setColor(1, 0.5, 0.5) end
         love.graphics.printf("HP:"..stats.hp.."/"..stats.maxHP, 50, yOff, 400, "right")
         -- mana
         if unit.isMechedUp then love.graphics.setColor(1, 0.7, 0) else love.graphics.setColor(0.5, 0.5, 1) end
         love.graphics.printf(tFocusName..":"..stats.focus.."/"..stats.maxFocus, 50, 25 + yOff, 400, "right")     
+    end
+    for i=1,#enemyBattleArr, 1 do
+        local yOff = (battleUIOffsetY * i) - 30
+        local unit = enemyBattleArr[i]
+        local stats = (unit.inBattle and unit.isMechedUp) and unit.mech or unit.pilot
+        local tFocusName = unit.isMechedUp and "Heat" or "Stamina"
+        local tInMech = unit.isMechedUp and "M" or "P"
+        -- name
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.printf("["..tInMech.."]-"..unit.name, currWindWidth - 425, yOff, 400, "left")
+        -- hp
+        if unit.isMechedUp then love.graphics.setColor(0.7, 1, 0.7) else love.graphics.setColor(1, 0.5, 0.5) end
+        love.graphics.printf("HP:"..stats.hp.."/"..stats.maxHP, currWindWidth - 450, yOff, 400, "right")
+        -- mana
+        if unit.isMechedUp then love.graphics.setColor(1, 0.7, 0) else love.graphics.setColor(0.5, 0.5, 1) end
+        love.graphics.printf(tFocusName..":"..stats.focus.."/"..stats.maxFocus, currWindWidth - 450, 25 + yOff, 400, "right")     
     end
 
     -- draw buttons for all combatants
@@ -177,7 +217,11 @@ end
 function inventoryUI()
     love.graphics.setColor(1, 1, 1)
     local pPE = player.pilot.equipment
+    local stats = player.isMechedUp and player.mech or player.pilot
     -- draw bg art here
+
+    -- healToFull button
+    drawButton(buttonHealToFullInventory)
 
     -- titles
     love.graphics.print("EQUIPMENT", playerInventX + (tileWH * graphicsScale * 0.4), playerInventY - (currWindHeight / 4))
@@ -248,15 +292,24 @@ function inventoryUI()
     local tYOffStats = currWindHeight / 4
     love.graphics.printf(player.name.."'s STATS", 50, tYOffStats, 200, "center")
     love.graphics.printf("----------------", 50, tYOffStats + 15, 200, "center")
-    love.graphics.setColor(1, 0.5, 0.5)
+    love.graphics.setColor(1, 1, 0.5)
     love.graphics.printf("HP:", 50, tYOffStats + 30, 100, "right")
-    love.graphics.printf(player.pilot.hp.."/"..player.pilot.maxHP, 150, tYOffStats + 30, 200, "left")
+    love.graphics.printf(stats.hp.."/"..stats.maxHP, 150, tYOffStats + 30, 200, "left")
     love.graphics.setColor(0.5, 0.5, 1)
     love.graphics.printf("Stamina:", 50, tYOffStats + 60, 100, "right")
-    love.graphics.printf(player.pilot.focus.."/"..player.pilot.maxFocus, 150, tYOffStats + 60, 200, "left")
+    love.graphics.printf(stats.focus.."/"..stats.maxFocus, 150, tYOffStats + 60, 200, "left")
+    love.graphics.setColor(0.5, 1, 0.5)
+    love.graphics.printf("Vitality:", 50, tYOffStats + 90, 100, "right")
+    love.graphics.printf(stats.vitality, 150, tYOffStats + 90, 200, "left")
+    love.graphics.setColor(0.75, 0.5, 0.5)
+    love.graphics.printf("Strength:", 50, tYOffStats + 120, 100, "right")
+    love.graphics.printf(stats.strength, 150, tYOffStats + 120, 200, "left")
+    love.graphics.setColor(0.75, 0.75 ,0.25)
+    love.graphics.printf("Instinct:", 50, tYOffStats + 150, 100, "right")
+    love.graphics.printf(stats.instinct, 150, tYOffStats + 150, 200, "left")
     love.graphics.setColor(0.75, 0 ,0.75)
-    love.graphics.printf("Speed:", 50, tYOffStats + 90, 100, "right")
-    love.graphics.printf(player.pilot.speed, 150, tYOffStats + 90, 200, "left")
+    love.graphics.printf("Speed:", 50, tYOffStats + 180, 100, "right")
+    love.graphics.printf(stats.speed, 150, tYOffStats + 180, 200, "left")
     love.graphics.setColor(1, 1, 1)
 
     -- draw picked up Item
