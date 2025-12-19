@@ -71,7 +71,7 @@ mainAnimationArray = AnimClass:new(
     , { -- _frames -- total, or rather, looping frames
         4, 4, 4, 4
         , 4, 4, 4, 4
-        , 0, 0, 1, 1
+        , 0, 0, 4, 1
     }
     , { -- _windUpFrames
         0, 0, 0, 0
